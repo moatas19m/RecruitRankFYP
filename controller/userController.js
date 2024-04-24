@@ -30,9 +30,8 @@ export const updateUserController = async(req,res)=>
 //Get All Users
 export const getUserController = async(req,res)=>
 {
-    const query=req.query.new
     try{
-       const users= query?await User.find().sort({_id:-1}).limit(1) : await User.find(req.params.id)
+       const users= await User.find()
        res.status(200).json({
         success:true,
         users});
@@ -48,9 +47,9 @@ export const getUserController = async(req,res)=>
 //Get Active Users
 export const getActiveUserController = async(req,res)=>
 {
-    const query=req.query.new
+    
     try{
-       const users= query?await User.find({status:"Active"}).sort({_id:-1}).limit(1) : await User.find(req.params.id)
+       const users= await User.find({status:"Active"})
        res.status(200).json({
         success:true,
         users});
@@ -67,7 +66,7 @@ export const getActiveUserController = async(req,res)=>
 export const userDeleteController = async(req,res)=>
     {
     try{
-        const deletedduser= await User.findByIdAndUpdate(req.params.id,{
+        const deleteduser= await User.findByIdAndUpdate(req.params.id,{
             status:"Inactive"
         },
         {
@@ -76,7 +75,7 @@ export const userDeleteController = async(req,res)=>
         return res.status(200).json({
             success:true,
             message:"User has been deleted",
-            deletedduser
+            deleteduser
         });
  
     } 
