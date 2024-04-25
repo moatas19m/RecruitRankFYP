@@ -1,5 +1,5 @@
 import express from "express";
-import {postApplicationController, applicationWithdrawController, getApplicationsOnJobController, getAllApplicationsOnJobController, getActiveApplicationsOnJobController, getInprogressApplicationsOnJobController, getActiveInprogressApplicationsOnJobController} from "../controller/applicationController.js"
+import {postApplicationController, applicationWithdrawController, getApplicationsOnJobController, getAllApplicationsController, getActiveApplicationsController, getInprogressApplicationsController, getActiveInprogressApplicationsController, getActiveInprogressApplicationsOnJobController, getActiveAcceptedApplicationsOnJobController, getActiveRejectedApplicationsOnJobController, getActiveAcceptedApplicationsController, getActiveRejectedApplicationsController} from "../controller/applicationController.js"
 import { requireSignIn, isAdmin, isRecruiter, isApplicantorAdmin, isRecruiterorAdmin } from "../middleware/Auth.js";
 
 //router object
@@ -14,15 +14,31 @@ router.put("/withdrawApplication/:id", requireSignIn, isApplicantorAdmin, applic
 //Get all applications on a specific job
 router.get("/getApplications/:id", requireSignIn, isRecruiterorAdmin, getApplicationsOnJobController);
 
-//Get all applications
-router.get("/getAllApplications", requireSignIn, isRecruiterorAdmin, getAllApplicationsOnJobController);
+//Get all applications on all the jobs
+router.get("/getAllApplications", requireSignIn, isAdmin, getAllApplicationsController);
 
-//Get all active applications
-router.get("/getActiveApplications", requireSignIn, isRecruiterorAdmin, getActiveApplicationsOnJobController);
+//Get all active applications on all the jobs
+router.get("/getActiveApplications", requireSignIn, isAdmin, getActiveApplicationsController);
 
 //Get all in-progress applications
-router.get("/InprogressApplications", requireSignIn, isRecruiterorAdmin, getInprogressApplicationsOnJobController);
+router.get("/InprogressApplications", requireSignIn, isAdmin, getInprogressApplicationsController);
 
 //Get active and in-progress applications
-router.get("/ActiveInprogressApplications", requireSignIn, isRecruiterorAdmin, getActiveInprogressApplicationsOnJobController);
+router.get("/ActiveInprogressApplications", requireSignIn, isAdmin, getActiveInprogressApplicationsController);
+
+//Get active and accepted applications
+router.get("/ActiveAcceptedApplications", requireSignIn, isAdmin, getActiveAcceptedApplicationsController);
+
+//Get active and rejected applications
+router.get("/ActiveRejectedApplications", requireSignIn, isAdmin, getActiveRejectedApplicationsController);
+
+//Get active and in-progress apps on a specific job
+router.get("/ActiveInprogressApp/:id", requireSignIn, isRecruiterorAdmin, getActiveInprogressApplicationsOnJobController);
+
+//Get active and accepted apps on a specific job
+router.get("/ActiveAcceptedApp/:id", requireSignIn, isRecruiterorAdmin, getActiveAcceptedApplicationsOnJobController);
+
+//Get active and rejected apps on a specific job
+router.get("/ActiveRejectedApp/:id", requireSignIn, isRecruiterorAdmin, getActiveRejectedApplicationsOnJobController);
+
 export default router;

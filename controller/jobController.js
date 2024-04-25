@@ -120,3 +120,22 @@ export const getUserJobController = async(req,res)=>
             err});
     }
 };
+
+//Get active jobs by a specific user
+export const getUserActiveJobController = async(req,res)=>
+{
+    const {id:userID} =req.params;
+    try{
+       const job= await Job.find({user:userID, status:"Active"}).populate("user")
+       res.status(200).json({
+        success:true,
+        ActiveJobCount:job.length,
+        job});
+      
+    }catch(err)
+    {
+       return res.status(500).json({
+            success:false,
+            err});
+    }
+};

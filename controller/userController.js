@@ -34,6 +34,7 @@ export const getUserController = async(req,res)=>
        const users= await User.find()
        res.status(200).json({
         success:true,
+        AllUserCount:users.length,
         users});
       
     }catch(err)
@@ -52,6 +53,7 @@ export const getActiveUserController = async(req,res)=>
        const users= await User.find({status:"Active"})
        res.status(200).json({
         success:true,
+        ActiveUserCount:users.length,
         users});
       
     }catch(err)

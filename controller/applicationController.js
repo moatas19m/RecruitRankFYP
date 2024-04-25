@@ -65,12 +65,12 @@ export const getApplicationsOnJobController = async(req,res)=>
     }
 };
 
-//Get all applications on a specific job
-export const getAllApplicationsOnJobController = async(req,res)=>
+
+//Get all applications on a all the job
+export const getAllApplicationsController = async(req,res)=>
 {
-    const {id:jobID } =req.params;
     try{
-       const application= await Application.find().populate("user")
+       const application= await Application.find().populate("user").populate("job")
        res.status(200).json({
         success:true,
         ApplicationCount:application.length,
@@ -84,12 +84,11 @@ export const getAllApplicationsOnJobController = async(req,res)=>
     }
 };
 
-//Get all active applications on a specific job
-export const getActiveApplicationsOnJobController = async(req,res)=>
+//Get all active applications on all the jobs
+export const getActiveApplicationsController = async(req,res)=>
 {
-    const {id:jobID } =req.params;
     try{
-       const application= await Application.find({status:"Active"}).populate("user")
+       const application= await Application.find({status:"Active"}).populate("user").populate("job")
        res.status(200).json({
         success:true,
         ApplicationCount:application.length,
@@ -103,10 +102,9 @@ export const getActiveApplicationsOnJobController = async(req,res)=>
     }
 };
 
-//Get applications that are in-progress
-export const getInprogressApplicationsOnJobController = async(req,res)=>
+//Get all the applications that are in-progress
+export const getInprogressApplicationsController = async(req,res)=>
 {
-    const {id:jobID } =req.params;
     try{
        const application= await Application.find({progress:"In-progress"}).populate("user").populate("job")
        res.status(200).json({
@@ -123,10 +121,101 @@ export const getInprogressApplicationsOnJobController = async(req,res)=>
 };
 
 //Get applications that are active and in-progress
-export const getActiveInprogressApplicationsOnJobController = async(req,res)=>
+export const getActiveInprogressApplicationsController = async(req,res)=>
 {
     try{
        const application= await Application.find({progress:"In-progress",status:"Active"}).populate("user").populate("job")
+       res.status(200).json({
+        success:true,
+        ApplicationCount:application.length,
+        application});
+      
+    }catch(err)
+    {
+       return res.status(500).json({
+            success:false,
+            err});
+    }
+};
+
+export const getActiveAcceptedApplicationsController = async(req,res)=>
+{
+    try{
+       const application= await Application.find({progress:"Accepted",status:"Active"}).populate("user").populate("job")
+       res.status(200).json({
+        success:true,
+        ApplicationCount:application.length,
+        application});
+      
+    }catch(err)
+    {
+       return res.status(500).json({
+            success:false,
+            err});
+    }
+};
+
+export const getActiveRejectedApplicationsController = async(req,res)=>
+{
+    try{
+       const application= await Application.find({progress:"Rejected",status:"Active"}).populate("user").populate("job")
+       res.status(200).json({
+        success:true,
+        ApplicationCount:application.length,
+        application});
+      
+    }catch(err)
+    {
+       return res.status(500).json({
+            success:false,
+            err});
+    }
+};
+
+//Get applications that are active and in-progress on a specific job
+export const getActiveInprogressApplicationsOnJobController = async(req,res)=>
+{
+    const {id:jobID} = req.params.id
+    try{
+       const application= await Application.find({job:req.params.id, progress:"In-progress",status:"Active"}).populate("user").populate("job")
+       res.status(200).json({
+        success:true,
+        ApplicationCount:application.length,
+        application});
+      
+    }catch(err)
+    {
+       return res.status(500).json({
+            success:false,
+            err});
+    }
+};
+
+//Get active and accepted applications on a specific job
+export const getActiveAcceptedApplicationsOnJobController = async(req,res)=>
+{
+    const {id:jobID} = req.params.id
+    try{
+       const application= await Application.find({job:req.params.id, progress:"Accepted",status:"Active"}).populate("user").populate("job")
+       res.status(200).json({
+        success:true,
+        ApplicationCount:application.length,
+        application});
+      
+    }catch(err)
+    {
+       return res.status(500).json({
+            success:false,
+            err});
+    }
+};
+
+//Get active and rejected applications on a specific job
+export const getActiveRejectedApplicationsOnJobController = async(req,res)=>
+{
+    const {id:jobID} = req.params.id
+    try{
+       const application= await Application.find({job:req.params.id, progress:"Rejected",status:"Active"}).populate("user").populate("job")
        res.status(200).json({
         success:true,
         ApplicationCount:application.length,

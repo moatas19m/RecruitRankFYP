@@ -1,5 +1,5 @@
 import express from "express";
-import {postJobController, updateJobController, getJobController, getActiveJobController, jobDeleteController, getUserJobController} from '../controller/jobController.js'
+import {postJobController, updateJobController, getJobController, getActiveJobController, jobDeleteController, getUserJobController, getUserActiveJobController} from '../controller/jobController.js'
 import { requireSignIn, isAdmin, isRecruiter, isRecruiterorAdmin } from "../middleware/Auth.js";
 
 //router object
@@ -22,6 +22,9 @@ router.put("/deletejob/:id", requireSignIn, isRecruiterorAdmin, jobDeleteControl
 
 //Get jobs by a specific user
 router.get("/userJob/:id", requireSignIn, isRecruiterorAdmin, getUserJobController);
+
+//Get active jobs by a specific user
+router.get("/userActiveJob/:id", requireSignIn, isRecruiterorAdmin, getUserActiveJobController);
 
 export default router;
 
