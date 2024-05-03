@@ -1,6 +1,6 @@
 import express from "express";
-import {postJobController, updateJobController, getJobController, getActiveJobController, jobDeleteController, getUserJobController, getUserActiveJobController} from '../controller/jobController.js'
-import { requireSignIn, isAdmin, isRecruiter, isRecruiterorAdmin } from "../middleware/Auth.js";
+import {postJobController, updateJobController, getJobController, getActiveJobController, jobDeleteController, getUserJobController, getUserActiveJobController, FilterQueryController, SearchQueryController} from '../controller/jobController.js'
+import { requireSignIn, isAdmin, isRecruiter, isRecruiterorAdmin, isApplicantorAdmin } from "../middleware/Auth.js";
 
 //router object
 const router=express.Router()
@@ -25,6 +25,12 @@ router.get("/userJob/:id", requireSignIn, isRecruiterorAdmin, getUserJobControll
 
 //Get active jobs by a specific user
 router.get("/userActiveJob/:id", requireSignIn, isRecruiterorAdmin, getUserActiveJobController);
+
+//Filter Jobs
+router.get("/filter", requireSignIn, isApplicantorAdmin, FilterQueryController);
+
+//Search
+router.get("/search", requireSignIn, isApplicantorAdmin, SearchQueryController);
 
 export default router;
 

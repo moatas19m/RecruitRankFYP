@@ -1,6 +1,7 @@
 import express from "express";
-import {postApplicationController, applicationWithdrawController, getApplicationsOnJobController, getAllApplicationsController, getActiveApplicationsController, getInprogressApplicationsController, getActiveInprogressApplicationsController, getActiveInprogressApplicationsOnJobController, getActiveAcceptedApplicationsOnJobController, getActiveRejectedApplicationsOnJobController, getActiveAcceptedApplicationsController, getActiveRejectedApplicationsController} from "../controller/applicationController.js"
+import {/*UploadFileController,*/ postApplicationController, applicationWithdrawController, getApplicationsOnJobController, getAllApplicationsController, getActiveApplicationsController, getInprogressApplicationsController, getActiveInprogressApplicationsController, getActiveInprogressApplicationsOnJobController, getActiveAcceptedApplicationsOnJobController, getActiveRejectedApplicationsOnJobController, getActiveAcceptedApplicationsController, getActiveRejectedApplicationsController, acceptApplicationController, rejectApplicationController, FilterAppQueryController} from "../controller/applicationController.js"
 import { requireSignIn, isAdmin, isRecruiter, isApplicantorAdmin, isRecruiterorAdmin } from "../middleware/Auth.js";
+
 
 //router object
 const router=express.Router()
@@ -40,5 +41,14 @@ router.get("/ActiveAcceptedApp/:id", requireSignIn, isRecruiterorAdmin, getActiv
 
 //Get active and rejected apps on a specific job
 router.get("/ActiveRejectedApp/:id", requireSignIn, isRecruiterorAdmin, getActiveRejectedApplicationsOnJobController);
+
+//Accept application
+router.put("/acceptApplication/:id", requireSignIn, isRecruiterorAdmin, acceptApplicationController);
+
+//Reject application
+router.put("/rejectApplication/:id", requireSignIn, isRecruiterorAdmin, rejectApplicationController);
+
+//Filter Application
+router.get("/filterapp", requireSignIn, isAdmin, FilterAppQueryController);
 
 export default router;

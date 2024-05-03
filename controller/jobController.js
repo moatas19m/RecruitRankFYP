@@ -139,3 +139,87 @@ export const getUserActiveJobController = async(req,res)=>
             err});
     }
 };
+
+//Filter Job
+export const FilterQueryController = async (req, res) => {
+    try {
+        const query = { status: "Active" };
+
+        if (req.query.id) {
+            query._id = req.query.id;
+        }
+
+        if (req.query.location) {
+            query['location'] = req.query.location;
+        }
+
+        if (req.query.joblevel) {
+            query['joblevel'] = req.query.joblevel;
+        }
+
+        if (req.query.education) {
+            query['education'] = req.query.education;
+        }
+
+        if (req.query.type) {
+            query['type'] = req.query.type;
+        }
+
+        if (req.query.shift) {
+            query['shift'] = req.query.shift;
+        }
+
+        if(req.query.id){
+            const jobs = await Job.findById(req.query.id).populate('user');
+            res.status(200).json({
+                success:true,
+                JobCount:jobs.length,
+                jobs
+            });
+        }
+        else{
+            const jobs = await Job.find(query).populate('user');
+            res.status(200).json({
+                success:true,
+                JobCount:jobs.length,
+                jobs
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+//Search Jobs
+export const SearchQueryController = async (req, res) => {
+    try {
+        const searchQuery = req.query.search;
+
+        if (!searchQuery) {
+            return res.status(400).json({ message: 'Please provide a search query' });
+        }
+
+        const query = {
+            $and: [
+                {
+                    $or: [
+                        { company: { $regex: searchQuery, $options: 'i' } },
+                        { title: { $regex: searchQuery, $options: 'i' } }
+                    ]
+                },
+                { status: "Active" } // Adding the condition for status
+            ]
+        };
+
+        const jobs = await Job.find(query).populate('user');
+        res.status(200).json({
+            success:true,
+            JobCount:jobs.length,
+            jobs
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};

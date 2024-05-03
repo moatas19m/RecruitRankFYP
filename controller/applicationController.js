@@ -1,6 +1,4 @@
 import Application from "../models/Applications.js"
-import Job from "../models/Jobs.js"
-import User from "../models/User.js"
 
 //Creating an application - Applicant applying to the job
 export const postApplicationController= async(req,res)=>{
@@ -228,3 +226,89 @@ export const getActiveRejectedApplicationsOnJobController = async(req,res)=>
             err});
     }
 };
+
+//Accept Application
+export const acceptApplicationController = async(req,res)=>
+    {
+    try{
+        const acceptedapplication= await Application.findByIdAndUpdate(req.params.id,{
+            progress:"Accepted"
+        },
+        {
+            new:true
+        }).populate("job").populate("user");
+        return res.status(200).json({
+            success:true,
+            message:"Application has been accepted",
+            acceptedapplication
+        });
+ 
+    } 
+      catch(err){
+        return res.status(500).json({
+            success:false,
+            err});
+    }
+};
+
+//Reject Application
+export const rejectApplicationController = async(req,res)=>
+    {
+    try{
+        const rejectedapplication= await Application.findByIdAndUpdate(req.params.id,{
+            progress:"Rejected"
+        },
+        {
+            new:true
+        }).populate("job").populate("user");
+        return res.status(200).json({
+            success:true,
+            message:"Application has been rejected",
+            rejectedapplication
+        });
+ 
+    } 
+      catch(err){
+        return res.status(500).json({
+            success:false,
+            err});
+    }
+};
+
+//Filter Application
+export const FilterAppQueryController = async (req, res) => {
+    try {
+        const query = { status: "Active" };
+
+        if (req.query.id) {
+            query._id = req.query.id;
+        }
+
+        if (req.query.progress) {
+            query['progress'] = req.query.progress;
+        }
+
+        if(req.query.id){
+            const application = await Application.findById(req.query.id);
+            res.status(200).json({
+                success:true,
+                ApplicationCount:application.length,
+                application
+            });
+        }
+        else{
+            const application = await Application.find(query).populate('job');
+            res.status(200).json({
+                success:true,
+                ApplicationCount:application.length,
+                application
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+
+

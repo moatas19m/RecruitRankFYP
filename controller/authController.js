@@ -4,10 +4,19 @@ import userModel from "../models/User.js"
 import  Jwt  from "jsonwebtoken";
 import { requireSignIn } from "../middleware/Auth.js";
 
+
+
 //User Sign-up
 export const registerController= async(req,res)=>{
     try{
-    const {name, email, password, phone,address,answer,role}=req.body
+    const {name}=req.body;
+    const {email}=req.body;
+    const {password}=req.body;
+    const {phone}=req.body;
+    const {address}=req.body;
+    const {answer}=req.body;
+    const {role}=req.body;
+
         //validations
         if(!name){
             return res.send({message:'Name is required'})
@@ -22,7 +31,7 @@ export const registerController= async(req,res)=>{
             return res.send({message:'Phone number is required'})
         }
         if(!address){
-            return res.send({message:'Adress is required'})
+            return res.send({message:'Address is required'})
         }
         if(!answer){
             return res.send({message:'Answer is required'})
@@ -44,7 +53,7 @@ export const registerController= async(req,res)=>{
         const hashedPassword= await hashPassword(password)
         //save
         const user = await new userModel(
-            {name,email,phone,address,password:hashedPassword,answer,role}
+            {name, email, phone, address, password:hashedPassword, answer, role}
             ).save()
         res.status(201).send({
             success:true,
@@ -98,7 +107,8 @@ export const loginController=async(req,res)=>{
                 phone:user.phone,
                 address:user.address,
                 role:user.role,
-                answer:user.answer
+                answer:user.answer,
+                cv:user.cv
             },
             token
         })

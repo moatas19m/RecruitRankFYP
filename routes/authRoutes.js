@@ -4,9 +4,9 @@ import { requireSignIn,isAdmin } from "../middleware/Auth.js";
 //import router from './authRoute';
 
 
-
 //router object
 const router=express.Router()
+
 //REGISTER
 router.post("/register",registerController);
 

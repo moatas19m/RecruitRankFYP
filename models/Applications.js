@@ -13,7 +13,6 @@ const applicationSchema= new mongoose.Schema({
     },
     progress:{type: String, enum:["Accepted", "Rejected", "In-progress"], default:"In-progress", required:false},
     status:{type:String, enum:["Active", "Inactive"], default:"Active", required:false}
-
 },
  {timestamps:true}
  );

@@ -5,7 +5,7 @@ import authRoute from "./routes/authRoutes.js";
 import userRoute from "./routes/userRoutes.js";
 import jobRoute from "./routes/jobRoutes.js"
 import applicationRoute from "./routes/applicationRoutes.js"
-
+//import uploadRoute from "./routes/upload.cjs"
 
 //configure env
 dotenv.config();
@@ -30,6 +30,7 @@ app.use("/api/auth",authRoute);
 app.use("/api/user",userRoute);
 app.use("/api/job",jobRoute);
 app.use("/api/application",applicationRoute);
+//app.use("/api/upload", uploadRoute);
 //PORT
 const PORT = process.env.PORT || 8080;
 
