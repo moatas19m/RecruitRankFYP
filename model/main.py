@@ -137,7 +137,7 @@ print(resume_data)
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/parseResume")
 async def read_root():
     return resume_data
 

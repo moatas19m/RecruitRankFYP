@@ -5,6 +5,8 @@ import  Jwt  from "jsonwebtoken";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, getDownloadURL, uploadBytesResumable, deleteObject } from "firebase/storage";
 import multer from "multer";
+import axios from 'axios';
+
 
 import { firebaseConfig } from "../firebase.config.js";
 
@@ -15,6 +17,9 @@ const storage = getStorage();
 // Setting up multer as a middleware to grab photo uploads
 const upload = multer({ storage: multer.memoryStorage() });
 
+// Replace with the actual URL of your FastAPI server
+const apiUrl = 'http://localhost:8000'; 
+
 const giveCurrentDateTime = () => {
     const today = new Date();
     const date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
@@ -23,6 +28,7 @@ const giveCurrentDateTime = () => {
     return dateTime;
 }
 
+//Used by user to upload CV.
 let globalDownloadURL = '';
 export const UploadFileController = async (req, res) => {
     try {
@@ -32,6 +38,15 @@ export const UploadFileController = async (req, res) => {
         const snapshot = await uploadBytesResumable(storageRef, req.file.buffer, metadata);
         const downloadURL = await getDownloadURL(snapshot.ref);
         globalDownloadURL = downloadURL;
+
+        axios.get(`${apiUrl}/parseResume`)
+        .then(response => {
+            console.log('Response from FastAPI server:', response.data);
+        })
+        .catch(error => {
+            console.error('Error calling FastAPI server:', error);
+        });
+
 
         console.log('File successfully uploaded.');
         console.log(globalDownloadURL)
