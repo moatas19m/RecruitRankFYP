@@ -1,39 +1,35 @@
-import os
+import requests
 import PyPDF2
+import io
 
-def open_pdf_resume():
-    # Get the current directory
-    current_dir = os.path.dirname(os.path.realpath(__file__))
-    
-    # Path to the PDF file
-    pdf_file_path = os.path.join(current_dir, "Osama Hameed Resume.pdf")
+# URL of the PDF file
+url = "https://firebasestorage.googleapis.com/v0/b/recruitranks-1111.appspot.com/o/files%2FOsama%20Hameed%20Resume.pdfua2024-5-9%204%3A42%3A10?alt=media&token=8048f9a9-d926-4e91-ac22-d8debca493c1"
 
-    # Check if the file exists
-    if not os.path.exists(pdf_file_path):
-        print("Error: Resume file not found.")
-        return
+# Send a GET request to the URL
+response = requests.get(url)
 
-    # Open the PDF file
-    with open(pdf_file_path, "rb") as pdf_file:
-        # Create a PdfFileReader object
-        pdf_reader = PyPDF2.PdfReader(pdf_file)
+# Check if the request was successful (status code 200)
+if response.status_code == 200:
+
+    if ".pdf" in url:
+        # Create a PDF reader object
+        pdf_reader = PyPDF2.PdfReader(io.BytesIO(response.content))
+
+        # Initialize an empty string to store the text
+        text = ""
+
+        # Iterate through each page of the PDF and extract text
+        for page_num in range(len(pdf_reader.pages)):
+            page = pdf_reader.pages[page_num]
+            text += page.extract_text()
+
+        # Print the extracted text
+        print(text)
         
-        # Check if the PDF file has any pages
-        if len(pdf_reader.pages) == 0:
-            print("Error: The PDF file is empty.")
-            return
-        
-        # Print the number of pages in the PDF file
-        print("Number of pages in the PDF:", len(pdf_reader.pages))
+    elif ".docx" in url:
+        text = docx2txt.process(io.BytesIO(response.content))
 
-        # Read the text from the first page
-        first_page_text = pdf_reader.pages[0].extract_text()
-
-        # Print the text from the first page
-        print("Text from the first page:")
-        print(first_page_text)
-
-        # You can add more code here to further process the PDF file, such as extracting text from other pages, etc.
-
-if __name__ == "__main__":
-    open_pdf_resume()
+        # Print the extracted text
+        print(text)
+else:
+    print("Failed to fetch the PDF file. Status code:", response.status_code)

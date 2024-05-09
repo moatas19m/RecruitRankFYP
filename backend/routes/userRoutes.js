@@ -9,7 +9,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 const router=express.Router()
 
 //Upload CV
-router.post("/upload",upload.single("filename"), UploadFileController);
+router.post("/upload",upload.single("filename"), requireSignIn, UploadFileController);
 
 //Update User Profile for cv
 router.put("/updateProfile/:id", requireSignIn, isApplicantorAdmin,  updateUserCVController);

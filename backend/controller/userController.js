@@ -39,15 +39,6 @@ export const UploadFileController = async (req, res) => {
         const downloadURL = await getDownloadURL(snapshot.ref);
         globalDownloadURL = downloadURL;
 
-        axios.get(`${apiUrl}/parseResume`)
-        .then(response => {
-            console.log('Response from FastAPI server:', response.data);
-        })
-        .catch(error => {
-            console.error('Error calling FastAPI server:', error);
-        });
-
-
         console.log('File successfully uploaded.');
         console.log(globalDownloadURL)
         return res.send({
@@ -73,6 +64,20 @@ export const updateUserCVController = async(req,res)=>
         {
             new:true
         });
+
+
+        console.log("globalDownloadURL: " + globalDownloadURL);
+        axios.get(`${apiUrl}/parseResume?downloadURL=${encodeURIComponent(globalDownloadURL)}`)
+        .then(response => {
+            console.log('Response from FastAPI server:', response.data);
+        })
+        .catch(error => {
+            console.error('Error calling FastAPI server:', error);
+        });
+
+        
+
+
         return res.status(200).json({
             success:true,
             updateduser
