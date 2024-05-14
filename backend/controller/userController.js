@@ -58,26 +58,28 @@ export const updateUserCVController = async(req,res)=>
     {
 
     try{
-        const updateduser= await User.findByIdAndUpdate(req.params.id,{
-            cv:globalDownloadURL
-        },
-        {
-            new:true
-        });
-
-
+        let resData;
         console.log("globalDownloadURL: " + globalDownloadURL);
-        axios.get(`${apiUrl}/parseResume?downloadURL=${encodeURIComponent(globalDownloadURL)}`)
+
+        await axios.get(`${apiUrl}/parseResume?downloadURL=${encodeURIComponent(globalDownloadURL)}`)
         .then(response => {
             console.log('Response from FastAPI server:', response.data);
+            resData = response.data;
         })
         .catch(error => {
             console.error('Error calling FastAPI server:', error);
         });
 
+
+        const updateduser= await User.findByIdAndUpdate(req.params.id,{
+            cv:globalDownloadURL,
+            parsedData:resData
+        },
+        {
+            new:true
+        });
+
         
-
-
         return res.status(200).json({
             success:true,
             updateduser
