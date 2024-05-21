@@ -41,6 +41,30 @@ export const updateJobController = async(req,res)=>
     }
 };
 
+//Update jobStatus attribute
+export const updateJobStatusController = async(req,res)=>
+{
+
+    try{
+        const updatedjob= await Job.findByIdAndUpdate(req.params.id,{
+            jobStatus:"Inactive"
+        },
+        {
+            new:true
+        });
+        return res.status(200).json({
+            success:true,
+            updatedjob
+        });
+ 
+    } 
+    catch(err){
+        return res.status(500).json({
+            success:false,
+            err});
+    }
+};
+
 //Get All Jobs
 export const getJobController = async(req,res)=>
 {
@@ -62,7 +86,6 @@ export const getJobController = async(req,res)=>
 //Get Active Jobs
 export const getActiveJobController = async(req,res)=>
 {
-    const query=req.query.new
     try{
         const jobs= await Job.find({status:"Active"}).populate("user")
         res.status(200).json({
@@ -70,6 +93,24 @@ export const getActiveJobController = async(req,res)=>
         ActiveJobsCount:jobs.length,
         jobs});
       
+    }catch(err)
+    {
+        return res.status(500).json({
+            success:false,
+            err});
+    }
+};
+
+//Get Active Jobs
+export const getHomepageJobsController = async(req,res)=>
+{
+    try{
+        const jobs= await Job.find({status:"Active", jobStatus:"Active"}).populate("user")
+        res.status(200).json({
+        success:true,
+        ActiveJobsCount:jobs.length,
+        jobs});
+        
     }catch(err)
     {
         return res.status(500).json({

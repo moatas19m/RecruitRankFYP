@@ -14,14 +14,15 @@ const jobSchema= new mongoose.Schema({
     maxSalary:{type: Number, required:true},
     location:{type: String, required:true},
     jobposted:{type:Date, default:Date.now},
-    jobexpiry:{type:Date, required:true},
     joblevel:{type:String, enum:["Entry-level", "Mid-Senior", "Senior", "Executive"], default:"Entry-level", required:true},
     experience:{type:String, require:true},
     education:{type:String, enum:["Graduate", "Post-Graduate", "Doctorate"], default:"Graduate", required:true},
     type:{type: String, enum:["Remote","Hybrid","Onsite"], required:true},
     shift:{type: String, enum:["Morning", "Afternoon", "Night"], required:true},
     benefits:{type: String, required:true},
-    status:{type:String, enum:["Active", "Inactive"], default:"Active", required:true}
+    status:{type:String, enum:["Active", "Inactive"], default:"Active", required:true},
+    parsedData: { type: mongoose.Schema.Types.Mixed, required: false },
+    jobStatus:{type:String, enum:["Active", "Inactive"], default:"Active"}
 
 },
  {timestamps:true}

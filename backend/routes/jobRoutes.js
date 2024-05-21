@@ -1,5 +1,5 @@
 import express from "express";
-import {postJobController, updateJobController, getJobController, getActiveJobController, jobDeleteController, getUserJobController, getUserActiveJobController, FilterQueryController, SearchQueryController} from '../controller/jobController.js'
+import {postJobController, updateJobController, getJobController, getActiveJobController, jobDeleteController, getUserJobController, getUserActiveJobController, FilterQueryController, SearchQueryController, getHomepageJobsController, updateJobStatusController} from '../controller/jobController.js'
 import { requireSignIn, isAdmin, isRecruiter, isRecruiterorAdmin, isApplicantorAdmin } from "../middleware/Auth.js";
 
 //router object
@@ -16,6 +16,12 @@ router.get("/getjob", requireSignIn, isRecruiterorAdmin, getJobController);
 
 //Get Active Jobs
 router.get("/getActiveJobs", requireSignIn, isRecruiterorAdmin, getActiveJobController);
+
+//Get Active Jobs for All
+router.get("/getHomepageJobs", getHomepageJobsController);
+
+//Update jobStatus attribute
+router.put("/changeJobStatus/:id", requireSignIn, isRecruiterorAdmin, updateJobStatusController);
 
 //Delete Job
 router.put("/deletejob/:id", requireSignIn, isRecruiterorAdmin, jobDeleteController);
