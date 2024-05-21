@@ -12,6 +12,7 @@ import Property1Intern from "./Property1Intern"
 import Logo from "./Logo"
 import fiarrowright from "./fiarrowright"
 import Footer from './Footer'
+import JobCard from './JobCard'
 export default function Homepage () {
 	return (
 		<div className='Homepage_Homepage'>
@@ -117,186 +118,15 @@ export default function Homepage () {
 				<span className='DiscoverwhymillionsofcandidateschooseRecruitRanksfortheirjobs'>Discover why millions of candidates choose Recruit Ranks for their jobs.</span>
 			</div>
 			<div className='Frame683'>
-				<div className='Frame682'>
-					<div className='Rectangle1590'/>
-					<div className='Job'>
-						<div className='Heading'>
-							<span className='SeniorUXDesigner'>Senior UX Designer</span>
-							<div className='Frame675'>
-								<Property1Full className='Type'/>
-								<span className='Salary2000025000'>Salary: $20,000 - $25,000</span>
-							</div>
-						</div>
-					</div>
-					<div className='Info_3'>
-						<span className='GoogleInc'>Google Inc.</span>
-						<div className='Loaction'>
-							<MapPin className='MapPin'/>
-							<span className='DhakaBangladesh'>Dhaka, Bangladesh</span>
-						</div>
-					</div>
-					<EmployersGoogleSizeMedium className='EmployersLogo'/>
-				</div>
-				<div className='Frame688'>
-					<div className='Rectangle1590_1'/>
-					<div className='Job_1'>
-						<div className='Heading_1'>
-							<span className='UIUXDesigner'>UI/UX Designer</span>
-						</div>
-						<div className='Frame675_1'>
-							<Property1Full className='Type_1'/>
-							<span className='Salary2000025000_1'>Salary: $20,000 - $25,000</span>
-						</div>
-					</div>
-					<div className='Info_4'>
-						<span className='GoogleInc_1'>Google Inc.</span>
-						<div className='Loaction_1'>
-							<MapPin className='MapPin_1'/>
-							<span className='DhakaBangladesh_1'>Dhaka, Bangladesh</span>
-						</div>
-					</div>
-					<EmployersGoogleSizeMedium className='EmployersLogo_1'/>
-				</div>
-				<div className='Frame686'>
-					<div className='Rectangle1590_2'/>
-					<div className='Job_2'>
-						<div className='Heading_2'>
-							<span className='ProductDesigner'>Product Designer</span>
-						</div>
-						<div className='Frame675_2'>
-							<Property1Full className='Type_2'/>
-							<span className='Salary2000025000_2'>Salary: $20,000 - $25,000</span>
-						</div>
-					</div>
-					<div className='Info_5'>
-						<span className='GoogleInc_2'>Google Inc.</span>
-						<div className='Loaction_2'>
-							<MapPin className='MapPin_2'/>
-							<span className='DhakaBangladesh_2'>Dhaka, Bangladesh</span>
-						</div>
-					</div>
-					<EmployersGoogleSizeMedium className='EmployersLogo_2'/>
-				</div>
-				<div className='Frame689'>
-					<div className='Rectangle1590_3'/>
-					<div className='Job_3'>
-						<div className='Heading_3'>
-							<span className='SoftwareEngineer'>Software Engineer</span>
-						</div>
-						<div className='Frame675_3'>
-							<Property1Full className='Type_3'/>
-							<span className='Salary2000025000_3'>Salary: $20,000 - $25,000</span>
-						</div>
-					</div>
-					<div className='Info_6'>
-						<span className='GoogleInc_3'>Google Inc.</span>
-						<div className='Loaction_3'>
-							<MapPin className='MapPin_3'/>
-							<span className='DhakaBangladesh_3'>Dhaka, Bangladesh</span>
-						</div>
-					</div>
-					<EmployersGoogleSizeMedium className='EmployersLogo_3'/>
-				</div>
-				<div className='Frame693'>
-					<div className='Rectangle1590_4'/>
-					<div className='Job_4'>
-						<div className='Heading_4'>
-							<span className='InteractionDesigner'>Interaction Designer</span>
-						</div>
-						<div className='Frame675_4'>
-							<Property1Full className='Type_4'/>
-							<span className='Salary2000025000_4'>Salary: $20,000 - $25,000</span>
-						</div>
-					</div>
-					<div className='Info_7'>
-						<span className='GoogleInc_4'>Google Inc.</span>
-						<div className='Loaction_4'>
-							<MapPin className='MapPin_4'/>
-							<span className='DhakaBangladesh_4'>Dhaka, Bangladesh</span>
-						</div>
-					</div>
-					<EmployersGoogleSizeMedium className='EmployersLogo_4'/>
-				</div>
-				<div className='Frame687'>
-					<div className='Rectangle1590_5'/>
-					<div className='Job_5'>
-						<div className='Heading_5'>
-							<span className='NetworkingEngineer'>Networking Engineer</span>
-						</div>
-						<div className='Frame675_5'>
-							<Property1Intern className='Type_5'/>
-							<span className='Salary2000025000_5'>Salary: $20,000 - $25,000</span>
-						</div>
-					</div>
-					<div className='Info_8'>
-						<span className='GoogleInc_5'>Google Inc.</span>
-						<div className='Loaction_5'>
-							<MapPin className='MapPin_5'/>
-							<span className='DhakaBangladesh_5'>Dhaka, Bangladesh</span>
-						</div>
-					</div>
-					<EmployersGoogleSizeMedium className='EmployersLogo_5'/>
-				</div>
-				<div className='Frame681'>
-					<div className='Rectangle1590_6'/>
-					<div className='Job_6'>
-						<div className='Heading_6'>
-							<span className='FrontEndDeveloper'>Front End Developer</span>
-							<div className='Frame675_6'>
-								<Property1Full className='Type_6'/>
-								<span className='Salary2000025000_6'>Salary: $20,000 - $25,000</span>
-							</div>
-						</div>
-					</div>
-					<div className='Info_9'>
-						<span className='GoogleInc_6'>Google Inc.</span>
-						<div className='Loaction_6'>
-							<MapPin className='MapPin_6'/>
-							<span className='DhakaBangladesh_6'>Dhaka, Bangladesh</span>
-						</div>
-					</div>
-					<EmployersGoogleSizeMedium className='EmployersLogo_6'/>
-				</div>
-				<div className='Frame694'>
-					<div className='Rectangle1590_7'/>
-					<div className='Job_7'>
-						<div className='Heading_7'>
-							<span className='ProjectManager'>Project Manager</span>
-						</div>
-						<div className='Frame675_7'>
-							<Property1Full className='Type_7'/>
-							<span className='Salary2000025000_7'>Salary: $20,000 - $25,000</span>
-						</div>
-					</div>
-					<div className='Info_10'>
-						<span className='GoogleInc_7'>Google Inc.</span>
-						<div className='Loaction_7'>
-							<MapPin className='MapPin_7'/>
-							<span className='DhakaBangladesh_7'>Dhaka, Bangladesh</span>
-						</div>
-					</div>
-					<EmployersGoogleSizeMedium className='EmployersLogo_7'/>
-				</div>
-				<div className='Frame691'>
-					<div className='Rectangle1590_8'/>
-					<div className='Job_8'>
-						<div className='Heading_8'>
-							<span className='ProjectManager_1'>Project Manager</span>
-						</div>
-						<div className='Frame675_8'>
-							<Property1Full className='Type_8'/>
-							<span className='Salary2000025000_8'>Salary: $20,000 - $25,000</span>
-						</div>
-					</div>
-					<div className='Info_11'>
-						<span className='GoogleInc_8'>Google Inc.</span>
-						<div className='Loaction_8'>
-							<MapPin className='MapPin_8'/>
-							<span className='DhakaBangladesh_8'>Dhaka, Bangladesh</span>
-						</div>
-					</div>
-					<EmployersGoogleSizeMedium className='EmployersLogo_8'/>
-				</div>
+				<JobCard/>
+				<JobCard/>
+				<JobCard/>
+				<JobCard/>
+				<JobCard/>
+				<JobCard/>
+				<JobCard/>
+				<JobCard/>
+				<JobCard/>
 			</div>
 			<div className='Heading_9'>
 				<span className='Featuredjob'>Featured job</span>
