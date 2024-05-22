@@ -97,10 +97,22 @@ export const updateJobStatusController = async (req, res) => {
         
         const usersWithJobs = await Applications.find({job:jobID}).populate('user', 'name email parsedData');
         
-        usersWithJobs.forEach((application, index) => {
+        for (const [index, application] of usersWithJobs.entries()) {
+
+            // await axios.post(`${apiUrl}/extractJobDescription`, { JD: jobText }, {
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     }
+            // })
+            // .then(response => {
+            //     console.log('Response from FastAPI server:', response.data);
+            //     resData = response.data;
+            // })
+            
+
             console.log(`Application ${index + 1}:`, application);
             console.log("\n\n\n" + application.user.parsedData + "\n\n\n")
-        });
+        };
         
 
         //console.log("\n\n\n\n\n" + usersWithJobs);
