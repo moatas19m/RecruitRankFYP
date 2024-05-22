@@ -375,17 +375,17 @@ def calculate_score(resume_path: str = Query(...), jd_path: str = Query(...)):
     return {"Resume match score": f"{overall_score_percentage}%"}
 
 
-@app.get("/extract-jd/{file_path:path}")
-async def extract_job(file_path:str):
+@app.post("/extractJobDescription")
+async def extract_job(request: Request):
     try:
-        with open(file_path, 'r') as file:
-            job_description_text = file.read()
-        job_info =extract_job_info(job_description_text)
+        # with open(file_path, 'r') as file:
+        #     job_description_text = file.read()
+        body = await request.json()
+        job_description = body.get("JD")
+        job_info =extract_job_info(job_description)
         print(job_info)
-        json_file_path="job_data.json"
-        save_json(job_info,json_file_path)
+        # json_file_path="job_data.json"
+        # save_json(job_info,json_file_path)
         return job_info
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="File not found")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

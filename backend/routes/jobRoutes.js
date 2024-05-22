@@ -3,7 +3,8 @@ import {postJobController, updateJobController, getJobController, getActiveJobCo
 import { requireSignIn, isAdmin, isRecruiter, isRecruiterorAdmin, isApplicantorAdmin } from "../middleware/Auth.js";
 
 //router object
-const router=express.Router()
+const router=express.Router();
+router.use(express.json());
 
 //Post Jobs
 router.post("/postjob", requireSignIn, isRecruiterorAdmin, postJobController);
