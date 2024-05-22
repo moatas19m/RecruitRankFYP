@@ -1,37 +1,38 @@
 import Job from "../models/Jobs.js"
 import User from "../models/User.js"
-import axios from 'axios';
+import axios from 'axios'
+import Applications from "../models/Applications.js"
 
 // Replace with the actual URL of your FastAPI server
 const apiUrl = 'http://localhost:8000';
 
 const convertJobJsonToText = (jobJson) => {
-    return  `Job Title: ${jobJson.title}\nCompany: ${jobJson.company}\nLocation: ${jobJson.location}\n`+
-            `Job Level: ${jobJson.joblevel}\nJob Type: ${jobJson.type}\nShift: ${jobJson.shift}\n` +
-            `Salary Range: $${jobJson.minSalary} - $${jobJson.maxSalary}\nExperience Required: ${jobJson.experience}\n` +
-            `Education Required: ${jobJson.education}\nRequirements: ${jobJson.requirements}\n` +
-            `Benefits: ${jobJson.benefits}\nDescription:${jobJson.description}`;
+    return `Job Title: ${jobJson.title}\nCompany: ${jobJson.company}\nLocation: ${jobJson.location}\n` +
+        `Job Level: ${jobJson.joblevel}\nJob Type: ${jobJson.type}\nShift: ${jobJson.shift}\n` +
+        `Salary Range: $${jobJson.minSalary} - $${jobJson.maxSalary}\nExperience Required: ${jobJson.experience}\n` +
+        `Education Required: ${jobJson.education}\nRequirements: ${jobJson.requirements}\n` +
+        `Benefits: ${jobJson.benefits}\nDescription:${jobJson.description}`;
 };
 
 //Post Job
-export const postJobController= async(req,res)=>{
+export const postJobController = async (req, res) => {
     {
         const jobText = convertJobJsonToText(req.body);
         let resData;
         // console.log(jobText);
 
-        await axios.post(`${apiUrl}/extractJobDescription`, { JD: jobText },{
+        await axios.post(`${apiUrl}/extractJobDescription`, { JD: jobText }, {
             headers: {
                 'Content-Type': 'application/json',
             }
         })
-        .then(response => {
-            console.log('Response from FastAPI server:', response.data);
-            resData = response.data;
-        })
-        .catch(error => {
-            console.error('Error calling FastAPI server:', error);
-        });
+            .then(response => {
+                console.log('Response from FastAPI server:', response.data);
+                resData = response.data;
+            })
+            .catch(error => {
+                console.error('Error calling FastAPI server:', error);
+            });
 
         const newJobData = {
             ...req.body,
@@ -40,180 +41,216 @@ export const postJobController= async(req,res)=>{
 
         const newJob = new Job(newJobData);
 
-        try{
-            const savedJob=await newJob.save();
+        try {
+            const savedJob = await newJob.save();
             res.status(200).json(
                 {
-                    success:true,
-                    savedJob});
-        }catch(err)
-        {
-           return res.status(500).json({success:false,err});
+                    success: true,
+                    savedJob
+                });
+        } catch (err) {
+            return res.status(500).json({ success: false, err });
         }
-    }   
+    }
 }
 
 //Update Job
-export const updateJobController = async(req,res)=>
-    {
+export const updateJobController = async (req, res) => {
 
-    try{
-        const updatedjob= await Job.findByIdAndUpdate(req.params.id,{
-            $set:req.body
+    try {
+        const updatedjob = await Job.findByIdAndUpdate(req.params.id, {
+            $set: req.body
         },
-        {
-            new:true
-        });
+            {
+                new: true
+            });
         return res.status(200).json({
-            success:true,
+            success: true,
             updatedjob
         });
- 
-    } 
-      catch(err){
+
+    }
+    catch (err) {
         return res.status(500).json({
-            success:false,
-            err});
+            success: false,
+            err
+        });
     }
 };
 
 //Update jobStatus attribute
-export const updateJobStatusController = async(req,res)=>
-{
+export const updateJobStatusController = async (req, res) => {
 
-    try{
-        const updatedjob= await Job.findByIdAndUpdate(req.params.id,{
-            jobStatus:"Inactive"
+    try {
+        const updatedjob = await Job.findByIdAndUpdate(req.params.id, {
+            jobStatus: "Inactive"
         },
-        {
-            new:true
+            {
+                new: true
+            });
+
+        const jobDetails = updatedjob.parsedData;
+        const jobID = updatedjob._id;
+
+        //const numberOfApplications = await Applications.countDocuments({ job: jobID });
+        //console.log(numberOfApplications);
+        
+        const usersWithJobs = await Applications.find({job:jobID}).populate('user', 'name email parsedData');
+        
+        usersWithJobs.forEach((application, index) => {
+            console.log(`Application ${index + 1}:`, application);
+            console.log("\n\n\n" + application.user.parsedData + "\n\n\n")
         });
+        
+
+        //console.log("\n\n\n\n\n" + usersWithJobs);
+
+
+        //     const { id: jobID } = req.params;
+        // try {
+        //     const application = await Application.find({ job: jobID }).populate("user")
+        //     res.status(200).json({
+        //         success: true,
+        //         ApplicationCount: application.length,
+        //         application
+        //     });
+
+        // } catch (err) {
+        //     return res.status(500).json({
+        //         success: false,
+        //         err
+        //     });
+        // }
+
+
         return res.status(200).json({
-            success:true,
+            success: true,
+            usersWithJobs,
             updatedjob
         });
- 
-    } 
-    catch(err){
+
+    }
+    catch (err) {
         return res.status(500).json({
-            success:false,
-            err});
+            success: false,
+            err
+        });
     }
 };
 
 //Get All Jobs
-export const getJobController = async(req,res)=>
-{
-    try{
-       const jobs= await Job.find().populate("user")
-       res.status(200).json({
-        success:true,
-        JobCount:jobs.length,
-        jobs});
-      
-    }catch(err)
-    {
-       return res.status(500).json({
-            success:false,
-            err});
+export const getJobController = async (req, res) => {
+    try {
+        const jobs = await Job.find().populate("user")
+        res.status(200).json({
+            success: true,
+            JobCount: jobs.length,
+            jobs
+        });
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            err
+        });
     }
 };
 
 //Get Active Jobs
-export const getActiveJobController = async(req,res)=>
-{
-    try{
-        const jobs= await Job.find({status:"Active"}).populate("user")
+export const getActiveJobController = async (req, res) => {
+    try {
+        const jobs = await Job.find({ status: "Active" }).populate("user")
         res.status(200).json({
-        success:true,
-        ActiveJobsCount:jobs.length,
-        jobs});
-      
-    }catch(err)
-    {
+            success: true,
+            ActiveJobsCount: jobs.length,
+            jobs
+        });
+
+    } catch (err) {
         return res.status(500).json({
-            success:false,
-            err});
+            success: false,
+            err
+        });
     }
 };
 
 //Get Active Jobs
-export const getHomepageJobsController = async(req,res)=>
-{
-    try{
-        const jobs= await Job.find({status:"Active", jobStatus:"Active"}).populate("user")
+export const getHomepageJobsController = async (req, res) => {
+    try {
+        const jobs = await Job.find({ status: "Active", jobStatus: "Active" }).populate("user")
         res.status(200).json({
-        success:true,
-        ActiveJobsCount:jobs.length,
-        jobs});
-        
-    }catch(err)
-    {
+            success: true,
+            ActiveJobsCount: jobs.length,
+            jobs
+        });
+
+    } catch (err) {
         return res.status(500).json({
-            success:false,
-            err});
+            success: false,
+            err
+        });
     }
 };
 
 //Delete Job
-export const jobDeleteController = async(req,res)=>
-    {
-    try{
-        const deletedJob= await Job.findByIdAndUpdate(req.params.id,{
-            status:"Inactive"
+export const jobDeleteController = async (req, res) => {
+    try {
+        const deletedJob = await Job.findByIdAndUpdate(req.params.id, {
+            status: "Inactive"
         },
-        {
-            new:true
-        });
+            {
+                new: true
+            });
         return res.status(200).json({
-            success:true,
-            message:"Job has been deleted",
+            success: true,
+            message: "Job has been deleted",
             deletedJob
         });
- 
-    } 
-      catch(err){
+
+    }
+    catch (err) {
         return res.status(500).json({
-            success:false,
-            err});
+            success: false,
+            err
+        });
     }
 };
 
 //Get all jobs by a specific user
-export const getUserJobController = async(req,res)=>
-{
-    const {id:userID} =req.params;
-    try{
-       const job= await Job.find({user:userID}).populate("user")
-       res.status(200).json({
-        success:true,
-        JobCount:job.length,
-        job});
-      
-    }catch(err)
-    {
-       return res.status(500).json({
-            success:false,
-            err});
+export const getUserJobController = async (req, res) => {
+    const { id: userID } = req.params;
+    try {
+        const job = await Job.find({ user: userID }).populate("user")
+        res.status(200).json({
+            success: true,
+            JobCount: job.length,
+            job
+        });
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            err
+        });
     }
 };
 
 //Get active jobs by a specific user
-export const getUserActiveJobController = async(req,res)=>
-{
-    const {id:userID} =req.params;
-    try{
-       const job= await Job.find({user:userID, status:"Active"}).populate("user")
-       res.status(200).json({
-        success:true,
-        ActiveJobCount:job.length,
-        job});
-      
-    }catch(err)
-    {
-       return res.status(500).json({
-            success:false,
-            err});
+export const getUserActiveJobController = async (req, res) => {
+    const { id: userID } = req.params;
+    try {
+        const job = await Job.find({ user: userID, status: "Active" }).populate("user")
+        res.status(200).json({
+            success: true,
+            ActiveJobCount: job.length,
+            job
+        });
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            err
+        });
     }
 };
 
@@ -246,19 +283,19 @@ export const FilterQueryController = async (req, res) => {
             query['shift'] = req.query.shift;
         }
 
-        if(req.query.id){
+        if (req.query.id) {
             const jobs = await Job.findById(req.query.id).populate('user');
             res.status(200).json({
-                success:true,
-                JobCount:jobs.length,
+                success: true,
+                JobCount: jobs.length,
                 jobs
             });
         }
-        else{
+        else {
             const jobs = await Job.find(query).populate('user');
             res.status(200).json({
-                success:true,
-                JobCount:jobs.length,
+                success: true,
+                JobCount: jobs.length,
                 jobs
             });
         }
@@ -291,8 +328,8 @@ export const SearchQueryController = async (req, res) => {
 
         const jobs = await Job.find(query).populate('user');
         res.status(200).json({
-            success:true,
-            JobCount:jobs.length,
+            success: true,
+            JobCount: jobs.length,
             jobs
         });
     } catch (err) {
