@@ -305,21 +305,30 @@ async def parse_resume(request: Request):
     else:
         return {"error": "No downloadURL parameter provided"}
     
-@app.get('/score/')
-def calculate_score(resume_path: str = Query(...), jd_path: str = Query(...)):
-    resume_path = os.path.abspath(resume_path)
-    jd_path = os.path.abspath(jd_path)
+@app.post('/score/')
+async def calculate_score(request: Request):
+    # resume_path: str = Query(...), jd_path: str = Query(...)
+    body = await request.json()
+    jd_data = body.get("jobParsed")
+    cv_data = body.get("resumeParsed")
 
-    if not (os.path.isfile(resume_path) and os.path.isfile(jd_path)):
-        raise HTTPException(status_code=404, detail="File not found at resolved path")
+    # cv_data = json.loads(cv_json)
+    # jd_data = json.loads(jd_json)
 
-    try:
-        with open(resume_path, 'r') as file_cv, open(jd_path, 'r') as file_jd:
-            cv_data, jd_data = json.load(file_cv), json.load(file_jd)
-    except json.JSONDecodeError as json_err:
-        raise HTTPException(status_code=400, detail=f"Error decoding JSON: {json_err}")
-    except FileNotFoundError as fnf_error:
-        raise HTTPException(status_code=404, detail=f"File not found: {fnf_error}")
+    # print(cv_data)
+    # print(jd_data)
+
+    # resume_path = os.path.abspath(resume_path)
+    # jd_path = os.path.abspath(jd_path)
+
+    # if not (os.path.isfile(resume_path) and os.path.isfile(jd_path)):
+    #     raise HTTPException(status_code=404, detail="File not found at resolved path")
+    # try:
+    #     cv_data, jd_data = json.load(cv_json), json.load(jd_json)
+    # except json.JSONDecodeError as json_err:
+    #     raise HTTPException(status_code=400, detail=f"Error decoding JSON: {json_err}")
+    # except FileNotFoundError as fnf_error:
+    #     raise HTTPException(status_code=404, detail=f"File not found: {fnf_error}")
 
     def get_normalized_cgpa(cgpa):
     # Check if CGPA data is a list, and if so, take the first element.
