@@ -1,6 +1,6 @@
 import express from "express";
-import {UploadFileController, updateUserCVController, updateUserController, getUserController, userDeleteController, getActiveUserController, FilterUserQueryController, SearchUserQueryController} from '../controller/userController.js'
-import { requireSignIn,isAdmin, isApplicantorAdmin } from "../middleware/Auth.js";
+import {getSingleUserController, UploadFileController, updateUserCVController, updateUserController, getUserController, userDeleteController, getActiveUserController, FilterUserQueryController, SearchUserQueryController} from '../controller/userController.js'
+import { requireSignIn,isAdmin, isApplicantorAdmin, isRecruiterorAdmin } from "../middleware/Auth.js";
 import multer from "multer";
 
 const upload = multer({ storage: multer.memoryStorage() });
@@ -22,6 +22,9 @@ router.get("/getusers", requireSignIn, isAdmin, getUserController);
 
 //Get Active Users Only
 router.get("/getActiveUsers", requireSignIn, isAdmin, getActiveUserController);
+
+//Get Single Users Only
+router.get("/getSingleUser/:id", requireSignIn, getSingleUserController);
 
 //Delete User
 router.put("/deleteuser/:id", requireSignIn, isAdmin, userDeleteController);

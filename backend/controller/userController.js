@@ -156,6 +156,24 @@ export const getActiveUserController = async(req,res)=>
     }
 };
 
+//Get Signle Users
+export const getSingleUserController = async(req,res)=>
+    {
+        
+        try{
+           const users= await User.findById(req.params.id)
+           res.status(200).json({
+            success:true,
+            users});
+          
+        }catch(err)
+        {
+           return res.status(500).json({
+                success:false,
+                err});
+        }
+    };
+
 //Soft Delete
 export const userDeleteController = async(req,res)=>
     {

@@ -14,7 +14,7 @@ function PreviewJobComp({ onAppsPage, job }) {
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     useEffect(() => {
         const getJob = async () => {
-            axios.get(`/jobs/${jobId}`).then((res) => {
+            axios.get(`/userActiveJob/${jobId}`).then((res) => {
                 setJobP(res.data)
             }).catch((err) => console.log(err))
         }
@@ -23,7 +23,7 @@ function PreviewJobComp({ onAppsPage, job }) {
 
     const discardJob = async () => {
         setLoading(true)
-        axios.delete(`/jobs/${jobId}`)
+        axios.put(`/deletejob/${jobId}`)
         notifySuc();
         await delay(500).then(() => navigate(`/HRView/createJob/`));
     }

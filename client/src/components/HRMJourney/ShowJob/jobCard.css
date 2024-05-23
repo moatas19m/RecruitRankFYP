@@ -1,0 +1,44 @@
+.jobCard {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+.jobCardContent {
+    display: flex;
+    flex-direction: column;
+}
+
+.jobTitle {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.jobCompany {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.jobLocation {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.jobDescription {
+    margin-bottom: 15px;
+}
+
+.jobDetails {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.jobDetails p {
+    margin-right: 20px;
+}
+
+/* Customize styles for different job details as needed */

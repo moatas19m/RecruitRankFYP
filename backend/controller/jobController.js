@@ -13,33 +13,51 @@ const convertJobJsonToText = (jobJson) => {
             `Benefits: ${jobJson.benefits}\nDescription:${jobJson.description}`;
 };
 
+// //Post Job
+// export const postJobController= async(req,res)=>{
+//     {
+//         const jobText = convertJobJsonToText(req.body);
+//         let resData;
+//         // console.log(jobText);
+
+//         await axios.post(`${apiUrl}/extractJobDescription`, { JD: jobText },{
+//             headers: {
+//                 'Content-Type': 'application/json',
+//             }
+//         })
+//         .then(response => {
+//             console.log('Response from FastAPI server:', response.data);
+//             resData = response.data;
+//         })
+//         .catch(error => {
+//             console.error('Error calling FastAPI server:', error);
+//         });
+
+//         const newJobData = {
+//             ...req.body,
+//             parsedData: resData
+//         };
+
+//         const newJob = new Job(newJobData);
+
+//         try{
+//             const savedJob=await newJob.save();
+//             res.status(200).json(
+//                 {
+//                     success:true,
+//                     savedJob});
+//         }catch(err)
+//         {
+//            return res.status(500).json({success:false,err});
+//         }
+//     }   
+// }
+
+//rough
 //Post Job
 export const postJobController= async(req,res)=>{
     {
-        const jobText = convertJobJsonToText(req.body);
-        let resData;
-        // console.log(jobText);
-
-        await axios.post(`${apiUrl}/extractJobDescription`, { JD: jobText },{
-            headers: {
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response => {
-            console.log('Response from FastAPI server:', response.data);
-            resData = response.data;
-        })
-        .catch(error => {
-            console.error('Error calling FastAPI server:', error);
-        });
-
-        const newJobData = {
-            ...req.body,
-            parsedData: resData
-        };
-
-        const newJob = new Job(newJobData);
-
+        const newJob = new Job(req.body)
         try{
             const savedJob=await newJob.save();
             res.status(200).json(
@@ -50,8 +68,7 @@ export const postJobController= async(req,res)=>{
         {
            return res.status(500).json({success:false,err});
         }
-    }   
-}
+}}
 
 //Update Job
 export const updateJobController = async(req,res)=>
@@ -197,6 +214,25 @@ export const getUserJobController = async(req,res)=>
             err});
     }
 };
+
+//Get Single Job
+//Get all jobs by a specific user
+export const getSingleJobController = async(req,res)=>
+    {
+        const {id:userID} =req.params;
+        try{
+           const job= await Job.findById(req.params.id)
+           res.status(200).json({
+            success:true,
+            job});
+          
+        }catch(err)
+        {
+           return res.status(500).json({
+                success:false,
+                err});
+        }
+    };
 
 //Get active jobs by a specific user
 export const getUserActiveJobController = async(req,res)=>

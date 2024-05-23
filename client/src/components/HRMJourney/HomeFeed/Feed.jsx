@@ -5,30 +5,46 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { CircularProgress, LinearProgress } from "@mui/material"
 function Feed() {
-    const userId = localStorage.getItem("userId")
+    const userData = localStorage.getItem("user");
+    const users = JSON.parse(userData);
+    const userId = users.id;
+
+    const [user, setUser] = useState({ _id: "n/a" });
     const companyId = localStorage.getItem("companyId")
-    const [myjobs, setJobs] = useState([])
+    const [jobs, setJobs] = useState([])
     const [compjobs, setCompJobs] = useState([])
     const [isLoading, setIsloading] = useState(false)
 
     useEffect(() => {
-        const fetchMyJobs = async () => {
-            setIsloading(true)
-            await axios.get(`/jobs?HRCreatorId=${userId}`).then(res => { setJobs(res.data); setIsloading(false) }).catch(err => { console.log(err); setIsloading(false) });
-        }
-        const fetchCompJobs = async () => {
-            setIsloading(true)
-            await axios.get(`/jobs?companyId=${companyId}&HRCreatorId[$ne]=${userId}`).then(res => { setCompJobs(res.data); setIsloading(false) }).catch(err => { console.log(err); setIsloading(false) });
-        }
-        fetchMyJobs();
-        fetchCompJobs();
-    }, [])
+        // Fetch the list of posted jobs from the API
+        const fetchJobs = async () => {
+            try {
+                const headers = { Authorization: `${localStorage.getItem("token")}` };
+                const response = await axios.get(`/api/job/userActiveJob/${userId}`, { headers });
+                console.log("Response data:", response.data);
+        
+                // Check if response.data.job is an array before setting the jobs state
+                if (response.data.job && Array.isArray(response.data.job)) {
+                    setJobs(response.data.job);
+                } else {
+                    console.error("Response data.job is not an array:", response.data);
+                }
+            } catch (error) {
+                console.error("Error fetching jobs:", error);
+            }
+        };
+        fetchJobs(); // Call the fetchJobs function when the component mounts
+    }, []);
 
+    
+    const userD = localStorage.getItem("user");
+    const UserD = JSON.parse(userD);
+    const userName = UserD.name;
     return (
         <div className="feed">
             <div className="feedWrapper">
                 <div className="topSection">
-                    <div className="feedTitle">Hello, Vladmir</div>
+                    <div className="feedTitle">Hello, {userName}</div>
                     <div className="searchbar">
                         <Search className="SearchIcon" />
                         <input placeholder="Search across the system..." type="text" className="searchInput" />
@@ -39,15 +55,15 @@ function Feed() {
                         <div className="jobPostingHeading">Created Jobs</div>
                         <div className="jobPostingsContainer">
                             {isLoading ? <div className="jobPostings"> <LinearProgress /> </div> :
-                                myjobs.length === 0 ? <div className="jobPostingsError"><div className="error"><Error />No jobs found...</div></div> :
+                                jobs.length === 0 ? <div className="jobPostingsError"><div className="error"><Error />No jobs found...</div></div> :
                                     < div className="jobPostings">
                                         {
-                                            myjobs.map((j) => (<JobCard key={j._id} job={j} />))
+                                            jobs.map((job) => (<JobCard key={job._id} job={job} />))
                                         }
                                     </div>
                             }
                         </div>
-                        <div className="jobPostingHeading">Company Jobs</div>
+                        {/* <div className="jobPostingHeading">Company Jobs</div>
                         <div className="jobPostingsContainer">
                             {isLoading ? <div className="jobPostings"> <LinearProgress /> </div> :
                                 compjobs.length === 0 ? <div className="jobPostingsError"><div className="error"><Error />No jobs found...</div></div> :
@@ -57,7 +73,7 @@ function Feed() {
                                         }
                                     </div>
                             }
-                        </div>
+                        </div> */}
                     </div></div>
             </div>
         </div >

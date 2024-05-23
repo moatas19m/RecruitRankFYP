@@ -1,0 +1,28 @@
+.jobList {
+    padding: 20px;
+}
+
+.jobListWrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.Heading {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.jobCardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 20px;
+}
+
+/* Additional styles can be added as needed */

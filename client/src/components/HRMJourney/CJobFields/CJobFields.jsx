@@ -1,94 +1,99 @@
 import { Link, useNavigate } from "react-router-dom";
-import "./cJobFields.css"
-import React, { useState } from "react"
+import "./cJobFields.css";
+import React, { useState } from "react";
 import axios from "axios";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function CJobFields(props) {
-    const userId = localStorage.getItem("userId")
-    const companyId = localStorage.getItem("companyId")
-    const [tags, setTags] = useState([]);
-    const [pos, setPos] = useState(1);
-    const [descValue, setDescValue] = useState('');
-    const [reqValue, setReqValue] = useState('');
-    const navigate = useNavigate()
+    const userData = localStorage.getItem("user");
 
+    // Parse the JSON string to get the user object
+    const user = JSON.parse(userData);
+  
+    // Access the id from the user object
+    const userId = user.id;
+    const [descValue, setDescValue] = useState("");
+    const [reqValue, setReqValue] = useState("");
+    const [company, setCompany] = useState("");
+    const [title, setTitle] = useState("");
+    const [workplace, setWorkplace] = useState("Remote"); // Default value
+    const [location, setLocation] = useState("");
+    const [minSalary, setMinSalary] = useState("");
+    const [maxSalary, setMaxSalary] = useState("");
+    const [joblevel, setJobLevel] = useState("Entry-level"); // Default value
+    const [experience, setExperience] = useState("");
+    const [education, setEducation] = useState("Graduate"); // Default value
+    const [shift, setShift] = useState("Morning"); // Default value
+    const [benefits, setBenefits] = useState("");
+    
 
-    const IncPos = () => {
-        setPos(pos + 1);
-    }
-    const decPos = () => {
-        setPos(pos - 1);
-    }
-
-    function handleKeyDown(e) {
-        if (e.key === 'Backspace' && e.target.value === "") rmeoveTag(tags.length - 1)
-        if (e.key !== 'Enter') return;
-        const value = e.target.value;
-        if (value.trim() === "") return;
-        setTags([...tags, value])
-        e.target.value = ''
-        e.preventDefault();
-    }
-    function rmeoveTag(index) {
-        setTags(tags.filter((el, i) => i !== index))
-    }
-
+    const navigate = useNavigate();
+    console.log ("userid ",  userId)
     const editorStyles = {
-        borderRadius: '1em',
-        border: 'none',
-        fontSize: '2em',
-        color: '#000',
+        borderRadius: "1em",
+        border: "none",
+        fontSize: "2em",
+        color: "#000",
         backgroundColor: "#f1f1f1",
-        height: "32vh"
+        height: "32vh",
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const job = {
-            jobTitle: event.target.elements.jobTitle.value,
-            workplace: event.target.elements.workplace.value,
-            location: event.target.elements.location.value,
-            type: event.target.elements.jobType.value,
-            skills: tags,
+            user: userId,
+            company: company,
+            title: title,
             description: descValue,
-            requiremets: reqValue,
-            spots: pos,
-            companyId: companyId,
-            HRCreatorId: userId,
+            requirements: reqValue,
+            minSalary: minSalary,
+            maxSalary: maxSalary,
+            location: location,
+            type: workplace,
+            
+            joblevel: joblevel,
+            experience: experience,
+            education: education,
+            shift: shift,
+            benefits: benefits,
         };
 
-        console.log(job)
+        console.log(job);
 
         try {
-            const response = await axios.post(
-                "/jobs",
-                job
-            )
-            console.log(response.data);
-            await axios.put(`/hrms/${userId}/jobsCreated`, {
-                jobsCreatedId: response.data._id
-            })
-            navigate(`/HRView/createJob/preview/${response.data._id}`);
+            const headers = { Authorization: `${localStorage.getItem("token")}` };
+            const {response} = await axios.post("/api/job/postjob", job,{headers});
+            
+            // await axios.put(`/hrms/${userId}/jobsCreated`, {
+            //     jobsCreatedId: response.data._id,
+            // });
+            if (response && response.data) {
+                console.log(response.data);
+            }
+           navigate(`/HRView`);
         } catch (error) {
-            console.error(error);
+            console.error("Error posting job:", error);
+            if (error.response) {
+                console.log("Server responded with status:", error.response.status);
+                console.log("Response data:", error.response.data);
+            }
         }
     };
 
     return (
         <div className="cJobFields">
             <div className="cJobFieldsWrapper">
-
                 <form onSubmit={handleSubmit}>
                     <div className="topBar">
                         <div className="Heading">Create Job</div>
                         <div className="buttonContainer">
-                            <Link to={"/createJob"}>
+                            {/* <Link to={"/HRView"}> */}
                                 {/* <button className="discard">Discard</button> */}
-                            </Link>
+                                <button className="preview" onClick={handleSubmit}>Submit</button>
+                            {/* </Link> */}
                             {/* <Link to={"/createJob/preview"}> */}
-                            <button className="preview" type="submit">Preview</button>
+                      
                             {/* </Link> */}
                         </div>
                     </div>
@@ -96,45 +101,39 @@ function CJobFields(props) {
                         <div className="basicInfo">
                             <div className="basicInfoWrapper">
                                 <div className="subHeading">Basic Info</div>
-                                <input type="text" name="jobTitle" className="TextFieldSmall" placeholder="Job Title (e.g: Software Engineer)" required />
-                                <select name="workplace" id="" className="ComboBox" placeholder="Workplace type (eg. Remote)" required>
-                                    <option value="Remote">Remote</option>
-                                    <option value="Hybrid">Hybrid</option>
-                                    <option value="on-Site">on-Site</option>
-                                </select>
-                                <input type="text" name="location" className="TextFieldSmall" placeholder="Location (e.g: Chicago,IL) " required />
-                                <select name="jobType" id="" className="ComboBox" placeholder="Job Type (e.g Contract)" required>
-                                    <option value="Internship">Internship</option>
-                                    <option value="Apprenticeship">Apprenticeship</option>
-                                    <option value="Contract">Contract</option>
-                                    <option value="Part Time">Part Time</option>
-                                    <option value="Full Time">Full Time</option>
-                                </select>
-                                <div className="skillsSectionCJF">
-                                    <div className="subHeading">Skills</div>
-                                    <div className="tagsInputContainer">
-                                        {tags.map((tag, index) => (
-                                            <div className="tagItem" key={index}>
-                                                <div className="tagText">{tag}</div>
-                                                <div onClick={() => rmeoveTag(index)} className="tagRemove">&times;</div>
-                                            </div>
-                                        ))}
-                                        <input onKeyDown={handleKeyDown} type="text" className="TagInput" placeholder="e.g: Python3, React.js" />
-                                    </div>
-                                </div>
-                                <div className="posReqd">
-                                    <div className="subHeading">Positions Required</div>
-                                    <div className="incBar">
-                                        <div className="incBarButton" onClick={decPos}>-</div>
-                                        <div className="posCount">{pos}</div>
-                                        <div className="incBarButton" onClick={IncPos}>+</div>
-                                    </div>
-                                </div>
+                                <input type="text" name="company" className="TextFieldSmall" placeholder="Company Name" value={company} onChange={(e) => setCompany(e.target.value)} required />
+                                <input type="text" name="jobTitle" className="TextFieldSmall" placeholder="Job Title (e.g: Software Engineer)" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                            <select name="workplace" className="ComboBox" value={workplace} onChange={(e) => setWorkplace(e.target.value)} required>
+                                <option value="Remote">Remote</option>
+                                <option value="Hybrid">Hybrid</option>
+                                <option value="Onsite">Onsite</option>
+                            </select>
+                            <input type="text" name="location" className="TextFieldSmall" placeholder="Location (e.g: Chicago,IL)" value={location} onChange={(e) => setLocation(e.target.value)} required />
+                            <input type="number" name="minSalary" className="TextFieldSmall" placeholder="Min Salary" value={minSalary} onChange={(e) => setMinSalary(e.target.value)} required />
+                            <input type="number" name="maxSalary" className="TextFieldSmall" placeholder="Max Salary" value={maxSalary} onChange={(e) => setMaxSalary(e.target.value)} required />
+                            <select name="joblevel" className="ComboBox" value={joblevel} onChange={(e) => setJobLevel(e.target.value)} required>
+                                <option value="Entry-level">Entry-level</option>
+                                <option value="Mid-Senior">Mid-Senior</option>
+                                <option value="Senior">Senior</option>
+                                <option value="Executive">Executive</option>
+                            </select>
+                            <input type="text" name="experience" className="TextFieldSmall" placeholder="Experience (e.g: 3 years)" value={experience} onChange={(e) => setExperience(e.target.value)} required />
+                            <select name="education" className="ComboBox" value={education} onChange={(e) => setEducation(e.target.value)} required>
+                                <option value="Graduate">Graduate</option>
+                                <option value="Post-Graduate">Post-Graduate</option>
+                                <option value="Doctorate">Doctorate</option>
+                            </select>
+                            <select name="shift" className="ComboBox" value={shift} onChange={(e) => setShift(e.target.value)} required>
+                                <option value="Morning">Morning</option>
+                                <option value="Afternoon">Afternoon</option>
+                                <option value="Night">Night</option>
+                            </select>
+                            <input type="text" name="benefits" className="TextFieldSmall" placeholder="Benefits" value={benefits} onChange={(e) => setBenefits(e.target.value)} required />
+                                                            
                             </div>
                         </div>
                         <div className="DescriptiveInfo">
                             <div className="subHeading">Descriptive Info</div>
-                            {/* <textarea name="description" type="text" className="TextFieldBig" placeholder="Job Description" required /> */}
                             <ReactQuill name="description" className="TextField" placeholder="Job Description" style={editorStyles} value={descValue} onChange={setDescValue} required />
                             <ReactQuill name="requirements" className="TextField" placeholder="Requirements" style={editorStyles} value={reqValue} onChange={setReqValue} required />
                         </div>
@@ -142,6 +141,7 @@ function CJobFields(props) {
                 </form>
             </div>
         </div>
-    )
+    );
 }
-export default CJobFields
+
+export default CJobFields;

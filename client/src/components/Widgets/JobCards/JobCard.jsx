@@ -7,13 +7,14 @@ function JobCard({job}) {
             <Link to={`ViewJob/${job._id}`} style={{textDecoration: "none",}}>
                 <div className="jobCardContainer">
                     <div className="positionSpots">
-                        <div className="position">{job.jobTitle}</div>
-                        <div className="spots">{job.spots} spots to fill</div>
+                        <div className="company">Company: {job.company}</div>
+                        <div className="title">Title: {job.title}</div>
+                        <div className="location">Location: {job.location}</div>
                     </div>
-                    <div className="applicationsCount">
+                    {/* <div className="applicationsCount">
                         <div className="count">{job.applications.length}</div>
                         <button className="up"><KeyboardDoubleArrowUpRoundedIcon className="upIcon" /></button>
-                    </div>
+                    </div> */}
                 </div>
             </Link>
         </div>

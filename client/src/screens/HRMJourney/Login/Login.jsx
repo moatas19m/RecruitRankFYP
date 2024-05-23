@@ -31,7 +31,7 @@ function Login() {
     const navigateByRole = (role) => {
         if (role === 'Recruiter') {
             navigate("/HRView");
-        } else if (role === 'Candidate') {
+        } else if (role === 'Applicant') {
             navigate("/CANDView");
         }
     }
@@ -56,7 +56,7 @@ function Login() {
     return (
         <div className="login">
             <div className="loginWrapper">
-                <div className="TalentHiveLogo">Talent Hive</div>
+                <div className="TalentHiveLogo">RecruitRanks</div>
                 <form onSubmit={onSubmit} className='form'>
                     <input type="email" className="form-control" name='email'
                         value={email} onChange={onChange} placeholder='Enter your email' required />

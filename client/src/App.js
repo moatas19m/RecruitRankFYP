@@ -18,6 +18,7 @@ import CandApplyJob from "./screens/CANDJourney/CandApplyJob/CandApplyJob"
 
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom"
 import CompanyMGT from "./components/HRMJourney/CompanyMGT/CompanyMGT";
+import JobList from "./components/HRMJourney/ShowJob/JobList";
 
 const LayoutForHr = ({ children }) => {
   return (
@@ -56,8 +57,9 @@ function App() {
           <Route path="EditHr" element={<EditHR />} />
           <Route path="EditCompany" element={<CompanyMGT />} />
           <Route path="EditCompany/AddHR" element={<CreateHR />} />
-          <Route path="ViewJob/:jobId" element={<ViewJob />} />
+          <Route path="/HRView/ViewJob/:jobId" element={<ViewJob />} />
           <Route path="ViewCandidate/:appId" element={<ViewCandidate />} />
+          <Route path="/HRView/ShowMyJobs" element={<JobList />} />
         </Route>
         <Route path="/CANDView" element={<LayoutForCand />}>
           <Route path="" element={<CandHome />} />

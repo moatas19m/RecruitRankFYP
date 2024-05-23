@@ -70,6 +70,11 @@ function Sidebar() {
                             <CalendarMonthOutlined className="optionsIcon" /><div className="optionLink">Edit Info</div>
                         </Link>
                     </li>
+                    <li className="option">
+                        <Link to={"/HRView/ShowMyJobs"} style={{ textDecoration: "none", alignItems: "center", display: "flex" }} >
+                            <CalendarMonthOutlined className="optionsIcon" /><div className="optionLink">View My Jobs</div>
+                        </Link>
+                    </li>
                     <li className="option" onClick={logOut}>
                         <Logout className="optionsIcon" /><div className="optionLink">Log Out</div>
                     </li>
