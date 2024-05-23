@@ -19,20 +19,19 @@ export const postJobController = async (req, res) => {
     {
         const jobText = convertJobJsonToText(req.body);
         let resData;
-        // console.log(jobText);
 
         await axios.post(`${apiUrl}/extractJobDescription`, { JD: jobText }, {
             headers: {
                 'Content-Type': 'application/json',
             }
         })
-            .then(response => {
-                console.log('Response from FastAPI server:', response.data);
-                resData = response.data;
-            })
-            .catch(error => {
-                console.error('Error calling FastAPI server:', error);
-            });
+        .then(response => {
+            console.log('Response from FastAPI server:', response.data);
+            resData = response.data;
+        })
+        .catch(error => {
+            console.error('Error calling FastAPI server:', error);
+        });
 
         const newJobData = {
             ...req.body,
@@ -92,52 +91,29 @@ export const updateJobStatusController = async (req, res) => {
         const jobDetails = updatedjob.parsedData;
         const jobID = updatedjob._id;
 
-        //const numberOfApplications = await Applications.countDocuments({ job: jobID });
-        //console.log(numberOfApplications);
-        
         const usersWithJobs = await Applications.find({job:jobID}).populate('user', 'name email parsedData');
         
         for (const [index, application] of usersWithJobs.entries()) {
-
-            // await axios.post(`${apiUrl}/extractJobDescription`, { JD: jobText }, {
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     }
-            // })
-            // .then(response => {
-            //     console.log('Response from FastAPI server:', response.data);
-            //     resData = response.data;
-            // })
             
+            try {
+                const response = await axios.post(`${apiUrl}/score/`, { jobParsed: jobDetails, resumeParsed: application.user.parsedData }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
 
-            console.log(`Application ${index + 1}:`, application);
-            console.log("\n\n\n" + application.user.parsedData + "\n\n\n")
+                const receivedScore = response.data ['Resume match score'];
+
+                await Applications.findByIdAndUpdate(application._id, { score: receivedScore });
+
+                console.log('Response from FastAPI server:', receivedScore);
+            } catch (error) {
+                console.error('Error updating score for application:', error);
+            }
         };
-        
-
-        //console.log("\n\n\n\n\n" + usersWithJobs);
-
-
-        //     const { id: jobID } = req.params;
-        // try {
-        //     const application = await Application.find({ job: jobID }).populate("user")
-        //     res.status(200).json({
-        //         success: true,
-        //         ApplicationCount: application.length,
-        //         application
-        //     });
-
-        // } catch (err) {
-        //     return res.status(500).json({
-        //         success: false,
-        //         err
-        //     });
-        // }
-
 
         return res.status(200).json({
             success: true,
-            usersWithJobs,
             updatedjob
         });
 
