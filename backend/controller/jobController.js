@@ -95,26 +95,51 @@ export const updateJobController = async(req,res)=>
 };
 
 //Update jobStatus attribute
-export const updateJobStatusController = async(req,res)=>
-{
+export const updateJobStatusController = async (req, res) => {
 
-    try{
-        const updatedjob= await Job.findByIdAndUpdate(req.params.id,{
-            jobStatus:"Inactive"
+    try {
+        const updatedjob = await Job.findByIdAndUpdate(req.params.id, {
+            jobStatus: "Inactive"
         },
-        {
-            new:true
-        });
+            {
+                new: true
+            });
+
+        const jobDetails = updatedjob.parsedData;
+        const jobID = updatedjob._id;
+
+        const usersWithJobs = await Applications.find({job:jobID}).populate('user', 'name email parsedData');
+        
+        for (const [index, application] of usersWithJobs.entries()) {
+            
+            try {
+                const response = await axios.post(`${apiUrl}/score/`, { jobParsed: jobDetails, resumeParsed: application.user.parsedData }, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                const receivedScore = response.data ['Resume match score'];
+
+                await Applications.findByIdAndUpdate(application._id, { score: receivedScore });
+
+                console.log('Response from FastAPI server:', receivedScore);
+            } catch (error) {
+                console.error('Error updating score for application:', error);
+            }
+        };
+
         return res.status(200).json({
-            success:true,
+            success: true,
             updatedjob
         });
- 
-    } 
-    catch(err){
+
+    }
+    catch (err) {
         return res.status(500).json({
-            success:false,
-            err});
+            success: false,
+            err
+        });
     }
 };
 
