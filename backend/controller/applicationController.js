@@ -63,7 +63,6 @@ export const getApplicationsOnJobController = async(req,res)=>
     }
 };
 
-
 //Get all applications on a all the job
 export const getAllApplicationsController = async(req,res)=>
 {

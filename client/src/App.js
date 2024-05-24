@@ -21,6 +21,9 @@ import CompanyMGT from "./components/HRMJourney/CompanyMGT/CompanyMGT";
 import JobList from "./components/HRMJourney/ShowJob/JobList";
 import CandViewJob from "./components/CANDJourney/ViewJob/ViewJobComponents";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const LayoutForHr = ({ children }) => {
   return (
     <div className="mainAppContainer">
@@ -69,8 +72,11 @@ function App() {
           <Route path="AppliedJobsScreen" element={<CandAppliedJobs />} />
           <Route path="EditCand" element={<CandEdit />} />
           <Route path="ViewJob/:jobId" element={<CandViewJob />} />
+          
         </Route>
+        
       </Routes>
+      <ToastContainer />
     </BrowserRouter>
 
   );

@@ -86,6 +86,10 @@ function CandEditFields(props) {
                 setCV(cvURL);
                 setCVExists(true);
                 setUploading(false);
+
+                // Store CV URL in local storage
+                const updatedUser = { ...userd, cv: cvURL };
+                localStorage.setItem("user", JSON.stringify(updatedUser));
             } catch (error) {
                 console.error("Error uploading file:", error);
                 setUploading(false);
