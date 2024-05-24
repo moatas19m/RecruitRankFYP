@@ -145,7 +145,7 @@
 }
 
 .Candpreview {
-    background-color: #0e3837;
+  background-color: #005b3b;
     border: 1px solid transparent;
     border-radius: .75rem;
     box-sizing: border-box;
@@ -169,7 +169,7 @@
 }
 
 .Candpreview:hover {
-    background-color: #005b3b;
+    background-color: #03442d;
 }
 
 .Candpreview:focus {

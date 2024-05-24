@@ -19,6 +19,7 @@ import CandApplyJob from "./screens/CANDJourney/CandApplyJob/CandApplyJob"
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom"
 import CompanyMGT from "./components/HRMJourney/CompanyMGT/CompanyMGT";
 import JobList from "./components/HRMJourney/ShowJob/JobList";
+import CandViewJob from "./components/CANDJourney/ViewJob/ViewJobComponents";
 
 const LayoutForHr = ({ children }) => {
   return (
@@ -67,6 +68,7 @@ function App() {
           <Route path="ApplyJob/:jobId" element={< CandApplyJob />} />
           <Route path="AppliedJobsScreen" element={<CandAppliedJobs />} />
           <Route path="EditCand" element={<CandEdit />} />
+          <Route path="ViewJob/:jobId" element={<CandViewJob />} />
         </Route>
       </Routes>
     </BrowserRouter>

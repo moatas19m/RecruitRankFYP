@@ -5,6 +5,8 @@ import authRoute from "./routes/authRoutes.js";
 import userRoute from "./routes/userRoutes.js";
 import jobRoute from "./routes/jobRoutes.js"
 import applicationRoute from "./routes/applicationRoutes.js"
+//import proxyMiddleware from "./proxy.mjs";
+import cors from "cors"; // Import the cors middleware
 //import uploadRoute from "./routes/upload.cjs"
 
 //configure env
@@ -24,7 +26,10 @@ const app = express();
 
 //middelwares
 app.use(express.json());
-
+//proxyMiddleware(app);
+// app.use(cors({
+//     origin: '*' // Allow requests from any origin
+//   }));
 //routes
 app.use("/api/auth",authRoute);
 app.use("/api/user",userRoute);

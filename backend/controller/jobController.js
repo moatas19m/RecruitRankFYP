@@ -3,7 +3,7 @@ import User from "../models/User.js"
 import axios from 'axios';
 
 // Replace with the actual URL of your FastAPI server
-const apiUrl = 'http://localhost:8000';
+const apiUrl = 'http://127.0.0.1:8000';
 
 const convertJobJsonToText = (jobJson) => {
     return  `Job Title: ${jobJson.title}\nCompany: ${jobJson.company}\nLocation: ${jobJson.location}\n`+

@@ -18,7 +18,7 @@ const storage = getStorage();
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Replace with the actual URL of your FastAPI server
-const apiUrl = 'http://localhost:8000'; 
+const apiUrl = 'http://127.0.0.1:8000'; 
 
 const giveCurrentDateTime = () => {
     const today = new Date();

@@ -310,5 +310,25 @@ export const FilterAppQueryController = async (req, res) => {
     }
 };
 
+//Applied Jobs per User
+export const getAppliedJobsController = async(req,res)=>
+    {
+        const {id:userID} = req.params.id
+
+        try{
+            const application= await Application.find({user:req.params.id, status:"Active"}).populate("user").populate("job")
+            res.status(200).json({
+            success:true,
+            ApplicationCount:application.length,
+            application});
+          
+        }catch(err)
+        {
+           return res.status(500).json({
+                success:false,
+                err});
+        }
+    };
+
 
 

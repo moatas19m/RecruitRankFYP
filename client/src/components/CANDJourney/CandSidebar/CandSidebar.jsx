@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios"
 
 function CandSidebar() {
+
     const navigae = useNavigate();
     const [user, setUser] = useState({ _id: "n/a" })
 
@@ -23,27 +24,34 @@ function CandSidebar() {
         navigae("/")
     }
 
+    const userData = localStorage.getItem("user");
+    const users = JSON.parse(userData);
+    const userName = users.name;
+    const userId = users._id
+    const userEmail = users.email
+    const userRole = users.role
+
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
                 <img src="http://localhost:3000/assets/blank_pfp.png" alt="" className="companyImage" />
-                <div className="CandName">{user._id === "n/a" ? "Welcome to Talent Hive" : `${user.name.fname} ${user.name.lname}`}</div>
-                {user._id === "n/a" ? null : <div className="CandEmail">{user.email}</div>}
+                <div className="CandName">{userId === "n/a" ? "Welcome to RecruitRanks" : `${userName}`}</div>
+                {userId === "n/a" ? null : <div className="CandEmail">{userEmail}</div>}
                 <ul className="optionsList">
 
                     <li className="option">
                         <HomeOutlined className="optionsIcon" />
                         <Link to="/CANDView" className="optionLink">Home</Link>
                     </li>
-                    {localStorage.getItem("userType") == 3 ?
+                    {userRole === "Applicant" ?
                         <li className="option">
                             <WorkIcon className="optionsIcon" />
                             <Link to="AppliedJobsScreen" className="optionLink">Applied Jobs</Link>
                         </li> : null
                     }
-                    {localStorage.getItem("userType") == 3 ?
+                    {userRole === "Applicant" ?
                         <li className="option"><Person4Icon className="optionsIcon" />
-                            <Link to="EditCand" className="optionLink">Profile</Link>
+                            <Link to="EditCand" className="optionLink">Edit Details</Link>
                         </li>
                         :
                         <li className="option"><PersonAdd className="optionsIcon" />
@@ -51,7 +59,7 @@ function CandSidebar() {
                         </li>
                     }
 
-                    {localStorage.getItem("userType") == 3 ?
+                    {userRole === "Applicant" ?
                         <li className="option" onClick={logOut}>
                             <Logout className="optionsIcon" /><div className="optionLink">Log Out</div>
                         </li>

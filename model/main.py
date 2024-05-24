@@ -18,6 +18,7 @@ from fastapi import FastAPI, UploadFile, Request
 from fastapi.responses import JSONResponse
 from uuid import uuid4
 import jsonlines
+from fastapi.middleware.cors import CORSMiddleware
 
 #from app1 import resumeparse,save_json
 #from app2 import extract_job_info

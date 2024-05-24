@@ -6,11 +6,7 @@ import ReactQuill from "react-quill";
 import 'react-quill/dist/quill.snow.css';
 function CJobFieldsEdit(props) {
     const userData = localStorage.getItem("user");
-
-    // Parse the JSON string to get the user object
     const user = JSON.parse(userData);
-  
-    // Access the id from the user object
     const userId = user.id;
     const [descValue, setDescValue] = useState("");
     const [reqValue, setReqValue] = useState("");

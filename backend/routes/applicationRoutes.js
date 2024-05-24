@@ -1,5 +1,5 @@
 import express from "express";
-import {/*UploadFileController,*/ postApplicationController, applicationWithdrawController, getApplicationsOnJobController, getAllApplicationsController, getActiveApplicationsController, getInprogressApplicationsController, getActiveInprogressApplicationsController, getActiveInprogressApplicationsOnJobController, getActiveAcceptedApplicationsOnJobController, getActiveRejectedApplicationsOnJobController, getActiveAcceptedApplicationsController, getActiveRejectedApplicationsController, acceptApplicationController, rejectApplicationController, FilterAppQueryController} from "../controller/applicationController.js"
+import {/*UploadFileController,*/ postApplicationController, applicationWithdrawController, getApplicationsOnJobController, getAllApplicationsController, getActiveApplicationsController, getInprogressApplicationsController, getActiveInprogressApplicationsController, getActiveInprogressApplicationsOnJobController, getActiveAcceptedApplicationsOnJobController, getActiveRejectedApplicationsOnJobController, getActiveAcceptedApplicationsController, getActiveRejectedApplicationsController, acceptApplicationController, rejectApplicationController, FilterAppQueryController, getAppliedJobsController} from "../controller/applicationController.js"
 import { requireSignIn, isAdmin, isRecruiter, isApplicantorAdmin, isRecruiterorAdmin } from "../middleware/Auth.js";
 
 
@@ -11,6 +11,9 @@ router.post("/postapplication/:id", requireSignIn, isApplicantorAdmin, postAppli
 
 //Withdraw Application (Delete)
 router.put("/withdrawApplication/:id", requireSignIn, isApplicantorAdmin, applicationWithdrawController);
+
+//Get jobs applied by user
+router.get("/getApplicationsByUser/:id", requireSignIn, isApplicantorAdmin, getAppliedJobsController);
 
 //Get all applications on a specific job
 router.get("/getApplications/:id", requireSignIn, isRecruiterorAdmin, getApplicationsOnJobController);

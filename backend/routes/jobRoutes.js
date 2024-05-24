@@ -16,10 +16,10 @@ router.put("/updatejob/:id", requireSignIn, isRecruiterorAdmin, updateJobControl
 router.get("/getjob", requireSignIn, isRecruiterorAdmin, getJobController);
 
 //Get Single Job
-router.get("/getSingleJob/:id", requireSignIn, isRecruiterorAdmin, getSingleJobController);
+router.get("/getSingleJob/:id", requireSignIn, getSingleJobController);
 
 //Get Active Jobs
-router.get("/getActiveJobs", requireSignIn, isRecruiterorAdmin, getActiveJobController);
+router.get("/getActiveJobs", requireSignIn, getActiveJobController);
 
 //Get Active Jobs for All
 router.get("/getHomepageJobs", getHomepageJobsController);

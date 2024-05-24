@@ -1,23 +1,44 @@
 import "./Candfeed.css"
-import { Search } from "@mui/icons-material"
+import { Error, Search } from "@mui/icons-material"
 import CandJobCard from "../Widgets/CandJobCard/CandJobCard"
 import TuneIcon from '@mui/icons-material/Tune';
 import axios from "axios";
 import { useState, useEffect } from "react";
-function CandFeed() {
+import { CircularProgress, LinearProgress } from "@mui/material"
+import JobCard from "../../CANDJourney/Widgets/JobCard/jobCard.jsx";
 
+function CandFeed() {
+    const [isLoading, setIsloading] = useState(false)
     const [jobs, setJobs] = useState([])
 
     useEffect(() => {
         const fetchJobs = async () => {
-            await axios.get("/jobs").then(res => setJobs(res.data)).catch(err => console.log(err));
-        }
+            try {
+                const headers = { Authorization: `${localStorage.getItem("token")}` };
+                const response = await axios.get(`/api/job/getActiveJobs/`, { headers });
+                console.log("Response data:", response.data.jobs);
+        
+                // Check if response.data.job is an array before setting the jobs state
+                if (response.data.jobs && Array.isArray(response.data.jobs)) {
+                    setJobs(response.data.jobs);
+                } else {
+                    console.error("Response data.job is not an array:", response.data);
+                }
+            } catch (error) {
+                console.error("Error fetching jobs:", error);
+            }
+        };
         fetchJobs();
     }, [])
+
+    const userD = localStorage.getItem("user");
+    const UserD = JSON.parse(userD);
+    const userName = UserD.name;
+
     return (
         <div className="CandfeedHome">
             <div className="CandfeedWrapper1">
-                <div className="CandfeedTitle1">Hello, Vladmir</div>
+                <div className="CandfeedTitle1">Hello, {userName}</div>
                 <div className="Candsearchbar1">
                     <Search className="CandSearchIcon1" />
                     <input placeholder="Search across the system..." type="text" className="searchInput" />
@@ -29,9 +50,14 @@ function CandFeed() {
 
                 <div className="line"> </div>
                 <div className="CandjobPostings1">
-                    {
-                        jobs.map((j) => (<CandJobCard key={j._id} job={j} />))
-                    }
+                {isLoading ? <div className="jobPostings"> <LinearProgress /> </div> :
+                                jobs.length === 0 ? <div className="jobPostingsError"><div className="error"><Error />No jobs found...</div></div> :
+                                    < div className="jobPostings">
+                                        {
+                                            jobs.map((job) => (<JobCard key={job._id} job={job} />))
+                                        }
+                                    </div>
+                            }
                 </div>
             </div>
         </div>
