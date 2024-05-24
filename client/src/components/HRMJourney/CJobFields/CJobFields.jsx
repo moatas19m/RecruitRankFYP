@@ -26,7 +26,7 @@ function CJobFields(props) {
     const [education, setEducation] = useState("Graduate"); // Default value
     const [shift, setShift] = useState("Morning"); // Default value
     const [benefits, setBenefits] = useState("");
-    
+    const [isLoading, setIsLoading] = useState(false);
 
     const navigate = useNavigate();
     console.log ("userid ",  userId)
@@ -41,12 +41,18 @@ function CJobFields(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const stripHtmlTags = (html) => {
+            const tmp = document.createElement("div");
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || "";
+        };
+
         const job = {
             user: userId,
             company: company,
             title: title,
-            description: descValue,
-            requirements: reqValue,
+            description: stripHtmlTags(descValue),
+            requirements: stripHtmlTags(reqValue),
             minSalary: minSalary,
             maxSalary: maxSalary,
             location: location,
@@ -71,6 +77,7 @@ function CJobFields(props) {
             if (response && response.data) {
                 console.log(response.data);
             }
+            setIsLoading(false);
            navigate(`/HRView`);
         } catch (error) {
             console.error("Error posting job:", error);
@@ -90,7 +97,9 @@ function CJobFields(props) {
                         <div className="buttonContainer">
                             {/* <Link to={"/HRView"}> */}
                                 {/* <button className="discard">Discard</button> */}
-                                <button className="preview" onClick={handleSubmit}>Submit</button>
+                                <button className="preview" disabled={isLoading} onClick={handleSubmit}>
+                                {isLoading ? <div className="spinner"></div> : "Submit"}
+                            </button>
                             {/* </Link> */}
                             {/* <Link to={"/createJob/preview"}> */}
                       

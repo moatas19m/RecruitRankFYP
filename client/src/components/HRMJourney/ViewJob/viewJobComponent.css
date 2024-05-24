@@ -64,22 +64,24 @@
 
 .bottomWrapper {
     display: flex;
+    overflow-y: scroll;
 }
 
 .leftPane {
     flex: 1.5;
     height: 80vh;
-    overflow-y: hidden;
+    overflow-y: scroll;
 }
 
 .rightPane {
     flex: 1;
-    overflow-y: hidden;
+    overflow-y: scroll;
     height: 80vh;
 }
 
 .paneWrapper {
     height: 80vh;
+    overflow-y: scroll;
 }
 
 .rightpaneWrapper {
@@ -164,3 +166,125 @@ b {
     gap: 0.5em;
     color: #464646;
 }
+.disableButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #f0ad4e;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.disableButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3; /* Light grey */
+    border-top: 4px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+.applicantsSection {
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 300px; 
+}
+
+.applicantsSection h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.applicantsSection ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.applicantsSection li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.applicantsSection li p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.applicantsSection li p b {
+    color: #000;
+}
+
+.applicantInfo {
+    display: flex;
+    align-items: center;
+}
+
+.data {
+    margin-right: 10px; /* Horizontal gap between data and score */
+}
+
+.scoreBox {
+    background-color: #6EBB41; /* Green color */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.scoreHeading {
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.score {
+    font-weight: bold;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .actionButtons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .rejectButton {
+    background-color: #FF5733; /* Red color for rejection */
+    color: white;
+  }
+  
+  .acceptButton {
+    background-color: #4CAF50; /* Green color for acceptance */
+    color: white;
+  }
+  
+  .actionButtons button:hover {
+    opacity: 0.5; /* Reduce opacity on hover */
+  }
+  

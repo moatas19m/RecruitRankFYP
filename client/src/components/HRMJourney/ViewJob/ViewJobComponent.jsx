@@ -15,9 +15,14 @@ function ViewJob(props) {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
     const userData = localStorage.getItem("user");
+    const [applicants, setApplicants] = useState([]);
+    const [disableLoading, setDisableLoading] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
     const user = JSON.parse(userData);
     const userName = user.name;
     const [hrm, setHrm] = useState({ _id: "n/a" });
+    //gettersetter for job status
+    const [jobStatus, setJobStatus] = useState("Active");
 
     useEffect(() => {
         const fetchJob = async () => {
@@ -26,6 +31,10 @@ function ViewJob(props) {
                 const response = await axios.get(`/api/job/getSingleJob/${jobId}`, { headers });
                 console.log("Fetched job view data:", response.data.job); // Log the fetched job data
                 setJob(response.data.job);
+                setJobStatus(response.data.job.jobStatus);
+                if (jobStatus === "Inactive") {
+                    fetchApplicants();
+                }
             } catch (error) {
                 console.error("Error fetching job data:", error); // Log any errors
             } finally {
@@ -34,7 +43,7 @@ function ViewJob(props) {
         };
 
         fetchJob();
-    }, [jobId]);
+    }, [jobId, jobStatus]);
 
     const delJob = async () => {
         const headers = { Authorization: `${localStorage.getItem("token")}` };
@@ -61,7 +70,111 @@ function ViewJob(props) {
         });
         navigate(`/HRView`);
     };
+    // const handleDisable = async () => {
+    //     setDisableLoading(true); // Show spinner
+    //     const headers = { Authorization: `${localStorage.getItem("token")}` };
+    //     try {
+    //         const response= await axios.put(`/api/job/changeJobStatus/${job._id}`, job, { headers });
+    //         console.log("Job disabled!", response.data);
+    //         toast.success('Job disabled', {
+    //             position: "bottom-right",
+    //             autoClose: 5000,
+    //             hideProgressBar: false,
+    //             closeOnClick: true,
+    //             pauseOnHover: true,
+    //             draggable: true,
+    //             progress: undefined,
+    //             theme: "colored",
+    //         });
+    //          // Fetch applicants and their scores
+    //          const applicantsResponse = await axios.get(`/api/application/getApplications/${job._id}`, { headers });
+    //          console.log("Fetched applicants data:", applicantsResponse.data);
+    //          setApplicants(applicantsResponse.data);
+ 
+    //         //navigate('/HRView');
+    //     } catch (err) {
+    //         console.error("Error disabling job:", err); // Log any errors
+    //     } finally {
+    //         setDisableLoading(false); // Hide spinner
+    //     }
+    // };
 
+    const handleDisable = async () => {
+        setDisableLoading(true); // Show spinner
+        const headers = { Authorization: `${localStorage.getItem("token")}` };
+        try {
+            const response = await axios.put(`/api/job/changeJobStatus/${job._id}`, job, { headers });
+            console.log("Job disabled!", response.data);
+            setIsDisabled(true); // Prevent further clicks on disable button
+            toast.success('Job disabled', {
+                position: "bottom-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+            });
+            setJobStatus("Inactive"); // Fetch applicants after disabling the job
+        } catch (err) {
+            console.error("Error disabling job:", err); // Log any errors
+        } finally {
+            setDisableLoading(false); // Hide spinner
+        }
+    };
+    const fetchApplicants = async () => {
+        const headers = { Authorization: `${localStorage.getItem("token")}` };
+        try {
+            const applicantsResponse = await axios.get(`/api/application/getApplications/${jobId}`, { headers });
+            console.log("Fetched applicants data:", applicantsResponse.data);
+            console.log("Fetched Applicant", applicantsResponse.data.application)
+            setApplicants(applicantsResponse.data.application);
+        } catch (err) {
+            console.error("Error fetching applicants data:", err); // Log any errors
+        }
+    };
+            // Function to handle rejection
+        const handleReject = async (applicantId) => {
+            const headers = { Authorization: `${localStorage.getItem("token")}` };
+            try {
+                // Make API request to change progress status to 'Rejected'
+                const response = await axios.put(`/api/application/rejectApplication/${applicantId}`, {},{headers});
+                console.log('Applicant rejected:', response.data);
+
+                // Update the progress status locally
+                updateProgressStatus(applicantId, 'Rejected');
+            } catch (error) {
+                console.error('Error rejecting applicant:', error);
+            }
+        };
+
+        // Function to handle acceptance
+        const handleAccept = async (applicantId) => {
+            const headers = { Authorization: `${localStorage.getItem("token")}` };
+            try {
+                // Make API request to change progress status to 'Accepted'
+                const response = await axios.put(`/api/application/acceptApplication/${applicantId}`, {},{headers});
+                console.log('Applicant accepted:', response.data);
+
+                // Update the progress status locally
+                updateProgressStatus(applicantId, 'Accepted');
+            } catch (error) {
+                console.error('Error accepting applicant:', error);
+            }
+        };
+
+        // Function to update progress status locally
+        const updateProgressStatus = (applicantId, newStatus) => {
+            setApplicants(prevApplicants => 
+                prevApplicants.map(applicant => 
+                    applicant._id === applicantId ? { ...applicant, progress: newStatus } : applicant
+                )
+            );
+        };
+
+
+        const sortedApplicants = applicants.sort((a, b) => parseFloat(b.score) - parseFloat(a.score));
     return (
         <div className="ViewJob">
             <div className="wrapper">
@@ -107,10 +220,51 @@ function ViewJob(props) {
                                             <div><b>Experience:</b> {job.experience}</div>
                                             <div><b>Education:</b> {job.education}</div>
                                             <div><b>Benefits:</b> {job.benefits}</div>
-                                            <div><b>Status:</b> {job.status}</div>
+                                            {/* <div><b>Status:</b> {job.status}</div> */}
+                                            <div><b>Status:</b> {job.jobStatus}</div>
                                         </div>
                                         {/* <BasicTabs /> */}
-                                    </div>
+                                        {((jobStatus === "Active" && !isDisabled) || jobStatus === "Inactive") && (
+                                    <>
+                                          {jobStatus === "Active" && !isDisabled && (
+                                                    <button className="disableButton" onClick={handleDisable} disabled={disableLoading}>
+                                                        {disableLoading ? <span className="spinner"></span> : 'Disable'}
+                                                    </button>
+                                         )}
+                                        <div className="applicantsSection">
+                                            <h2>Applicants</h2>
+                                            <ul>
+                                            {sortedApplicants.map((applicant) => (
+                                        <li key={applicant._id}>
+                                            <div className="applicantInfo">
+                                                {applicant.user && (
+                                                    <>
+                                                        <p><b>Name:</b> {applicant.user.name}</p>
+                                                        <p><b>Email:</b> {applicant.user.email}</p>
+                                                        <p><b>Phone:</b> {applicant.user.phone}</p>
+                                                    </>
+                                                )}
+                                                <p><b>Applied On:</b> {new Date(applicant.createdAt).toLocaleDateString()}</p>
+                                            </div>
+                                            <div className="scoreBox">
+                                                <div className="scoreHeading">Score</div>
+                                                <div className="scoreValue">{applicant.score}</div>
+                                            </div>
+                                            <div className="progressStatus">
+                                                <p><b>Progress:</b> {applicant.progress}</p>
+                                                {/* <p><b>Status:</b> {applicant.status}</p> */}
+                                            </div>
+                                            <div className="actionButtons">
+                                                    <button className="rejectButton" onClick={() => handleReject(applicant._id)}>Reject</button>
+                                                    <button className="acceptButton" onClick={() => handleAccept(applicant._id)}>Accept</button>
+                                            </div>
+                                        </li>
+                                    ))}
+                                            </ul>
+                                        </div>
+                                    </>
+                                )}
+                         </div>
                                 </div>
                                 <div className="rightPane">
                                     <div className="linkSection">

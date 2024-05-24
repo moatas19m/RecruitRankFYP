@@ -1,6 +1,7 @@
 import Job from "../models/Jobs.js"
 import User from "../models/User.js"
 import axios from 'axios';
+import Applications from '../models/Applications.js'
 
 // Replace with the actual URL of your FastAPI server
 const apiUrl = 'http://127.0.0.1:8000';
@@ -13,51 +14,33 @@ const convertJobJsonToText = (jobJson) => {
             `Benefits: ${jobJson.benefits}\nDescription:${jobJson.description}`;
 };
 
-// //Post Job
-// export const postJobController= async(req,res)=>{
-//     {
-//         const jobText = convertJobJsonToText(req.body);
-//         let resData;
-//         // console.log(jobText);
-
-//         await axios.post(`${apiUrl}/extractJobDescription`, { JD: jobText },{
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             }
-//         })
-//         .then(response => {
-//             console.log('Response from FastAPI server:', response.data);
-//             resData = response.data;
-//         })
-//         .catch(error => {
-//             console.error('Error calling FastAPI server:', error);
-//         });
-
-//         const newJobData = {
-//             ...req.body,
-//             parsedData: resData
-//         };
-
-//         const newJob = new Job(newJobData);
-
-//         try{
-//             const savedJob=await newJob.save();
-//             res.status(200).json(
-//                 {
-//                     success:true,
-//                     savedJob});
-//         }catch(err)
-//         {
-//            return res.status(500).json({success:false,err});
-//         }
-//     }   
-// }
-
-//rough
 //Post Job
 export const postJobController= async(req,res)=>{
     {
-        const newJob = new Job(req.body)
+        const jobText = convertJobJsonToText(req.body);
+        let resData;
+        // console.log(jobText);
+
+        await axios.post(`${apiUrl}/extractJobDescription`, { JD: jobText },{
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        })
+        .then(response => {
+            console.log('Response from FastAPI server:', response.data);
+            resData = response.data;
+        })
+        .catch(error => {
+            console.error('Error calling FastAPI server:', error);
+        });
+
+        const newJobData = {
+            ...req.body,
+            parsedData: resData
+        };
+
+        const newJob = new Job(newJobData);
+
         try{
             const savedJob=await newJob.save();
             res.status(200).json(
@@ -68,7 +51,25 @@ export const postJobController= async(req,res)=>{
         {
            return res.status(500).json({success:false,err});
         }
-}}
+    }   
+}
+
+//rough
+//Post Job
+// export const postJobController= async(req,res)=>{
+//     {
+//         const newJob = new Job(req.body)
+//         try{
+//             const savedJob=await newJob.save();
+//             res.status(200).json(
+//                 {
+//                     success:true,
+//                     savedJob});
+//         }catch(err)
+//         {
+//            return res.status(500).json({success:false,err});
+//         }
+// }}
 
 //Update Job
 export const updateJobController = async(req,res)=>
