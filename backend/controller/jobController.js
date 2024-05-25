@@ -14,7 +14,7 @@ const convertJobJsonToText = (jobJson) => {
             `Benefits: ${jobJson.benefits}\nDescription:${jobJson.description}`;
 };
 
-//Post Job
+
 export const postJobController= async(req,res)=>{
     {
         const jobText = convertJobJsonToText(req.body);
@@ -247,7 +247,7 @@ export const getSingleJobController = async(req,res)=>
     {
         const {id:userID} =req.params;
         try{
-           const job= await Job.findById(req.params.id)
+           const job= await Job.findById(req.params.id).populate("user")
            res.status(200).json({
             success:true,
             job});

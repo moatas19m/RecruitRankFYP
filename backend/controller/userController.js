@@ -156,6 +156,45 @@ export const getActiveUserController = async(req,res)=>
     }
 };
 
+//Get Active Applicants
+export const getActiveApplicantsController = async(req,res)=>
+    {
+        
+        try{
+           const users= await User.find({status:"Active", role:"Applicant"})
+           res.status(200).json({
+            success:true,
+            ActiveUserCount:users.length,
+            users});
+          
+        }catch(err)
+        {
+           return res.status(500).json({
+                success:false,
+                err});
+        }
+    };
+
+//Get Active Recruiter
+export const getActiveRecruiterController = async(req,res)=>
+    {
+        
+        try{
+           const users= await User.find({status:"Active", role:"Recruiter"})
+           res.status(200).json({
+            success:true,
+            ActiveUserCount:users.length,
+            users});
+          
+        }catch(err)
+        {
+           return res.status(500).json({
+                success:false,
+                err});
+        }
+    };
+
+
 //Get Signle Users
 export const getSingleUserController = async(req,res)=>
     {
