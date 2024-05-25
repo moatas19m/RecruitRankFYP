@@ -33,8 +33,7 @@ function Login() {
             navigate("/HRView");
         } else if (role === 'Applicant') {
             navigate("/CANDView");
-        } else if (role === 'Admin') 
-            navigate("/ADMINView");
+        }
     }
 
     const onSubmit = async (e) => {

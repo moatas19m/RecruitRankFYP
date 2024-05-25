@@ -11,7 +11,6 @@ import CreateHR from "./components/HRMJourney/CreateHR/CreateHR";
 //CandidateStuff
 import CandHome from "./screens/CANDJourney/CandHome/CandHome"
 import CandSidebar from "./components/CANDJourney/CandSidebar/CandSidebar"
-import AdminSidebar from "./components/ADMINJourney/AdminSidebar/AdminSidebar";
 import CandPreviewJob from "./screens/CANDJourney/CandApplyJob/CandPreviewJob"
 import CandAppliedJobs from "./screens/CANDJourney/CandAppliedJobs/CandAppliedJobs";
 import CandEdit from "./screens/CANDJourney/CandEdit/CandEdit";
@@ -24,14 +23,6 @@ import CandViewJob from "./components/CANDJourney/ViewJob/ViewJobComponents";
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import AdminHome from "./components/ADMINJourney/AdminHome/AdminHome";
-import ViewAdminJob from "./screens/ADMINJourney/ViewJobAdmin/ViewAdminJob";
-import ViewadminJob from "./screens/ADMINJourney/ViewJobAdmin/ViewAdminJob";
-import CreateJobAdmin from "./screens/ADMINJourney/CreateJobAdmin/CreateJobAdmin";
-import AdminPage from "./screens/ADMINJourney/AdminUsers/AdminUsers";
-import AdminApplicants from "./screens/ADMINJourney/AdminUsers/AdminViewApplicants";
-import AdminRecruiters from "./screens/ADMINJourney/AdminUsers/AdminViewRecruiters";
-//import ViewAdminJob from "./components/ADMINJourney/ViewAdminJob/ViewAdminJobComp";
 
 const LayoutForHr = ({ children }) => {
   return (
@@ -55,69 +46,12 @@ const LayoutForCand = ({ children }) => {
   );
 };
 
-const LayoutForAdmin = ({ children }) => {
-  return (
-    <div className="mainAppContainer">
-      <AdminSidebar />
-      <div className="content">
-        <Outlet />
-        <AdminHome/>
-      </div>
-    </div>
-  );
-};
-
-const AdminGet = ({ children }) => {
-  return (
-    <div className="mainAppContainer">
-      <AdminSidebar />
-      <div className="content">
-        <Outlet />
-        <AdminPage/>
-      </div>
-    </div>
-  );
-};
-
-const AdminGetApps = ({ children }) => {
-  return (
-    <div className="mainAppContainer">
-      <AdminSidebar />
-      <div className="content">
-        <Outlet />
-        <AdminApplicants/>
-      </div>
-    </div>
-  );
-};
-
-const AdminGetRecruiter = ({ children }) => {
-  return (
-    <div className="mainAppContainer">
-      <AdminSidebar />
-      <div className="content">
-        <Outlet />
-        <AdminRecruiters/>
-      </div>
-    </div>
-  );
-};
-
 function App() {
   return (
 
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route>
-          <Route path="/ADMINView" element={<LayoutForAdmin />}></Route>
-          <Route path="" element={<AdminHome />} />
-          <Route path="/ADMINVIEW/createJob" element={<CreateJobAdmin edit={false} />} />
-          <Route path="/ADMINView/ViewJob/:jobId" element={<ViewadminJob />} />
-          <Route path="/ADMINView/ViewAllUsers" element={<AdminGet />} />
-          <Route path="/ADMINView/ViewAllUsers/Applicants" element={<AdminGetApps />} />
-          <Route path="/ADMINView/ViewAllUsers/Recruiters" element={<AdminGetRecruiter />} />
-        </Route>
         <Route path="/HRView" element={<LayoutForHr />}>
           <Route path="" element={<Home />} />
           <Route path="createJob" element={<CreateJob edit={false} />} />
