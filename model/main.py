@@ -342,7 +342,7 @@ async def calculate_score(request: Request):
             print(f"Successfully converted CGPA: {normalized_value}")  # Debugging output
             return normalized_value
         except (ValueError, TypeError) as e:
-            print(f"Error converting CGPA '{cgpa}' to float: {e}")  # Debugging output
+            print(f"Error converting CGPA '{cgpa}' to float: {e}")  # Debugging outpunit
             return 0  # Return 0 if there's an error converting to float
      else:
         print(f"CGPA '{cgpa}' is not meaningful")  # Debugging output
