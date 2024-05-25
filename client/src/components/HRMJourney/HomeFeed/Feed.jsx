@@ -1,6 +1,6 @@
 import "./feed.css"
 import { Error, Search } from "@mui/icons-material"
-import JobCard from "../../Widgets/JobCards/JobCard"
+import JobCard from "../../Widgets/JobCard/JobCard"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { CircularProgress, LinearProgress } from "@mui/material"

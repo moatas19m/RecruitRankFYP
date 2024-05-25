@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import JobCard from "./JobCard"; // Assume you have a JobCard component for displaying individual job details
+import JobCard from "../../Widgets/JobCard/JobCard"; // Assume you have a JobCard component for displaying individual job details
 import "./jobList.css"
 import { Link } from "react-router-dom";
 function JobList() {

@@ -1,11 +1,12 @@
+:root {
+    font-size: calc((0.5vw + 0.5vh + 0.25vmin) * 1.2);
+
+}
+
 .sidebar {
-    flex: 2;
-    
+    flex: 0 0 15rem; /* Sidebar takes a fixed width in rem */
     height: 100%;
-    top: 0;
-    bottom: 0;
     background-color: #d9d9d9;
-    
 }
 
 .sidebarWrapper {
@@ -13,7 +14,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 1.25rem;
     align-items: center;
     justify-content: center;
     background-color: #d9d9d9;
@@ -22,39 +23,34 @@
 .companyImage {
     align-items: center;
     border-radius: 50%;
-    width: 10em;
-    height: 10em;
-    box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.17);
-    -webkit-box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.17);
-    -moz-box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.17);
+    width: 10rem;
+    height: 10rem;
+    box-shadow: 1px 1.2rem 3.625rem 0px rgba(0, 0, 0, 0.17);
     transition: 300ms;
 }
 
 .companyImage:hover {
-    transition: 300ms;
-    box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1.2rem 3.625rem 0px rgba(0, 0, 0, 0.5);
 }
 
 .companyTitle {
-    padding: 35px 0px 10px;
-    font-size: 35px;
+    padding: 2.1875rem 0px 0.625rem;
+    font-size: 2.1875rem;
     font-weight: 700;
     color: #545151;
 }
 
 .optionsList {
     list-style: none;
-    padding: 20px;
-    margin-top: 1em;
+    padding: 1.25rem;
+    margin-top: 1rem;
 }
 
 .option {
     display: flex;
-    font-size: 18px;
-    padding: 20px;
-    margin: 10px 0px 10px;
+    font-size: 1.125rem;
+    padding: 1.25rem;
+    margin: 0.625rem 0;
     transition: 300ms;
     border: solid 0px #cecdcd;
     cursor: pointer;
@@ -63,10 +59,8 @@
 .option:hover {
     transition: 600ms;
     background-color: #eae8e8;
-    border-radius: 20px;
-    box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.12);
-    -webkit-box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.12);
-    -moz-box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.12);
+    border-radius: 1.25rem;
+    box-shadow: 1px 1.2rem 3.625rem 0px rgba(0, 0, 0, 0.12);
 }
 
 .optionLink {
@@ -76,35 +70,61 @@
 
 .optionsIcon {
     color: #545151;
-    padding-right: 10px;
+    padding-right: 0.625rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .sidebar {
+        flex: 0 0 12.5rem; /* Adjust sidebar width for smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        flex: 0 0 11.25rem; /* Further adjust for even smaller screens */
+    }
+    .optionLink {
+        font-size: 0.9em;
+    }
+    .companyImage {
+        width: 8rem;
+        height: 8rem;
+    }
+    .companyTitle {
+        font-size: 1.5rem;
+    }
+    .sidebarWrapper {
+        padding: 0.625rem;
+    }
+    .optionsIcon {
+        padding-right: 0.3125rem;
+    }
 }
 
 @media (max-width: 640px) {
     .optionLink {
-        font-size: 0px;
+        font-size: 0.8em;
     }
-
     .companyImage {
-        width: 3em;
-        height: 3em;
+        width: 5rem;
+        height: 5rem;
     }
-
-    .companyTitle{
-        font-size: 0em;
+    .companyTitle {
+        font-size: 1rem;
     }
-    .sidebarWrapper{
-        padding: 0px;
+    .sidebarWrapper {
+        padding: 0.3125rem;
     }
-
-    .optionsIcon{
-        padding-right: 0em;
+    .optionsIcon {
+        padding-right: 0.1875rem;
     }
 }
 
-.CandName{
+.CandName {
     text-align: center;
-    font-size: 1.5em;
-    padding: 1em;
+    font-size: 1.5rem;
+    padding: 1rem;
     font-weight: 900;
     color: #545151;
 }

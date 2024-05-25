@@ -20,6 +20,8 @@ function CandViewJob(props) {
     const userd = JSON.parse(userData);
     const userId = userd.id
     const usercv = userd.cv
+    const [appID,setAppID]=useState({})
+    const [ApplyDisabled, setApplyDisabled] = useState(false);
     
 
     useEffect(() => {
@@ -67,7 +69,10 @@ function CandViewJob(props) {
         try {
             const response = await axios.post(`/api/application/postapplication/${job._id}`, {user:userId}, {headers});
             setApplication(response.data.application);
-            console.log(response.data)
+            console.log("HElloooo",response.data.savedApplication._id)
+            setAppID(response.data.savedApplication._id)
+            setApplyDisabled(true);
+            console.log("Usman",appID);
             toast.success("You have successfully applied to the job");
             navigate(`/CANDView/AppliedJobsScreen`);
         } catch (error) {

@@ -22,7 +22,7 @@ router.get("/getSingleJob/:id", requireSignIn, getSingleJobController);
 router.get("/getActiveJobs", requireSignIn, getActiveJobController);
 
 //Get Active Jobs for All
-router.get("/getHomepageJobs", getHomepageJobsController);
+router.get("/getHomepageJobs", getHomepageJobsController); 
 
 //Update jobStatus attribute
 router.put("/changeJobStatus/:id", requireSignIn, isRecruiterorAdmin, updateJobStatusController);

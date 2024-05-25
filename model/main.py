@@ -159,7 +159,7 @@ def resumeparse(url):
         doc = doc.replace("DC", "Doctor of Chiropractic ")
         doc = doc.replace("DSW", "Doctor of Social Work ")
         
-        doc = " ".join(re.split("\s+", doc, flags=re.UNICODE))
+        doc = " ".join(re.split(r"\s+", doc, flags=re.UNICODE))
         doc = re.sub(r'(?<=\d) (?=\d)', '', doc)
 
         nlp = spacy.load("en_core_web_lg")
@@ -168,10 +168,10 @@ def resumeparse(url):
         ruler.from_disk(skill_pattern_path)
 
         patterns = [
-            {"label": "EMAIL", "pattern": [{"TEXT": {"REGEX": "([^@|\s]+@[^@]+\.[^@|\s]+)"}}]},
-            {"label": "LINKEDIN", "pattern": [{"TEXT": {"REGEX": "^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)"}}]},
-            {"label": "GITHUB", "pattern": [{"TEXT": {"REGEX": "^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$"}}]},
-            {"label": "PHONE-NUMBER", "pattern": [{"TEXT": {"REGEX": "^((\+92)?(0092)?(92)?(0)?)(3)([0-9]{9})$"}}]}
+            {"label": "EMAIL", "pattern": [{"TEXT": {"REGEX": r"([^@|\s]+@[^@]+\.[^@|\s]+)"}}]},
+            {"label": "LINKEDIN", "pattern": [{"TEXT": {"REGEX": r"^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)"}}]},
+            {"label": "GITHUB", "pattern": [{"TEXT": {"REGEX": r"^(http(s?):\/\/)?(www\.)?github\.([a-z])+\/([A-Za-z0-9]{1,})+\/?$"}}]},
+            {"label": "PHONE-NUMBER", "pattern": [{"TEXT": {"REGEX": r"^((\+92)?(0092)?(92)?(0)?)(3)([0-9]{9})$"}}]}
         ]
         ruler.add_patterns(patterns)
         p = nlp(doc)
