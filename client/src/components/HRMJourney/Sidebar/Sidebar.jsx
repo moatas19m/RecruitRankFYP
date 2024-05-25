@@ -40,18 +40,13 @@ function Sidebar() {
     const handleImageError = () => {
         setImageSrc("http://localhost:3000/assets/blank_pfp.png");
     };
-
-    const userData = localStorage.getItem("user");
-    const user = JSON.parse(userData);
-    const userName = user.name;
-    const userEmail = user.email
     return (
         <div className="sidebar">
             <div className="sidebarWrapper">
                 <img src={imageSrc} alt="" onError={handleImageError} className="companyImage" />
                 <div className="nameAndEmail">
-                    <div className="HRTitle">{userName}</div>
-                    <div className="HREmail">{userEmail}</div>
+                    <div className="HRTitle">{HRM.firstName} {HRM.lastName}</div>
+                    <div className="HREmail">{HRM.email}</div>
                 </div>
                 <ul className="optionsList">
 
