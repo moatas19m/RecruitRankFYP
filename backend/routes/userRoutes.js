@@ -1,5 +1,5 @@
 import express from "express";
-import {getSingleUserController, UploadFileController, updateUserCVController, updateUserController, getUserController, userDeleteController, getActiveUserController, FilterUserQueryController, SearchUserQueryController} from '../controller/userController.js'
+import {getActiveRecruiterController,getActiveApplicantsController,getSingleUserController, UploadFileController, updateUserCVController, updateUserController, getUserController, userDeleteController, getActiveUserController, FilterUserQueryController, SearchUserQueryController} from '../controller/userController.js'
 import { requireSignIn,isAdmin, isApplicantorAdmin, isRecruiterorAdmin } from "../middleware/Auth.js";
 import multer from "multer";
 
@@ -19,6 +19,12 @@ router.put("/update/:id", requireSignIn, updateUserController);
 
 //Get All Users
 router.get("/getusers", requireSignIn, isAdmin, getUserController);
+
+//Get Active Applicants
+router.get("/getActiveApplicants", requireSignIn, isAdmin, getActiveApplicantsController);
+
+//Get Active Recruiter
+router.get("/getActiveRecruiter", requireSignIn, isAdmin, getActiveRecruiterController);
 
 //Get Active Users Only
 router.get("/getActiveUsers", requireSignIn, isAdmin, getActiveUserController);
