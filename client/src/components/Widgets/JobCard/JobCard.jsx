@@ -4,7 +4,7 @@ import KeyboardDoubleArrowUpRoundedIcon from '@mui/icons-material/KeyboardDouble
 function JobCard({job}) {
     return (
         <div className="jobCard">
-            <Link to={`ViewJob/${job._id}`} style={{textDecoration: "none",}}>
+            <Link to={`/HRView/ViewJob/${job._id}`} style={{textDecoration: "none",}}>
                 <div className="jobCardContainer">
                     <div className="positionSpots">
                         <div className="company">Company: {job.company}</div>
