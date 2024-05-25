@@ -1,6 +1,6 @@
 .ApplyexperienceFields {
     display: flex;
-    gap: 1em;
+    gap: 1rem; /* converted to rem */
     width: 100%;
     flex-direction: column;
     padding-bottom: 1em;
@@ -10,65 +10,64 @@
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: 1em;
+    gap: 1rem; /* converted to rem */
 }
 
 .ExperienceTitle {
-    gap: 5em;
+    gap: 5rem; /* converted to rem */
     width: 50%;
 }
 
 .CompanyName {
     width: 50%;
-    margin-right: 2em;
+    margin-right: 2rem; /* converted to rem */
 }
 
 .description {
-    margin-right: 2em;
+    margin-right: 2rem; /* converted to rem */
 }
 
 .box2 {
     display: flex;
     flex: 1;
-
-    gap: 3em;
-    margin-right: 1em;
+    gap: 3rem; /* converted to rem */
+    margin-right: 1rem; /* converted to rem */
     flex-direction: row;
 }
 
 .dates {
     display: flex;
     flex-direction: row;
-    gap: 3em;
+    gap: 3rem; /* converted to rem */
 }
 
 .StartDateTitle {
-    margin-left: 0.7em;
-    margin-bottom: 0.2em;
+    margin-left: 0.7rem; /* converted to rem */
+    margin-bottom: 0.2rem; /* converted to rem */
 }
 
 .EndDateTitle {
-    margin-left: 0.7em;
-    margin-bottom: 0.2em;
+    margin-left: 0.7rem; /* converted to rem */
+    margin-bottom: 0.2rem; /* converted to rem */
 }
 
 .nameflex {
     display: flex;
     flex: 1;
     flex-direction: row;
-    gap: 3em;
+    gap: 3rem; /* converted to rem */
 }
 
 .dateflex {
     display: flex;
     flex: 1;
     flex-direction: column;
-    gap: 1em;
+    gap: 1rem; /* converted to rem */
 }
 
 .checkbox {
     display: flex;
-    border: 2px #6e6c6c;
+    border: 0.2rem #6e6c6c solid; /* converted to rem */
 }
 
 .StillWorking {
@@ -76,18 +75,18 @@
     flex-direction: row-reverse;
     justify-content: center;
     align-items: center;
-    gap: 0.5em;
-    padding-left: 1em;
+    gap: 0.5rem; /* converted to rem */
+    padding-left: 1rem; /* converted to rem */
     font-weight: 400;
-    font-size: 1.5em;
-    padding-top: 1em;
+    font-size: 1.5rem; /* converted to rem */
+    padding-top: 1rem; /* converted to rem */
 }
 
 .isWorkingCheckbox {
-    height: 3em;
-    width: 3em;
+    height: 3rem; /* converted to rem */
+    width: 3rem; /* converted to rem */
     cursor: pointer;
-    border-radius: 1em;
+    border-radius: 1rem; /* converted to rem */
 }
 
 .stillWorkingWrapper {

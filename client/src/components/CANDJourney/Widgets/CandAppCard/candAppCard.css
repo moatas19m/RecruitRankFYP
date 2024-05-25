@@ -1,4 +1,5 @@
-.CandAppCard,.CandAppCardModal {
+.CandAppCard,
+.CandAppCardModal {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -8,15 +9,17 @@
     user-select: none;
 }
 
-.CandAppCardModal{
+.CandAppCardModal {
     flex-direction: column;
     align-items: start;
 }
-.modalViewPort{
+
+.modalViewPort {
     height: 50vh;
     overflow-y: scroll;
-    margin: 1.5em 0em;
+    margin: 1.5em 0;
 }
+
 .CandAppCard:hover {
     background-color: aliceblue;
     cursor: pointer;
@@ -31,24 +34,24 @@
 .CandAppCardRight {
     display: flex;
     flex-direction: column;
-    justify-content: end;
-    align-items: end;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .CandAppCardJob {
-    font-size: 1.3em;
+    font-size: 1.3rem;
     font-weight: 900;
 }
 
 .CandAppCardCompany {
-    font-size: 0.8em;
+    font-size: 0.8rem;
     font-style: italic;
 }
 
 .jobAppStatus {}
 
 .jobAppCreated {
-    font-size: 0.8em;
+    font-size: 0.8rem;
     font-style: italic;
     font-weight: 600;
     color: rgb(120, 120, 120);
@@ -93,14 +96,14 @@
     padding: 5px 7px;
 }
 
-.modalContainer{
+.modalContainer {
     display: flex;
     flex-direction: column;
     gap: 1em;
     padding: 0em 2em;
 }
 
-.close{
+.close {
     font-size: 1em;
     background-color: rgb(211, 121, 121);
     border: none;
@@ -111,6 +114,6 @@
     cursor: pointer;
 }
 
-.close:hover{
+.close:hover {
     background-color: rgb(190, 63, 63);
 }

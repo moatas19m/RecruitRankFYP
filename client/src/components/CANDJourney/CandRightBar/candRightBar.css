@@ -1,6 +1,6 @@
-.topHeading{
+.topHeading {
     display: flex;
     align-items: center;
     gap: 0.5em;
-    z-index: -999;
+    z-index: auto; /* Set z-index to auto to place the element above others by default */
 }

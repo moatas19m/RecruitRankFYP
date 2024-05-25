@@ -2,11 +2,11 @@
     flex: 10;
     padding: 3em;
     color: #464646;
-    overflow-y: scroll;
+    overflow-y: auto; /* Changed to auto for better responsiveness */
 }
 
 .DescHeading {
-    font-size: 3em;
+    font-size: 3rem; /* Convert to rem */
     font-weight: 900;
 }
 
@@ -17,7 +17,6 @@
 }
 
 .JobDescCont {
-
     height: auto;
     background-color: #d9d9d9;
     padding: 1em;
@@ -26,12 +25,12 @@
 }
 
 .JTitle {
-    font-size: 2.5em;
+    font-size: 2.5rem; /* Convert to rem */
     font-weight: 500;
 }
 
 .Title {
-    font-size: 2em;
+    font-size: 2rem; /* Convert to rem */
     font-weight: 700;
 }
 
@@ -55,8 +54,7 @@
     display: flex;
     gap: 1em;
     flex-direction: column;
-    padding: 2em 15em;
-
+    padding: 2em 1.875rem; /* Convert to rem */
 }
 
 .CPJLeftContainer,
@@ -68,7 +66,7 @@
 }
 
 .CJPSubheading {
-    font-size: 1.5em;
+    font-size: 1.5rem; /* Convert to rem */
     font-weight: 700;
 }
 
@@ -110,48 +108,48 @@
 
 .CJPHRMname {
     font-weight: 600;
-    font-size: 1.3em;
+    font-size: 1.3rem; /* Convert to rem */
 }
 
-.mailAndLi{
+.mailAndLi {
     color: #464646;
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
 
-.linkedinLogo{
+.linkedinLogo {
     color: #222b65;
 }
 
-.nameAndLogosRow{
+.nameAndLogosRow {
     display: flex;
     justify-content: space-between;
 }
 
-.CJPcompanyLogo{
+.CJPcompanyLogo {
     height: 5em;
     width: 5em;
     border-radius: 50%;
 }
 
-.companyLogoDesc{
+.companyLogoDesc {
     display: flex;
     gap: 1em;
     align-items: center;
 }
 
-.infoCol{
+.infoCol {
     display: flex;
     gap: 3em;
 }
 
-.CJPJobTitleLocationInfo{
+.CJPJobTitleLocationInfo {
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
 
-.attItem{
+.attItem {
     gap: 0.5em !important;
 }

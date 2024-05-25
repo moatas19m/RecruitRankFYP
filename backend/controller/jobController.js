@@ -362,3 +362,40 @@ export const SearchQueryController = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+//Used for querying job results
+export const searchJobsController = async (req, res) => {
+    const { keyword } = req.body;
+
+    if(!keyword){
+        console.log("no keyword entered!");
+    }
+    try {
+        const jobs = await Job.find({
+            $and: [
+                { status: "Active" },
+                {
+                    $or: [
+                        { company: { $regex: keyword, $options: "i" } },
+                        { title: { $regex: keyword, $options: "i" } },
+                        { description: { $regex: keyword, $options: "i" } },
+                        { requirements: { $regex: keyword, $options: "i" } },
+                        { benefits: { $regex: keyword, $options: "i" } }
+                    ]
+                }
+            ]
+        });
+
+        res.status(200).json({
+            success: true,
+            matchedJobsCount: jobs.length,
+            jobs
+        });
+
+    } catch (err) {
+        return res.status(500).json({
+            success: false,
+            err
+        });
+    }
+};

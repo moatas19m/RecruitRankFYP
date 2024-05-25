@@ -1,29 +1,26 @@
 .CandjobCard1 {
-    width: 80%;
+    width: 80%; /* Convert to rem */
     height: auto;
     background-color: #d9d9d9;
-    border-radius: 2em;
+    border-radius: 2rem; /* Convert to rem */
     transition: 300ms;
     border: none;
     cursor: pointer;
 }
 
 .CandjobCard1:hover {
-    box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.5); /* Convert to rem */
+    -webkit-box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.5); /* Convert to rem */
+    -moz-box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.5); /* Convert to rem */
     transition: 300ms;
-
 }
 
 .CandjobCardContainer1 {
     color: #4a4a4a;
     display: flex;
-    padding: 2em;
-    gap: 2em;
-   
+    padding: 2rem; /* Convert to rem */
+    gap: 2rem;
     flex-direction: row-reverse;
-
 }
 
 .CandpositionSpots {
@@ -38,54 +35,55 @@
     align-items: start;
 }
 
-.Candtitle1{
+.Candtitle1 {
     font-weight: 800;
-    font-size: 3em;
-    margin-right: 10em;
+    font-size: 3rem; /* Convert to rem */
+    margin-right: 1.25rem; /* Convert to rem */
 }
-.Candtitle2{
+
+.Candtitle2 {
     font-weight: 500;
-    font-size: 1em; 
-    margin-right: 10em;
+    font-size: 1rem; /* Convert to rem */
+    margin-right: 1.25rem; /* Convert to rem */
     align-items: start;
 }
-.Candtype{
+
+.Candtype {
     font-weight: 500;
-    font-size: 2em;
-    
+    font-size: 2rem; /* Convert to rem */
 }
-.Candjobtype{
+
+.Candjobtype {
     margin-left: auto;
-    
 }
+
 .Candspots {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 1em;
-    padding: 0.5em;
-    font-size: 1.2em;
+    margin-top: 1rem; /* Convert to rem */
+    padding: 0.5rem; /* Convert to rem */
+    font-size: 1.2rem; /* Convert to rem */
     font-weight: 400;
     background-color: #c6c6c6;
-    border-radius: 1em;
+    border-radius: 1rem; /* Convert to rem */
     width: auto;
 }
 
-
 .up1 {
-    height: 3em;
-    width: 3em;
+    height: 3rem; /* Convert to rem */
+    width: 3rem; /* Convert to rem */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #c6c6c6;
-    margin-top: 1em;
+    margin-top: 1rem; /* Convert to rem */
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.17);
-    -webkit-box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.17);
-    -moz-box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.17);
+    box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.17); /* Convert to rem */
+    -webkit-box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.17); /* Convert to rem */
+    -moz-box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.17); /* Convert to rem */
     transition: 300ms;
 }
 
@@ -94,8 +92,8 @@
 }
 
 .up1:hover {
-    box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.5);
-    -moz-box-shadow: 0px 0px 10px -1px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.5); /* Convert to rem */
+    -webkit-box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.5); /* Convert to rem */
+    -moz-box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.5); /* Convert to rem */
     transition: 300ms;
 }

@@ -11,7 +11,7 @@
 
 .shortlisted {
     color: maroon;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     font-weight: 900;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .companyname {
-    font-size: 0.8em;
+    font-size: 0.8rem;
     font-style: italic;
 }
 

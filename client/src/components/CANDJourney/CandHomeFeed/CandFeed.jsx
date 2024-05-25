@@ -35,13 +35,38 @@ function CandFeed() {
     const UserD = JSON.parse(userD);
     const userName = UserD.name;
 
+    const handleSearchChange = (event) => {
+        const keyword = event.target.value;
+        fetchSearchJobs(keyword);
+    };
+
+
+    const fetchSearchJobs = async (keyword) => {
+        try {
+            console.log("coming")
+            const headers = { Authorization: `${localStorage.getItem("token")}` };
+            const response = await axios.post(`/api/job/searchJobs`,{keyword:keyword}, { headers });
+            console.log("Response data:", response.data.jobs);
+    
+            // Check if response.data.job is an array before setting the jobs state
+            if (response.data.jobs && Array.isArray(response.data.jobs)) {
+                setJobs(response.data.jobs);
+            } else {
+                console.error("Response data.job is not an array:", response.data);
+            }
+        } catch (error) {
+            console.error("Error fetching jobs:", error);
+        }
+    };
+
+
     return (
         <div className="CandfeedHome">
             <div className="CandfeedWrapper1">
                 <div className="CandfeedTitle1">Hello, {userName}</div>
                 <div className="Candsearchbar1">
                     <Search className="CandSearchIcon1" />
-                    <input placeholder="Search across the system..." type="text" className="searchInput" />
+                    <input placeholder="Search across the system..." type="text" className="searchInput" onChange={handleSearchChange}/>
                 </div>
                 <div className="Candjobss">
                     <div className="CandjobPostingHeading1">Available Jobs</div>

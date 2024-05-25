@@ -1,25 +1,25 @@
 .viewJobComponent {
     flex: 10;
-    padding: 3em;
+    padding: 3rem;
     color: #464646;
     height: 100vh;
     overflow: hidden;
 }
 
 .Heading {
-    font-size: 3em;
+    font-size: 3rem;
     font-weight: 900;
 }
 
 .attItem {
     display: flex;
-    gap: 1em;
+    gap: 1rem;
     align-items: center;
 }
 
 .headingAndAtts {
     display: flex;
-    gap: 3em;
+    gap: 3rem;
     align-items: center;
 }
 
@@ -32,11 +32,11 @@
 .Spots {
     display: flex;
     flex-direction: row;
-    gap: 0.5em;
+    gap: 0.5rem;
     background-color: transparent;
     align-items: center;
     justify-content: center;
-    margin: 0em;
+    margin: 0;
 }
 
 .spotsCircle {
@@ -44,19 +44,19 @@
     align-items: center;
     justify-content: center;
     background-color: #99c2a2;
-    padding: 0.3em;
+    padding: 0.3rem;
     font-weight: 900;
     color: white;
     border-radius: 50%;
-    font-size: 1.5em;
+    font-size: 1.5rem;
     aspect-ratio: 1;
-    min-width: 1.2em;
-    min-height: 1.2em;
+    min-width: 1.2rem;
+    min-height: 1.2rem;
 }
 
 .toFillS {
     font-weight: 900;
-    font-size: 1.2em;
+    font-size: 1.2rem;
     background-color: transparent;
 }
 
@@ -88,8 +88,8 @@
 }
 
 .applicantsCount {
-    padding: 1em 0em;
-    font-size: 1.3em;
+    padding: 1rem 0;
+    font-size: 1.3rem;
 }
 
 b {
@@ -102,19 +102,18 @@ b {
 
 .linkSection {
     display: flex;
-    font-size: 1em;
-    margin: 1em 2em 0em;
-    padding: 0.5em 1em;
+    font-size: 1rem;
+    margin: 1rem 2rem 0;
+    padding: 0.5rem 1rem;
     justify-content: space-between;
     align-items: center;
     background-color: rgb(212, 255, 212);
     font-weight: 800;
     color: rgb(3, 68, 3);
-    border-radius: 0.5em;
-    box-shadow: 1px 8px 19px 0px rgba(0, 145, 11, 0.18);
-    -webkit-box-shadow: 1px 8px 19px 0px rgba(0, 145, 11, 0.18);
-    -moz-box-shadow: 1px 8px 19px 0px rgba(0, 145, 11, 0.18);
-
+    border-radius: 0.5rem;
+    box-shadow: 1px 8px 19px 0 rgba(0, 145, 11, 0.18);
+    -webkit-box-shadow: 1px 8px 19px 0 rgba(0, 145, 11, 0.18);
+    -moz-box-shadow: 1px 8px 19px 0 rgba(0, 145, 11, 0.18);
 }
 
 .iconPat {
@@ -123,14 +122,12 @@ b {
 }
 
 .iconPat:hover {
-    transition: 300ms;
     transform: rotate(16deg) scale(1.7);
     -webkit-transform: rotate(16deg) scale(1.7);
     -moz-transform: rotate(16deg) scale(1.7);
 }
 
 .iconPat:active {
-    transition: 300ms;
     transform: scale(1.2);
     -webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
@@ -141,7 +138,7 @@ b {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5em;
+    padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
     color: white;
@@ -152,7 +149,7 @@ b {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.5em;
+    padding: 0.5rem;
     border-radius: 50%;
     cursor: pointer;
     color: white;
@@ -161,30 +158,30 @@ b {
 .HrmCreator {
     display: flex;
     align-items: center;
-    gap: 0.5em;
+    gap: 0.5rem;
     color: #464646;
 }
 
 .applyButton {
     background-color: #005b3b;
-      border: 1px solid transparent;
-      border-radius: .75rem;
-      box-sizing: border-box;
-      color: #FFFFFF;
-      cursor: pointer;
-      flex: 0 0 auto;
-      font-size: 1.125rem;
-      font-weight: 600;
-      line-height: 1.5rem;
-      padding: .75rem 1.2rem;
-      text-align: center;
-      text-decoration: none #6B7280 solid;
-      text-decoration-thickness: auto;
-      transition-duration: .2s;
-      transition-property: background-color, border-color, color, fill, stroke;
-      transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: manipulation;
-      width: auto;
-  }
+    border: 1px solid transparent;
+    border-radius: 0.75rem;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    flex: 0 0 auto;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5rem;
+    padding: 0.75rem 1.2rem;
+    text-align: center;
+    text-decoration: none #6B7280 solid;
+    text-decoration-thickness: auto;
+    transition-duration: 0.2s;
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: auto;
+}

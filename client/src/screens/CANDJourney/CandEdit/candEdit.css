@@ -1,24 +1,19 @@
-.editCandWrapper{
+.editCandWrapper {
     height: 100vh;
     display: flex;
     overflow: hidden;
 }
 
-.CandTextFieldSmall {
-    width: auto;
-    padding: 1em;
+.CandTextFieldSmall,
+.CandTextFieldBig {
+    width: auto; /* Ensure text fields take up full width */
+    padding: 1rem; /* Convert to rem */
     border: none;
-    font-size: 1.2em;
-    border-radius: 1em;
+    font-size: 1.2rem; /* Convert to rem */
+    border-radius: 1rem; /* Convert to rem */
     background-color: #f1f1f1;
 }
 
 .CandTextFieldBig {
-    width: auto;
-    height: 12.25em;
-    padding: 1em;
-    border: none;
-    font-size: 1.2em;
-    border-radius: 1em;
-    background-color: #f1f1f1;
+    height: 12.25rem; /* Convert to rem */
 }
