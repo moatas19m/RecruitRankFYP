@@ -1,211 +1,180 @@
+/* candEditFields.css */
+
 .CandFieldsWrapper {
     display: flex;
     flex-direction: column;
-    flex: 10;
-    padding: 3rem; /* Converted to rem */
-    color: #464646;
-    gap: 1rem; /* Converted to rem */
-    overflow-y: auto;
-}
-
-.CandHeading {
-    font-size: 3rem; /* Converted to rem */
-    font-weight: 900;
-}
-
-.CandtopHeadings {
-    margin-bottom: 1rem; /* Converted to rem */
-}
-
-.CandText {
-    font-size: 1.5rem; /* Converted to rem */
-    font-weight: 500;
-}
-
-.HTextSmaller {
-    font-size: 1.2rem; /* Converted to rem */
-    font-weight: 500;
-}
-
-.CandprofileImageSelection {
-    display: flex;
     align-items: center;
-    gap: 2rem; /* Converted to rem */
-}
-
-.pfp {
-    height: 10rem; /* Converted to rem */
-    width: 10rem; /* Converted to rem */
-    object-fit: cover;
-    border-radius: 50%;
-    box-shadow: 0px 1rem 0.3125rem -0.3125rem rgba(0, 0, 0, 0.2); /* Converted to rem */
-    transition: 300ms;
-    margin: 1rem; /* Converted to rem */
-}
-
-.pfp:hover {
-    cursor: pointer;
-    height: 12rem; /* Converted to rem */
-    width: 12rem; /* Converted to rem */
-    transition: 300ms;
-    margin: 0; /* Remove unit for margin */
-    box-shadow: 0px 1rem 1.5625rem 0.0625rem rgba(0, 0, 0, 0.67); /* Converted to rem */
-}
-
-.pfpButtons {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; /* Converted to rem */
-}
-
-.Candpanes {
-    display: flex;
-    flex-direction: row;
-    gap: 6rem; /* Converted to rem */
-}
-
-.CandleftSide {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem; /* Converted to rem */
-    flex: 1;
-    width: auto;
-}
-
-.CandrightSide {
-    flex: auto;
-    width: auto;
-    flex: 1;
-}
-
-.Candforms {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem; /* Converted to rem */
-    width: auto;
-}
-
-.CandTextFieldSmall {
-    width: auto;
-    padding: 1rem; /* Converted to rem */
-    border: none;
-    font-size: 1.2rem; /* Converted to rem */
-    border-radius: 1rem; /* Converted to rem */
-    background-color: #f1f1f1;
-}
-
-.CandTextFieldBig {
-    width: auto;
-    height: 12.25rem; /* Converted to rem */
-    padding: 1rem; /* Converted to rem */
-    border: none;
-    font-size: 1.2rem; /* Converted to rem */
-    border-radius: 1rem; /* Converted to rem */
-    background-color: #f1f1f1;
-}
-
-.CandnameFields {
-    margin-top: 1rem; /* Converted to rem */
-    display: flex;
-    gap: 1rem; /* Converted to rem */
-    width: auto;
-}
-
-#CandnameF {
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
     width: 100%;
-}
-
-#CandnameL {
-    width: 100%;
-}
-
-@media (max-width: 1150px) {
-    .Candpanes {
-        display: flex;
-        flex-direction: column;
-    }
+    box-sizing: border-box;
 }
 
 .CandtopBar {
     display: flex;
     justify-content: space-between;
-}
-
-.Candpreview,
-.Canddiscard {
-    min-width: 10rem; /* Converted to rem */
-}
-
-.Candpreview,
-.Canddiscard {
-    background-color: #005b3b;
-    border: 0.0625rem solid transparent; /* Converted to rem */
-    border-radius: 0.75rem; /* Converted to rem */
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
     box-sizing: border-box;
-    color: #FFFFFF;
-    cursor: pointer;
-    flex: 0 0 auto;
-    font-size: 1.125rem; /* Converted to rem */
-    font-weight: 600;
-    line-height: 1.5rem;
-    padding: 0.75rem 1.2rem; /* Converted to rem */
-    text-align: center;
-    text-decoration: none #6B7280 solid;
-    text-decoration-thickness: auto;
-    transition-duration: 0.2s;
-    transition-property: background-color, border-color, color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: auto;
 }
 
-.Candpreview:hover {
-background-color: #03442d;
+.CandtopHeadings {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
-.Candpreview:focus {
-box-shadow: none;
-outline: 0.125rem solid transparent; /* Converted to rem /
-outline-offset: 0.125rem; / Converted to rem */
+.CandHeading {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
-.Canddiscard {
-background-color: rgb(112, 0, 0);
-border: 0.0625rem solid transparent; /* Converted to rem /
-border-radius: 0.75rem; / Converted to rem /
-box-sizing: border-box;
-color: #FFFFFF;
-cursor: pointer;
-flex: 0 0 auto;
-font-size: 1.125rem; / Converted to rem /
-font-weight: 600;
-line-height: 1.5rem; / Converted to rem /
-padding: 0.75rem 1.2rem; / Converted to rem */
-text-align: center;
-text-decoration: none #6B7280 solid;
-text-decoration-thickness: auto;
-transition-duration: 0.2s;
-transition-property: background-color, border-color, color, fill, stroke;
-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-user-select: none;
--webkit-user-select: none;
-touch-action: manipulation;
-width: auto;
-}
-
-.Canddiscard:hover {
-background-color: #3c1f1f;
-}
-
-.Canddiscard:focus {
-box-shadow: none;
-outline: 0.125rem solid transparent; /* Converted to rem /
-outline-offset: 0.125rem; / Converted to rem */
+.CandText {
+    font-size: 14px;
+    color: #666;
 }
 
 .CandbuttonContainer {
-display: flex;
-gap: 1rem; /* Converted to rem */
+    display: flex;
+    gap: 10px;
+}
+
+.CandbuttonContainer button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.Canddiscard {
+    background-color: #c836f4;
+    color: white;
+}
+
+.Candpreview {
+    background-color: #420355;
+    color: white;
+}
+
+.Candpreview[disabled] {
+    background-color: gray;
+    cursor: not-allowed;
+}
+
+.Candpanes {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1200px;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+.CandrightSide,
+.CandleftSide {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.CandpfpSelectionHeading {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.subHeading {
+    font-size: 5px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: rgb(215, 179, 231);
+    align-items: center;
+}
+
+.Candforms {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.CandTextFieldSmall {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px; /* Increased font size */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.CandprofileImageSelection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.profilePic {
+    width: 100%;
+    text-align: center;
+}
+
+.pfpButtons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.pfpButtons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.pfpUpload {
+    background-color: #c2a0cf;
+    color: white;
+}
+
+.pfpDelete {
+    background-color: #a80af1;
+    color: white;
+}
+
+.pfpUpload[disabled] {
+    background-color: rgb(63, 60, 65);
+    cursor: not-allowed;
+}
+
+.loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
 }

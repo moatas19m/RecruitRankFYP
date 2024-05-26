@@ -1,102 +1,30 @@
 .jobCard {
-    width: auto;
-    height: auto;
-    background-color: #d9d9d9;
-    border-radius: 2rem; /* Convert to rem */
-    transition: 300ms;
-    padding: 0.5rem; /* Convert to rem */
-    box-shadow: 0px 0.4rem 1rem rgba(0, 0, 0, 0.1); /* Convert to rem */
-}
-
-.jobCard:hover {
-    box-shadow: -0.125rem 0.625rem 0.75rem 0px rgba(0, 0, 0, 0.06);
-    -webkit-box-shadow: -0.125rem 0.625rem 0.75rem 0px rgba(0, 0, 0, 0.06);
-    -moz-box-shadow: -0.125rem 0.625rem 0.75rem 0px rgba(0, 0, 0, 0.06);
-    background-color: #ae9595;
-}
-
-.jobCardContainer {
-    color: #4a4a4a;
-    display: flex;
-    padding: 2rem; /* Convert to rem */
-    justify-content: space-between;
-}
-
-.positionSpots {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.position {
-    font-weight: 800;
-    font-size: 1.5rem; /* Convert to rem */
-}
-
-.spots {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1rem; /* Convert to rem */
-    padding: 0.5rem; /* Convert to rem */
-    font-size: 1.2rem; /* Convert to rem */
-    font-weight: 400;
-    background-color: #c6c6c6;
-    border-radius: 1rem; /* Convert to rem */
-    width: auto;
-}
-
-.applicationsCount {
-    display: flex;
-    flex-direction: column;
-    margin-left: 3rem; /* Convert to rem */
-    justify-content: center;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.count {
-    aspect-ratio: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #99c2a2;
-    color: white;
-    font-size: 2rem; /* Convert to rem */
-    font-weight: 900;
-    padding: 0.4rem; /* Convert to rem */
-    border-radius: 50%; /* Convert to rem */
-}
-
-.up {
-    height: 3rem; /* Convert to rem */
-    width: 3rem; /* Convert to rem */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #c6c6c6;
-    margin-top: 1rem; /* Convert to rem */
-    border: none;
-    border-radius: 50%; /* Convert to rem */
-    cursor: pointer;
-    box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.17); /* Convert to rem */
-    -webkit-box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.17); /* Convert to rem */
-    -moz-box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.17); /* Convert to rem */
-    transition: 300ms;
-}
-
-.upIcon {
-    color: #4a4a4a;
-}
-
-.up:hover {
-    box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.5); /* Convert to rem */
-    -webkit-box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.5); /* Convert to rem */
-    -moz-box-shadow: 0px 0px 0.625rem -0.0625rem rgba(0, 0, 0, 0.5); /* Convert to rem */
-    transition: 300ms;
-}
-
-.company, .title, .location {
+    background: linear-gradient(to right, #f9f9f9, #794b79);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  
+  .jobCardContainer {
+    padding: 20px;
+  }
+  
+  .company {
+    font-size: 18px;
     font-weight: bold;
-    font-size: 1.1rem; /* Convert to rem */
-}
+    color: #333;
+  }
+  
+  .title {
+    font-size: 16px;
+    margin-top: 5px;
+    color: #555;
+  }
+  
+  .location {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #777;
+  }
+  

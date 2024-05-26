@@ -1,79 +1,161 @@
-.feed1 {
-    flex: 8;
-    height: 100%;
-    overflow-y: scroll;
-    color: #464646;
-}
+/* Candfeed.css */
 
-.feedWrapper1 {
-    padding: 3rem; /* Convert to rem */
-}
-
-.feedTitle1 {
-    font-size: 3rem; /* Convert to rem */
-    font-weight: 900;
-    color: #464646;
-}
-
-.searchbar1 {
-    margin-top: 2rem; /* Convert to rem */
-    width: 80%; /* Convert to rem */
-    margin-right: 10%; /* Convert to rem */
-    height: 2rem; /* Convert to rem */
-    background-color: #e5e4e4;
-    border-radius: 3rem; /* Convert to rem */
+.CandfeedHome {
+    display: flex;
+    justify-content: center;
     align-items: center;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.CandfeedWrapper1 {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #ffffff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.CandfeedTitle1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    
+    color: #111010;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Candsearchbar1 {
     display: flex;
-    justify-content: start;
-    padding: 1rem; /* Convert to rem */
-    box-shadow: 0.0625rem 0.9375rem 1.3125rem 0px rgba(0, 0, 0, 0.05); /* Convert to rem */
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #dcdcdc;
+    border-radius: 50px; /* Makes the search bar rounded */
+    background-color: #f0f0f0; /* Light fill color */
 }
 
-.SearchIcon1 {
-    font-size: 1.5rem !important; /* Convert to rem */
-    color: #464646;
-    margin-left: 1rem; /* Convert to rem */
-    margin-right: 1.25rem; /* Convert to rem */
+.CandSearchIcon1 {
+    color: #999999;
+    margin-right: 0.5rem;
 }
 
-.searchInput1 {
-    background-color: transparent;
+.searchInput {
+    width: 100%;
     border: none;
-    width: 90%;
-    font-size: 1.25rem; /* Convert to rem */
-}
-
-.searchInput1:focus {
     outline: none;
-}
-
-.jobss {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    height: auto;
-    margin-top: 1.25rem; /* Convert to rem */
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    color: #333333;
+    background-color: transparent;
+    border-radius: 50px; /* Makes the input field rounded */
 }
 
 .Candjobss {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: auto;
-    margin-top: 1.25rem; /* Convert to rem */
+    margin-bottom: 1.5rem;
 }
 
-.jobPostings1 {
-    padding-top: 2rem; /* Convert to rem */
+.CandjobPostingHeading1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333333;
+    position: relative;
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(90deg, #3b353b, #ebe1e0);
+    color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #a047bb;
+    border: none;
+    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 300ms;
+}
+
+.filter:hover {
+    background-color: #2980b9;
+}
+
+.line {
+    width: 100%;
+    height: 1px;
+    background-color: #dcdcdc;
+    margin-bottom: 1.5rem;
+}
+
+.CandjobPostings1 {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); /* Convert to rem */
 }
 
-.jobPostingHeading1 {
-    margin-top: 1em; /* Convert to rem */
-    font-size: 3.6rem; /* Convert to rem */
-    font-weight: 900;
+.jobPostings {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.jobPostingsError {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    color: #e74c3c;
+    font-size: 1.25rem;
+}
+
+.error {
+    display: flex;
+    align-items: center;
+}
+
+.error > svg {
+    margin-right: 0.5rem;
+}
+
+.LinearProgress {
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .CandfeedWrapper1 {
+        padding: 1rem;
+    }
+
+    .CandfeedTitle1 {
+        font-size: 1.5rem;
+    }
+
+    .CandjobPostingHeading1 {
+        font-size: 1.25rem;
+    }
+
+    .searchInput {
+        font-size: 0.875rem;
+    }
+
+    .filter {
+        font-size: 0.875rem;
+    }
 }

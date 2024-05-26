@@ -13,7 +13,7 @@
     padding: 20px;
     align-items: center;
     justify-content: center;
-    background-color: #d9d9d9;
+    background-color: #d6c7c7;
 }
 
 .companyImage {
@@ -39,7 +39,7 @@
     padding: 35px 0px 10px;
     font-size: 1.3em;
     font-weight: 700;
-    color: #545151;
+    color: #f3eaea;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -60,7 +60,7 @@
 
 .HREmail {
     font-weight: 400;
-    color: #858585;
+    color: #a39595;
 }
 
 .option {
@@ -75,7 +75,7 @@
 
 .option:hover {
     transition: 600ms;
-    background-color: #eae8e8;
+    background-color: #150d16;
     border-radius: 20px;
     box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.12);
     -webkit-box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.12);
@@ -88,7 +88,7 @@
 }
 
 .optionsIcon {
-    color: #545151;
+    color: #ebe3e3;
     padding-right: 10px;
 }
 

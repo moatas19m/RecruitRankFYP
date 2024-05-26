@@ -1,6 +1,63 @@
-.topHeading {
+/* candRightBar.css */
+
+.rightbar {
+    width: 300px;
+    padding: 20px;
+    background-color: #6d4170;
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* Position relative for absolute positioning */
+}
+
+.topContainer {
     display: flex;
     align-items: center;
-    gap: 0.5em;
-    z-index: auto; /* Set z-index to auto to place the element above others by default */
+    margin-bottom: 20px;
+}
+
+.topHeading {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-left: 10px;
+}
+
+.innerBox {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles for the notification list */
+.notifsList {
+    max-height: 300px; /* Set maximum height to enable scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+/* Style for each notification card */
+.notifCard {
+    background-color: rgb(186, 153, 207);
+    border-radius: 15px; /* Rounded corners */
+    padding: 15px; /* Increased padding */
+    margin-bottom: 15px; /* Increased margin */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+.notifTitle {
+    font-size: 18px; /* Increased font size */
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px; /* Adjusted margin */
+}
+
+.notifContent {
+    font-size: 16px; /* Increased font size */
+    color: #777;
+}
+
+.notifDate {
+    font-size: 14px; /* Increased font size */
+    color: #999;
+    margin-top: 8px; /* Adjusted margin */
 }

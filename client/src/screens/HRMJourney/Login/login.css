@@ -1,80 +1,203 @@
-.login {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.loginWrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100vb;
-    align-items: center;
-    justify-content: center;
-}
-
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-    padding: 3em;
-    align-items: center;
-}
-
-.TalentHiveLogo {
-    font-size: 7em;
-    font-weight: 100;
-    color: #001b52;
-    text-shadow: -62px -124px 4px rgba(0, 0, 0, 0.15);
-}
-
-.LoginHeading {
-    color: #6B7280;
-}
-
-.form-control {
-    width: 110%;
-    padding: 1em;
-    border: none;
-    font-size: 1.2em;
-    border-radius: 1em;
-    background-color: #f1f1f1;
-    text-align: center;
-}
-
-.btn {
-    background-color: #0e3837;
-    border: 1px solid transparent;
-    border-radius: .75rem;
+@font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 200;
+    src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlxdr.ttf) format('truetype');
+  }
+  
+  @font-face {
+    font-family: 'Source Sans Pro';
+    font-style: normal;
+    font-weight: 300;
+    src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdr.ttf) format('truetype');
+  }
+  
+  * {
     box-sizing: border-box;
-    color: #FFFFFF;
-    cursor: pointer;
-    flex: 0 0 auto;
-    font-size: 1.125rem;
-    font-weight: 600;
-    line-height: 1.5rem;
-    padding: .75rem 1.2rem;
+    margin: 0;
+    padding: 0;
+    font-weight: 300;
+  }
+  
+  body {
+    font-family: 'Source Sans Pro', sans-serif;
+    color: rgba(224, 76, 230, 0.185);
+    font-weight: 300;
+  }
+  
+  .wrapper {
+    background: #7c189b;
+    background: linear-gradient(to bottom right, #793fbb 0%, #bb92e0 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 0; /* Set z-index to send the wrapper behind other content */
+  }
+  
+  .container {
+    max-width: 400px;
+    padding: 40px;
     text-align: center;
-    text-decoration: none #6B7280 solid;
-    text-decoration-thickness: auto;
-    transition-duration: .2s;
-    transition-property: background-color, border-color, color, fill, stroke;
-    transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: fit-content;
-}
-
-.form-group{
+    position: relative; /* Add position relative */
+    z-index: 1; /* Set z-index higher to keep the container in front of the background */
+  }
+  
+  .container h1 {
+    font-size: 40px;
+    font-weight: 200;
+    margin-bottom: 40px;
+  }
+  
+  .form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1em;
-}
-
-.notFound{
+  }
+  
+  .form-control {
+    outline: 0;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    background-color: rgba(228, 157, 218, 0.2);
+    width: 100%;
+    border-radius: 3px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: rgb(163, 52, 185);
+    transition-duration: 0.25s;
+  }
+  
+  .form-control:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  
+  .form-control:focus {
+    background-color: white;
+    color: #53e3a6;
+  }
+  
+  .btn {
+    outline: 0;
+    background-color: rgb(136, 105, 134);
+    border: 0;
+    padding: 10px 15px;
+    color: #050505;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 18px;
+    transition-duration: 0.25s;
+  }
+  
+  .btn:hover {
+    background-color: #dee8f1;
+  }
+  
+  .notFound {
     color: red;
-    text-decoration: dashed;
-    font-weight: 800;
-}
+    margin-top: 10px;
+  }
+  
+  .bg-bubbles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Set background bubbles behind other content */
+  }
+  
+  .bg-bubbles li {
+    position: absolute;
+    list-style: none;
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(134, 80, 127, 0.15);
+    bottom: -160px;
+    animation: square 25s infinite;
+    transition-timing-function: linear;
+  }
+  
+  .bg-bubbles li:nth-child(1) {
+    left: 10%;
+  }
+  
+  .bg-bubbles li:nth-child(2) {
+    left: 20%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 2s;
+    animation-duration: 17s;
+  }
+  
+  .bg-bubbles li:nth-child(3) {
+    left: 25%;
+    animation-delay: 4s;
+  }
+  
+  .bg-bubbles li:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-duration: 22s;
+    background-color: rgba(144, 19, 148, 0.25);
+  }
+  
+  .bg-bubbles li:nth-child(5) {
+    left: 70%;
+  }
+  
+  .bg-bubbles li:nth-child(6) {
+    left: 80%;
+    width: 120px;
+    height: 120px;
+    animation-delay: 3s;
+    background-color: rgba(144, 65, 160, 0.2);
+  }
+  
+  .bg-bubbles li:nth-child(7) {
+    left: 32%;
+    width: 160px;
+    height: 160px;
+    animation-delay: 7s;
+  }
+  
+  .bg-bubbles li:nth-child(8) {
+    left: 55%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 15s;
+    animation-duration: 40s;
+  }
+  
+  .bg-bubbles li:nth-child(9) {
+    left: 25%;
+    width: 10px;
+    height: 10px;
+    animation-delay: 2s;
+    animation-duration: 40s;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .bg-bubbles li:nth-child(10) {
+    left: 90%;
+    width: 160px;
+    height: 160px;
+    animation-delay: 11s;
+  }
+  
+  @keyframes square {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-700px) rotate(600deg);
+    }
+  }
+  

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
@@ -33,8 +33,9 @@ function Login() {
             navigate("/HRView");
         } else if (role === 'Applicant') {
             navigate("/CANDView");
-        } else if (role === 'Admin') 
+        } else if (role === 'Admin') {
             navigate("/ADMINView");
+        }
     }
 
     const onSubmit = async (e) => {
@@ -55,14 +56,31 @@ function Login() {
     }
 
     return (
-        <div className="login">
-            <div className="loginWrapper">
-                <div className="TalentHiveLogo">RecruitRanks</div>
+        <div className="wrapper">
+            <ul className="bg-bubbles">
+                {[...Array(10)].map((_, index) => <li key={index}></li>)}
+            </ul>
+            <div className="container">
+                <h1>Welcome</h1>
                 <form onSubmit={onSubmit} className='form'>
-                    <input type="email" className="form-control" name='email'
-                        value={email} onChange={onChange} placeholder='Enter your email' required />
-                    <input type="password" className="form-control" name='password'
-                        value={password} onChange={onChange} placeholder='Enter your password' required />
+                    <input
+                        type="email"
+                        className="form-control"
+                        name='email'
+                        value={email}
+                        onChange={onChange}
+                        placeholder='Enter your email'
+                        required
+                    />
+                    <input
+                        type="password"
+                        className="form-control"
+                        name='password'
+                        value={password}
+                        onChange={onChange}
+                        placeholder='Enter your password'
+                        required
+                    />
                     <div className="form-group">
                         {isLoading ? <CircularProgress /> : <button type="submit" className='btn'>Login</button>}
                         {error && <div className="notFound">{error}</div>}

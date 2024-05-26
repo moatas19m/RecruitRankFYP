@@ -44,6 +44,7 @@ const LayoutForHr = ({ children }) => {
   );
 };
 
+
 const LayoutForCand = ({ children }) => {
   return (
     <div className="mainAppContainer">

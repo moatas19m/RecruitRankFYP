@@ -1,12 +1,11 @@
 :root {
     font-size: calc((0.5vw + 0.5vh + 0.25vmin) * 1.2);
-
 }
 
 .sidebar {
     flex: 0 0 15rem; /* Sidebar takes a fixed width in rem */
     height: 100%;
-    background-color: #d9d9d9;
+    background-color: #633c80 !important; /* Change the color to purple and add !important */
 }
 
 .sidebarWrapper {
@@ -17,7 +16,7 @@
     padding: 1.25rem;
     align-items: center;
     justify-content: center;
-    background-color: #d9d9d9;
+    background-color: #633c80 !important; /* Change the color to purple and add !important */
 }
 
 .companyImage {
@@ -37,7 +36,7 @@
     padding: 2.1875rem 0px 0.625rem;
     font-size: 2.1875rem;
     font-weight: 700;
-    color: #545151;
+    color: #ffffff !important; /* Change the text color to white and add !important */
 }
 
 .optionsList {
@@ -58,18 +57,18 @@
 
 .option:hover {
     transition: 600ms;
-    background-color: #eae8e8;
+    background-color: #d1b3ff; /* Light purple for hover effect */
     border-radius: 1.25rem;
     box-shadow: 1px 1.2rem 3.625rem 0px rgba(0, 0, 0, 0.12);
 }
 
 .optionLink {
     text-decoration: none;
-    color: #545151;
+    color: #ffffff !important; /* Change the text color to white and add !important */
 }
 
 .optionsIcon {
-    color: #545151;
+    color: #ffffff !important; /* Change the icon color to white and add !important */
     padding-right: 0.625rem;
 }
 
@@ -126,5 +125,9 @@
     font-size: 1.5rem;
     padding: 1rem;
     font-weight: 900;
-    color: #545151;
+    color: #ffffff !important; /* Change the text color to white and add !important */
+}
+.CandEmail{
+    font-weight: 200;
+    color: #cac4c4;
 }

@@ -1,187 +1,161 @@
-.viewJobComponent {
-    flex: 10;
-    padding: 3rem;
-    color: #464646;
-    height: 100vh;
+/* ViewJobComponents.css */
+
+.ViewJob {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    padding: 20px;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1200px;
+    background: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     overflow: hidden;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.loadingWrapper,
+.errorWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .Heading {
-    font-size: 3rem;
-    font-weight: 900;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.attItem {
+.viewJobComponent {
     display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.headingAndAtts {
-    display: flex;
-    gap: 3rem;
-    align-items: center;
+    flex-direction: column;
+    width: 100%;
 }
 
 .topBar {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
-.Spots {
+.headingAndAtts {
     display: flex;
-    flex-direction: row;
-    gap: 0.5rem;
-    background-color: transparent;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    margin: 0;
+    width: 100%;
 }
 
-.spotsCircle {
+.attsColumns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.attItem {
     display: flex;
     align-items: center;
+    margin-right: 20px;
+    color: #666;
+}
+
+.bottomStuff {
+    display: flex;
+    width: 100%;
     justify-content: center;
-    background-color: #99c2a2;
-    padding: 0.3rem;
-    font-weight: 900;
-    color: white;
-    border-radius: 50%;
-    font-size: 1.5rem;
-    aspect-ratio: 1;
-    min-width: 1.2rem;
-    min-height: 1.2rem;
 }
-
-.toFillS {
-    font-weight: 900;
-    font-size: 1.2rem;
-    background-color: transparent;
-}
-
-.bottomStuff {}
 
 .bottomWrapper {
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    gap: 20px;
 }
 
-.leftPane {
-    flex: 1.5;
-    height: 80vh;
-    overflow-y: hidden;
-}
-
+.leftPane,
 .rightPane {
     flex: 1;
-    overflow-y: hidden;
-    height: 80vh;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .paneWrapper {
-    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
-.rightpaneWrapper {
-    height: 70vh;
-    overflow-y: scroll;
+.jobDetails {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
-.applicantsCount {
-    padding: 1rem 0;
-    font-size: 1.3rem;
+.jobDetails div {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
-b {
-    font-weight: 900;
+.applyButton {
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    background-color: blue;
+    color: rgb(196, 112, 196);
+    align-self: flex-end;
 }
 
-.linkPartContainer {
-    overflow-x: hidden;
+.applyButton[disabled] {
+    cursor: not-allowed;
+    background-color: rgb(229, 186, 238);
 }
 
 .linkSection {
     display: flex;
-    font-size: 1rem;
-    margin: 1rem 2rem 0;
-    padding: 0.5rem 1rem;
-    justify-content: space-between;
     align-items: center;
-    background-color: rgb(212, 255, 212);
-    font-weight: 800;
-    color: rgb(3, 68, 3);
-    border-radius: 0.5rem;
-    box-shadow: 1px 8px 19px 0 rgba(0, 145, 11, 0.18);
-    -webkit-box-shadow: 1px 8px 19px 0 rgba(0, 145, 11, 0.18);
-    -moz-box-shadow: 1px 8px 19px 0 rgba(0, 145, 11, 0.18);
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.linkPartContainer {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.linkPart {
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    text-align: center;
 }
 
 .iconPat {
-    cursor: pointer;
-    transition: 300ms;
-}
-
-.iconPat:hover {
-    transform: rotate(16deg) scale(1.7);
-    -webkit-transform: rotate(16deg) scale(1.7);
-    -moz-transform: rotate(16deg) scale(1.7);
-}
-
-.iconPat:active {
-    transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
-}
-
-.delete {
-    background-color: rgb(189, 89, 89);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    color: white;
-}
-
-.edit {
-    background-color: rgb(65, 71, 177);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
-    border-radius: 50%;
-    cursor: pointer;
-    color: white;
-}
-
-.HrmCreator {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: #464646;
-}
-
-.applyButton {
-    background-color: #005b3b;
-    border: 1px solid transparent;
-    border-radius: 0.75rem;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    flex: 0 0 auto;
-    font-size: 1.125rem;
-    font-weight: 600;
-    line-height: 1.5rem;
-    padding: 0.75rem 1.2rem;
-    text-align: center;
-    text-decoration: none #6B7280 solid;
-    text-decoration-thickness: auto;
-    transition-duration: 0.2s;
-    transition-property: background-color, border-color, color, fill, stroke;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    width: auto;
+    margin-left: 10px;
 }
