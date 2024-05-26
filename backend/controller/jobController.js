@@ -109,6 +109,7 @@ export const updateJobStatusController = async (req, res) => {
         const jobDetails = updatedjob.parsedData;
         const jobID = updatedjob._id;
 
+
         const usersWithJobs = await Applications.find({job:jobID}).populate('user', 'name email parsedData');
         
         for (const [index, application] of usersWithJobs.entries()) {
@@ -119,7 +120,9 @@ export const updateJobStatusController = async (req, res) => {
                         'Content-Type': 'application/json',
                     }
                 });
-
+                
+                // console.log(jobDetails);
+                // console.log(application.user.parsedData);
                 const receivedScore = response.data ['Resume match score'];
 
                 await Applications.findByIdAndUpdate(application._id, { score: receivedScore });
