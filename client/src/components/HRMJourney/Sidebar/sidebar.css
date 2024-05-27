@@ -3,6 +3,7 @@
     position: relative;
     height: 100%;
     background-color: #d9d9d9;
+    z-index: 2;
 }
 
 .sidebarWrapper {
@@ -56,10 +57,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-weight: 1000;
 }
 
 .HREmail {
-    font-weight: 400;
+    font-weight: 1000;
     color: #a39595;
 }
 
@@ -75,7 +77,7 @@
 
 .option:hover {
     transition: 600ms;
-    background-color: #150d16;
+    background-color: #633269;
     border-radius: 20px;
     box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.12);
     -webkit-box-shadow: 1px 19px 58px 0px rgba(0, 0, 0, 0.12);

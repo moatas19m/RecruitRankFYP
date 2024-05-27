@@ -31,6 +31,7 @@ import CreateJobAdmin from "./screens/ADMINJourney/CreateJobAdmin/CreateJobAdmin
 import AdminPage from "./screens/ADMINJourney/AdminUsers/AdminUsers";
 import AdminApplicants from "./screens/ADMINJourney/AdminUsers/AdminViewApplicants";
 import AdminRecruiters from "./screens/ADMINJourney/AdminUsers/AdminViewRecruiters";
+import ViewJobComponent from "./components/HRMJourney/ViewJob/ViewJobComponent";
 //import ViewAdminJob from "./components/ADMINJourney/ViewAdminJob/ViewAdminJobComp";
 
 const LayoutForHr = ({ children }) => {
@@ -44,6 +45,17 @@ const LayoutForHr = ({ children }) => {
   );
 };
 
+const LayoutForHrViewJob = ({ children }) => {
+  return (
+    <div className="mainAppContainer">
+        {/* <Sidebar /> */}
+      <div className="content">
+        <Outlet />
+        <ViewJob/>
+      </div>
+    </div>
+  );
+};
 
 const LayoutForCand = ({ children }) => {
   return (
@@ -75,6 +87,18 @@ const AdminGet = ({ children }) => {
       <div className="content">
         <Outlet />
         <AdminPage/>
+      </div>
+    </div>
+  );
+};
+
+const AdminJob = ({ children }) => {
+  return (
+    <div className="mainAppContainer">
+      <AdminSidebar />
+      <div className="content">
+        <Outlet />
+        <ViewadminJob/>
       </div>
     </div>
   );
@@ -114,7 +138,7 @@ function App() {
           <Route path="/ADMINView" element={<LayoutForAdmin />}></Route>
           <Route path="" element={<AdminHome />} />
           <Route path="/ADMINVIEW/createJob" element={<CreateJobAdmin edit={false} />} />
-          <Route path="/ADMINView/ViewJob/:jobId" element={<ViewadminJob />} />
+          <Route path="/ADMINView/ViewJob/:jobId" element={<AdminJob />} />
           <Route path="/ADMINView/ViewAllUsers" element={<AdminGet />} />
           <Route path="/ADMINView/ViewAllUsers/Applicants" element={<AdminGetApps />} />
           <Route path="/ADMINView/ViewAllUsers/Recruiters" element={<AdminGetRecruiter />} />

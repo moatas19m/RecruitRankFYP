@@ -56,12 +56,12 @@ function Login() {
     }
 
     return (
-        <div className="wrapper">
+        <div className="main">
             <ul className="bg-bubbles">
                 {[...Array(10)].map((_, index) => <li key={index}></li>)}
             </ul>
             <div className="container">
-                <h1>Welcome</h1>
+                <h1>Welcome to RecruitRanks</h1>
                 <form onSubmit={onSubmit} className='form'>
                     <input
                         type="email"

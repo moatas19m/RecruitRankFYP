@@ -87,25 +87,34 @@ function CandViewJob(props) {
                                     <div className="attItem"><PinDrop /> {job.location} ({job.type})</div>
                                     <div className="attItem"><Work /> {job.shift} shift</div>
                                 </div>
+                                <div className="applyButtonContainer">
+                                {job.jobStatus === 'Inactive' ? (
+                                    <button className="applyButtonTop" disabled>
+                                        Apply Now
+                                    </button>
+                                ) : !usercv ? (
+                                    <button className="applyButtonTop" disabled>
+                                        Upload your resume to apply
+                                    </button>
+                                ) : (
+                                    <button className="applyButtonTop" onClick={handleApply}>
+                                        Apply Now
+                                    </button>
+                                )}
                             </div>
-                            {job.jobStatus === 'Inactive' ? (
-                                <button className="applyButtonTop" disabled>
-                                    Apply Now
-                                </button>
-                            ) : !usercv ? (
-                                <button className="applyButtonTop" disabled>
-                                    Upload your resume to apply
-                                </button>
-                            ) : (
-                                <button className="applyButtonTop" onClick={handleApply}>
-                                    Apply Now
-                                </button>
-                            )}
+                            </div>
+                            
                         </div>
                         <div className="bottomStuff">
                             <div className="bottomWrapper">
                                 <div className="leftPane">
                                     <div className="paneWrapper">
+                                    <div className="linkSection">
+                                        <div className="linkPartContainer">
+                                            <div className="linkPart">www.recruitranks.com/api/jobs/{job._id}</div>
+                                        </div>
+                                        <div className="iconPat"><AssignmentRounded /></div>
+                                    </div>
                                         <div className="jobDetails">
                                             <div><b>Company:</b> {job.company}</div>
                                             <div><b>Description:</b> {job.description}</div>
@@ -119,14 +128,9 @@ function CandViewJob(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="rightPane">
-                                    <div className="linkSection">
-                                        <div className="linkPartContainer">
-                                            <div className="linkPart">www.recruitranks.com/api/jobs/{job._id}</div>
-                                        </div>
-                                        <div className="iconPat"><AssignmentRounded /></div>
-                                    </div>
-                                </div>
+                                {/* <div className="rightPane">
+                                    
+                                </div> */}
                             </div>
                         </div>
                     </div>

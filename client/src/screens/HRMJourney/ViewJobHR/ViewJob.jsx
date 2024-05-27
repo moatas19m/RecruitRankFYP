@@ -29,8 +29,8 @@ function ViewJob(props) {
     }, [jobId]);
 
     return (
-        <div className="ViewJob">
-            <div className="wrapper">
+        // <div className="ViewJob">
+            <div >
                 {/* <Sidebar /> */}
                                 {loading ? (
                     <div className="loadingWrapper">
@@ -47,7 +47,7 @@ function ViewJob(props) {
                 )}
 
             </div>
-        </div>
+        // </div>
     );
 }
 

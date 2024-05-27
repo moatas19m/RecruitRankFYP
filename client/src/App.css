@@ -2,15 +2,16 @@
     font-size: calc((0.5vw + 0.5vh + 0.25vmin) * 1.2);
 
 }
-
 .mainAppContainer {
     display: flex;
     height: 100vh;
     overflow: hidden;
+    position:relative;
 }
 
 .content {
     flex: 1; /* Ensure content takes the remaining space */
     overflow-y: auto; /* Allow vertical scrolling if content overflows */
     padding: 2rem; /* Use relative units */
+    position:relative;
 }

@@ -1,5 +1,3 @@
-/* ViewJobComponents.css */
-
 .ViewJob {
     display: flex;
     justify-content: center;
@@ -32,7 +30,7 @@
 .Heading {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 3px; /* Reduced margin */
     text-align: center;
 }
 
@@ -63,14 +61,21 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 1px; /* Reduced margin */
 }
 
 .attItem {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 1px; /* Reduced margin */
     color: #666;
+}
+
+.applyButtonContainer {
+    margin-top: 1px; /* Reduced margin */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bottomStuff {
@@ -103,7 +108,7 @@
 .jobDetails {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 5px;
     margin-bottom: 20px;
     width: 100%;
 }
@@ -115,22 +120,29 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
+.applyButtonTop,
 .applyButton {
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 10px 20px; /* Adjusted padding */
+    font-size: 18px; /* Adjusted font size */
     font-weight: bold;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    margin-top: 20px;
     background-color: blue;
-    color: rgb(196, 112, 196);
-    align-self: flex-end;
+    color: white;
+    align-self: center;
+    transition: background-color 0.3s; /* smooth transition */
 }
 
+.applyButtonTop:hover,
+.applyButton:hover {
+    background-color: darkblue; /* darker blue on hover */
+}
+
+.applyButtonTop[disabled],
 .applyButton[disabled] {
     cursor: not-allowed;
-    background-color: rgb(229, 186, 238);
+    background-color: grey;
 }
 
 .linkSection {
@@ -148,7 +160,7 @@
 }
 
 .linkPart {
-    background: #f9f9f9;
+    background: #f9f9f900;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);

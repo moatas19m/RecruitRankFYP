@@ -1,14 +1,31 @@
-.viewJobComponent {
-    flex: 10;
-    padding: 3em;
-    color: #464646;
+.ViewJob {
+    display: flex;
+    position: relative;
+    height: 100vh; /* Set height to 100% of the viewport height */
+    overflow: hidden; /* Prevents the entire view from overflowing */
+}
+
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
     height: 100vh;
     overflow: hidden;
 }
 
+.viewJobComponent {
+    flex: 1;
+    padding: 2em;
+    color: #464646;
+    /* overflow-y: auto;*/
+    overflow: hidden;
+}
+
 .Heading {
-    font-size: 3em;
+    font-size: 2em;
     font-weight: 900;
+    margin-bottom: 1em;
 }
 
 .attItem {
@@ -19,7 +36,7 @@
 
 .headingAndAtts {
     display: flex;
-    gap: 3em;
+    gap: 2em;
     align-items: center;
 }
 
@@ -27,16 +44,15 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 }
 
 .Spots {
     display: flex;
     flex-direction: row;
     gap: 0.5em;
-    background-color: transparent;
     align-items: center;
-    justify-content: center;
-    margin: 0em;
+    margin: 0;
 }
 
 .spotsCircle {
@@ -49,9 +65,6 @@
     color: white;
     border-radius: 50%;
     font-size: 1.5em;
-    aspect-ratio: 1;
-    min-width: 1.2em;
-    min-height: 1.2em;
 }
 
 .toFillS {
@@ -60,37 +73,44 @@
     background-color: transparent;
 }
 
-.bottomStuff {}
+.bottomStuff {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    overflow-y: scroll;
+}
 
 .bottomWrapper {
     display: flex;
+    flex-direction: row;
+    width: 100%;
     overflow-y: scroll;
 }
 
 .leftPane {
-    flex: 1.5;
-    height: 80vh;
-    overflow-y: scroll;
+    flex: 2;
+    padding-right: 1em;
+    overflow-y: auto; /* Allow vertical scrolling */
 }
 
 .rightPane {
-    flex: 1;
-    overflow-y: scroll;
-    height: 80vh;
+    flex: 1.5;
+    padding-left: 1em;
+    overflow-y: auto; /* Allow vertical scrolling */
+    display: flex;
+    flex-direction: column;
 }
 
 .paneWrapper {
-    height: 80vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .rightpaneWrapper {
-    height: 70vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .applicantsCount {
-    padding: 1em 0em;
+    padding: 1em 0;
     font-size: 1.3em;
 }
 
@@ -104,9 +124,6 @@ b {
 
 .linkSection {
     display: flex;
-    font-size: 1em;
-    margin: 1em 2em 0em;
-    padding: 0.5em 1em;
     justify-content: space-between;
     align-items: center;
     background-color: rgb(212, 255, 212);
@@ -114,9 +131,8 @@ b {
     color: rgb(3, 68, 3);
     border-radius: 0.5em;
     box-shadow: 1px 8px 19px 0px rgba(0, 145, 11, 0.18);
-    -webkit-box-shadow: 1px 8px 19px 0px rgba(0, 145, 11, 0.18);
-    -moz-box-shadow: 1px 8px 19px 0px rgba(0, 145, 11, 0.18);
-
+    padding: 0.5em 1em;
+    margin: 1em 0;
 }
 
 .iconPat {
@@ -125,17 +141,11 @@ b {
 }
 
 .iconPat:hover {
-    transition: 300ms;
     transform: rotate(16deg) scale(1.7);
-    -webkit-transform: rotate(16deg) scale(1.7);
-    -moz-transform: rotate(16deg) scale(1.7);
 }
 
 .iconPat:active {
-    transition: 300ms;
     transform: scale(1.2);
-    -webkit-transform: scale(1.2);
-    -moz-transform: scale(1.2);
 }
 
 .delete {
@@ -166,10 +176,8 @@ b {
     gap: 0.5em;
     color: #464646;
 }
+
 .disableButton {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
@@ -177,6 +185,7 @@ b {
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    margin-top: 10px;
 }
 
 .disableButton:disabled {
@@ -185,8 +194,8 @@ b {
 }
 
 .spinner {
-    border: 4px solid #f3f3f3; /* Light grey */
-    border-top: 4px solid #3498db; /* Blue */
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
     border-radius: 50%;
     width: 14px;
     height: 14px;
@@ -198,15 +207,13 @@ b {
     100% { transform: rotate(360deg); }
 }
 
-
 .applicantsSection {
-    margin-top: 20px;
     background: #f9f9f9;
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-height: 300px; 
+    flex: 1;
 }
 
 .applicantsSection h2 {
@@ -238,19 +245,21 @@ b {
 .applicantInfo {
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
 }
 
 .data {
-    margin-right: 10px; /* Horizontal gap between data and score */
+    margin-right: 10px;
 }
 
 .scoreBox {
-    background-color: #6EBB41; /* Green color */
+    background-color: #6EBB41;
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    margin-right: 10px;
 }
 
 .scoreHeading {
@@ -258,33 +267,28 @@ b {
     font-weight: bold;
 }
 
-.score {
-    font-weight: bold;
-}
-
 .actionButtons {
     display: flex;
-    justify-content: space-between;
-  }
-  
-  .actionButtons button {
+    gap: 10px;
+}
+
+.actionButtons button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .rejectButton {
-    background-color: #FF5733; /* Red color for rejection */
+}
+
+.rejectButton {
+    background-color: #FF5733;
     color: white;
-  }
-  
-  .acceptButton {
-    background-color: #4CAF50; /* Green color for acceptance */
+}
+
+.acceptButton {
+    background-color: #4CAF50;
     color: white;
-  }
-  
-  .actionButtons button:hover {
-    opacity: 0.5; /* Reduce opacity on hover */
-  }
-  
+}
+
+.actionButtons button:hover {
+    opacity: 0.5;
+}
