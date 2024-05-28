@@ -108,13 +108,14 @@ export const updateJobStatusController = async (req, res) => {
 
         const jobDetails = updatedjob.parsedData;
         const jobID = updatedjob._id;
+        const weights = updatedjob.weights;
 
         const usersWithJobs = await Applications.find({job:jobID}).populate('user', 'name email parsedData');
         
         for (const [index, application] of usersWithJobs.entries()) {
             
             try {
-                const response = await axios.post(`${apiUrl}/score/`, { jobParsed: jobDetails, resumeParsed: application.user.parsedData }, {
+                const response = await axios.post(`${apiUrl}/score/`, { jobParsed: jobDetails, resumeParsed: application.user.parsedData, weights:weights }, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
@@ -397,5 +398,37 @@ export const searchJobsController = async (req, res) => {
             success: false,
             err
         });
+    }
+};
+
+export const getGraphsController = async(req,res)=>
+{
+    try {
+
+        const jobID = req.params.id;
+        console.log(jobID);    
+
+        const jobDetails = await Job.findById(jobID);
+        console.log(jobDetails);
+
+        const usersWithJobs = await Applications.find({job:jobID}).populate('user');
+        console.log(usersWithJobs);
+
+        const response = await axios.post(`${apiUrl}/giveGraphs/`, { usersWithJobs: usersWithJobs, jobDetails:jobDetails}, {
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        res.status(200).json({
+            success: true,
+            jobDetails,
+            usersWithJobs
+        });
+        
+    }catch(err)
+    {
+        return res.status(500).json({
+            success:false,
+            err});
     }
 };

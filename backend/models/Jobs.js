@@ -22,8 +22,13 @@ const jobSchema= new mongoose.Schema({
     benefits:{type: String, required:true},
     status:{type:String, enum:["Active", "Inactive"], default:"Active", required:true},
     parsedData: { type: mongoose.Schema.Types.Mixed, required: false },
-    jobStatus:{type:String, enum:["Active", "Inactive"], default:"Active"}
-
+    jobStatus:{type:String, enum:["Active", "Inactive"], default:"Active"},
+    weights: {
+        cosine_similarity_weight: { type: String, default: "0.5" },
+        cgpa_weight: { type: String, default: "0.1" },
+        degree_match_weight: { type: String, default: "0.2" },
+        discipline_match_weight: { type: String, default: "0.2" }
+    }
 },
  {timestamps:true}
  );

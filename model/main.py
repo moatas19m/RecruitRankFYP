@@ -312,6 +312,15 @@ async def calculate_score(request: Request):
     body = await request.json()
     jd_data = body.get("jobParsed")
     cv_data = body.get("resumeParsed")
+    weights = body.get("weights")
+    cosine_similarity_weight = float(weights.get("cosine_similarity_weight", 0))
+    cgpa_weight = float(weights.get("cgpa_weight", 0))
+    degree_match_weight = float(weights.get("degree_match_weight", 0))
+    discipline_match_weight = float(weights.get("discipline_match_weight", 0))
+
+
+    print(weights)
+    print(discipline_match_weight)
 
     # cv_data = json.loads(cv_json)
     # jd_data = json.loads(jd_json)
@@ -332,36 +341,24 @@ async def calculate_score(request: Request):
     #     raise HTTPException(status_code=404, detail=f"File not found: {fnf_error}")
 
     def get_normalized_cgpa(cgpa):
-    # Check if CGPA data is a list, and if so, take the first element.
-     if isinstance(cgpa, list) and cgpa:
-        cgpa = cgpa[0]
-    
-     if is_meaningful_data(cgpa):
-        try:
-            normalized_value = float(cgpa)
-            print(f"Successfully converted CGPA: {normalized_value}")  # Debugging output
-            return normalized_value
-        except (ValueError, TypeError) as e:
-            print(f"Error converting CGPA '{cgpa}' to float: {e}")  # Debugging outpunit
-            return 0  # Return 0 if there's an error converting to float
-     else:
-        print(f"CGPA '{cgpa}' is not meaningful")  # Debugging output
-     return 1  # Return 1 if CGPA is not meaningful - consider if this is the best default
-
-
+        if isinstance(cgpa, list) and cgpa:
+            cgpa = cgpa[0]
+        if is_meaningful_data(cgpa):
+            try:
+                normalized_value = float(cgpa)
+                return normalized_value
+            except (ValueError, TypeError):
+                return 0
+        return 1
 
     jd_cgpa, cv_cgpa = map(get_normalized_cgpa, (jd_data.get('CGPA', 0), cv_data.get('CGPA', 0)))
     cgpa_match = cv_cgpa >= jd_cgpa or not is_meaningful_data(jd_data.get('CGPA', 0))
-    print(f"JD CGPA: {jd_cgpa}, Resume CGPA: {cv_cgpa}, Match: {cgpa_match}")
-    print(cgpa_match)
 
     def prepare_text_data(data, keys):
         return normalize_text([data.get(key, []) for key in keys])
 
     jd_text = prepare_text_data(jd_data, ['description', 'experience'])
-    print(jd_text)
     cv_text = prepare_text_data(cv_data, ['SKILLS', 'EXPERIENCE'])
-    print(cv_text)
 
     vectorizer = TfidfVectorizer(stop_words='english', ngram_range=(1, 2), max_features=500)
     vectors = vectorizer.fit_transform([jd_text, cv_text])
@@ -369,17 +366,30 @@ async def calculate_score(request: Request):
 
     def compare_education_field(cv_field, jd_field):
         if is_meaningful_data(jd_field):
-            return 0.1 if normalize_text([cv_field]) == normalize_text([jd_field]) else 0
-        return 0.1
+            jd_normalized = normalize_text([jd_field])
+            cv_normalized = normalize_text([cv_field])
+            jd_normalized = jd_normalized.rstrip('s') if jd_normalized.endswith('s') else jd_normalized
+            cv_normalized = cv_normalized.rstrip('s') if cv_normalized.endswith('s') else cv_normalized
+            return 1 if jd_normalized == cv_normalized else 0
+        return 1
 
     degree_match = compare_education_field(cv_data.get('DEGREE', ""), jd_data.get('education', ""))
-    print(degree_match)
     discipline_match = compare_education_field(cv_data.get('DISCIPLINE', ""), jd_data.get('discipline', ""))
+    print(degree_match)
     print(discipline_match)
-    university_match = compare_education_field(cv_data.get('UNIVERSITY', ""), jd_data.get('university', ""))
-    print(university_match)
 
-    overall_score = (0.5 * cosine_sim) + (0.2 * (1 if cgpa_match else 0)) + degree_match + discipline_match + university_match
+    overall_score = (
+        cosine_similarity_weight * cosine_sim +
+        cgpa_weight * (1 if cgpa_match else 0) +
+        degree_match_weight * degree_match +
+        discipline_match_weight * discipline_match
+    )
+    # print(weights.degree_match_weight)
+    # print("1   " + str(cosine_similarity_weight))
+    # print("2   " + str(cgpa_weight))
+    # print("3   " + str(degree_match_weight))
+    # print("4   " + str(discipline_match_weight))
+    
     overall_score_percentage = round(overall_score * 100, 2)
 
     return {"Resume match score": f"{overall_score_percentage}%"}
@@ -397,5 +407,23 @@ async def extract_job(request: Request):
         # json_file_path="job_data.json"
         # save_json(job_info,json_file_path)
         return job_info
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+
+@app.post("/giveGraphs")
+async def give_graphs(request: Request):
+    try:
+        # with open(file_path, 'r') as file:
+        #     job_description_text = file.read()
+        body = await request.json()
+        usersWithJobs = body.get("usersWithJobs")
+        jobDetails = body.get("jobDetails")
+
+        print(jobDetails)
+        print(usersWithJobs)
+        # json_file_path="job_data.json"
+        # save_json(job_info,json_file_path)
+        return True
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
