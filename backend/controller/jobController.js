@@ -108,13 +108,14 @@ export const updateJobStatusController = async (req, res) => {
 
         const jobDetails = updatedjob.parsedData;
         const jobID = updatedjob._id;
+        const weights = updatedjob.weights;
 
         const usersWithJobs = await Applications.find({job:jobID}).populate('user', 'name email parsedData');
         
         for (const [index, application] of usersWithJobs.entries()) {
             
             try {
-                const response = await axios.post(`${apiUrl}/score/`, { jobParsed: jobDetails, resumeParsed: application.user.parsedData }, {
+                const response = await axios.post(`${apiUrl}/score/`, { jobParsed: jobDetails, resumeParsed: application.user.parsedData, weights:weights }, {
                     headers: {
                         'Content-Type': 'application/json',
                     }
