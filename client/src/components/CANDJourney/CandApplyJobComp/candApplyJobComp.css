@@ -285,7 +285,7 @@ textarea {
 
 .upload-cv-box {
     margin-top: 2rem; /* converted to rem */
-    border: 0.2rem dashed #bfbbbb; /* converted to rem */
+    border: 0.2rem solid #bfbbbb; /* converted to rem */
     background-color: #f1f1f1;
     padding: 2rem 0rem; /* converted to rem */
     border-radius: 2rem; /* converted to rem */
