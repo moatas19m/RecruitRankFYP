@@ -11,7 +11,7 @@ const LandingPage = () => {
       <Navbar />
       <Box component="main" sx={{ flexGrow: 1, p: 3, alignItems: 'center', justifyContent: 'center' }}>
         <Typography variant="h2" component="h1" gutterBottom>
-          Welcome to Our Platform
+          Welcome to RecruitRanks
         </Typography>
         <Typography variant="h5" gutterBottom>
           Explore our features and offerings.

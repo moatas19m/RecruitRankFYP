@@ -222,6 +222,12 @@ function ViewJob(props) {
                                             <Link to={`mailto:${hrm.email}`}><EmailOutlined /></Link>
                                         </div>
                                     </div>
+                                    <div className="linkSection">
+                                    <div className="linkPartContainer">
+                                        <div className="linkPart">www.recruitranks.com/api/jobs/{job._id}</div>
+                                    </div>
+                                    <div className="iconPat"><AssignmentRounded /></div>
+                                </div>
                                     <div className="jobDetails">
                                         <div><b>Company:</b> {job.company}</div>
                                         <div><b>Description:</b> {job.description}</div>
@@ -235,16 +241,12 @@ function ViewJob(props) {
                                         <div><b>Status:</b> {job.jobStatus}</div>
                                     </div>
                                     {/* <BasicTabs /> */}
+                                    
 
                                 </div>
                             </div>
                             <div className="rightPane">
-                                <div className="linkSection">
-                                    <div className="linkPartContainer">
-                                        <div className="linkPart">www.recruitranks.com/api/jobs/{job._id}</div>
-                                    </div>
-                                    <div className="iconPat"><AssignmentRounded /></div>
-                                </div>
+                                
                                 <div className="applicantsSection">
                                     <h2>Applicants</h2>
                                     <ul>
@@ -255,10 +257,10 @@ function ViewJob(props) {
                                                         <>
                                                             <p><b>Name:</b> {applicant.user.name}</p>
                                                             <p><b>Email:</b> {applicant.user.email}</p>
-                                                            <p><b>Phone:</b> {applicant.user.phone}</p>
+                                                            {/* <p><b>Phone:</b> {applicant.user.phone}</p> */}
                                                         </>
                                                     )}
-                                                    <p><b>Applied On:</b> {new Date(applicant.createdAt).toLocaleDateString()}</p>
+                                                    {/* <p><b>Applied On:</b> {new Date(applicant.createdAt).toLocaleDateString()}</p> */}
                                                 </div>
                                                 <div className="scoreBox">
                                                     <div className="scoreHeading">Score</div>
@@ -276,9 +278,7 @@ function ViewJob(props) {
                                         ))}
                                     </ul>
                                 </div>
-                                {/* <div className="rightpaneWrapper">
-                                        <PreviewJobComp onAppsPage={true} job={job} />
-                                    </div> */}
+                                
                             </div>
                         </div>
                     </div>
