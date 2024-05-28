@@ -409,3 +409,18 @@ async def extract_job(request: Request):
         return job_info
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+
+@app.post("/giveGraphs")
+async def give_graphs(request: Request):
+    try:
+        # with open(file_path, 'r') as file:
+        #     job_description_text = file.read()
+        body = await request.json()
+        usersWithJobs = body.get("usersWithJobs")
+        print(usersWithJobs)
+        # json_file_path="job_data.json"
+        # save_json(job_info,json_file_path)
+        return True
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

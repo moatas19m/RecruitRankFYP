@@ -1,5 +1,5 @@
 import express from "express";
-import {getSingleJobController, postJobController, updateJobController, getJobController, getActiveJobController, jobDeleteController, getUserJobController, getUserActiveJobController, FilterQueryController, SearchQueryController, getHomepageJobsController, updateJobStatusController, searchJobsController} from '../controller/jobController.js'
+import {getSingleJobController, postJobController, updateJobController, getJobController, getActiveJobController, jobDeleteController, getUserJobController, getUserActiveJobController, FilterQueryController, SearchQueryController, getHomepageJobsController, updateJobStatusController, searchJobsController, getGraphsController} from '../controller/jobController.js'
 import { requireSignIn, isAdmin, isRecruiter, isRecruiterorAdmin, isApplicantorAdmin } from "../middleware/Auth.js";
 
 //router object
@@ -44,6 +44,9 @@ router.get("/search", requireSignIn, isApplicantorAdmin, SearchQueryController);
 
 //Search filter API
 router.post("/searchJobs", requireSignIn, searchJobsController);
+
+//Get graphs
+router.get("/getGraphs/:id", requireSignIn, isRecruiterorAdmin, getGraphsController)
 
 export default router;
 
