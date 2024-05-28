@@ -140,27 +140,51 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route>
-            <Route path="/ADMINView" element={<LayoutForAdmin />}></Route>
-            <Route path="" element={<AdminHome />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/HRView"
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/CANDView"
+            element={
+              <PrivateRoute>
+                <CandHome />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/ADMINView"
+            element={
+              <PrivateRoute>
+                <CandHome />
+              </PrivateRoute>
+            }
+          />
+
+          {/* Admin Routes */}
+          <Route path="/ADMINView" element={<LayoutForAdmin />}>
+            <Route index element={<AdminHome />} />
+            <Route path="createJob" element={<CreateJobAdmin edit={false} />} />
+            <Route path="ViewJob/:jobId" element={<AdminJob />} />
+            <Route path="ViewAllUsers" element={<AdminGet />} />
+            <Route path="ViewAllUsers/Applicants" element={<AdminGetApps />} />
             <Route
-              path="/ADMINVIEW/createJob"
-              element={<CreateJobAdmin edit={false} />}
-            />
-            <Route path="/ADMINView/ViewJob/:jobId" element={<AdminJob />} />
-            <Route path="/ADMINView/ViewAllUsers" element={<AdminGet />} />
-            <Route
-              path="/ADMINView/ViewAllUsers/Applicants"
-              element={<AdminGetApps />}
-            />
-            <Route
-              path="/ADMINView/ViewAllUsers/Recruiters"
+              path="ViewAllUsers/Recruiters"
               element={<AdminGetRecruiter />}
             />
           </Route>
+
+          {/* HR Routes */}
           <Route path="/HRView" element={<LayoutForHr />}>
-            <Route path="" element={<Home />} />
+            <Route index element={<Home />} />
             <Route path="createJob" element={<CreateJob edit={false} />} />
             <Route path="editJob/:jobId" element={<CreateJob edit={true} />} />
             <Route path="createJob/preview" element={<PreviewJob />} />
@@ -171,12 +195,14 @@ function App() {
             <Route path="EditHr" element={<EditHR />} />
             <Route path="EditCompany" element={<CompanyMGT />} />
             <Route path="EditCompany/AddHR" element={<CreateHR />} />
-            <Route path="/HRView/ViewJob/:jobId" element={<ViewJob />} />
+            <Route path="ViewJob/:jobId" element={<ViewJob />} />
             <Route path="ViewCandidate/:appId" element={<ViewCandidate />} />
-            <Route path="/HRView/ShowMyJobs" element={<JobList />} />
+            <Route path="ShowMyJobs" element={<JobList />} />
           </Route>
+
+          {/* Candidate Routes */}
           <Route path="/CANDView" element={<LayoutForCand />}>
-            <Route path="" element={<CandHome />} />
+            <Route index element={<CandHome />} />
             <Route path="JobDesc/:jobId" element={<CandPreviewJob />} />
             <Route path="ApplyJob/:jobId" element={<CandApplyJob />} />
             <Route path="AppliedJobsScreen" element={<CandAppliedJobs />} />
