@@ -408,16 +408,20 @@ export const getGraphsController = async(req,res)=>
         const jobID = req.params.id;
         console.log(jobID);    
 
+        const jobDetails = await Job.findById(jobID);
+        console.log(jobDetails);
+
         const usersWithJobs = await Applications.find({job:jobID}).populate('user');
         console.log(usersWithJobs);
 
-        const response = await axios.post(`${apiUrl}/giveGraphs/`, { usersWithJobs: usersWithJobs}, {
+        const response = await axios.post(`${apiUrl}/giveGraphs/`, { usersWithJobs: usersWithJobs, jobDetails:jobDetails}, {
             headers: {
                 'Content-Type': 'application/json',
             }
         });
         res.status(200).json({
             success: true,
+            jobDetails,
             usersWithJobs
         });
         

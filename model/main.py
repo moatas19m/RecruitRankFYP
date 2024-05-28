@@ -418,6 +418,9 @@ async def give_graphs(request: Request):
         #     job_description_text = file.read()
         body = await request.json()
         usersWithJobs = body.get("usersWithJobs")
+        jobDetails = body.get("jobDetails")
+
+        print(jobDetails)
         print(usersWithJobs)
         # json_file_path="job_data.json"
         # save_json(job_info,json_file_path)
