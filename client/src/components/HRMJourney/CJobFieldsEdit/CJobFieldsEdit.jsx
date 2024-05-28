@@ -21,16 +21,21 @@ function CJobFieldsEdit(props) {
     const [education, setEducation] = useState(""); // Default value
     const [shift, setShift] = useState(""); // Default value
     const [benefits, setBenefits] = useState("");
+    const [weights, setWeights] = useState("");
     const { jobId } = useParams()
     const [tags, setTags] = useState([]);
     const [pos, setPos] = useState(1);
     const [job, setJob] = useState({ _id: "n/a" })
+    const [sliderweightskill, setSliderWeightSkill] = useState("");
+    const [sliderweightcgpa, setSliderWeightCgpa] = useState("");
+    const [sliderweightedu, setSliderWeightEdu] = useState("");
+    const [sliderweightdis, setSliderWeightDis] = useState("");
 
     const [sliderValues, setSliderValues] = useState({
-        skillweight: 25,
-        cgpaweight: 25,
-        educationweight: 25,
-        disciplineweight: 25,
+        skillweight: 0.25,
+        cgpaweight: 0.25,
+        educationweight: 0.25,
+        disciplineweight: 0.25,
     });
 
     const editorStyles = {
@@ -84,6 +89,12 @@ function CJobFieldsEdit(props) {
             education: education,
             shift: shift,
             benefits: benefits,
+            weights: {
+                cosine_similarity_weight: sliderValues.skillweight,
+                cgpa_weight: sliderValues.cgpaweight,
+                degree_match_weight: sliderValues.educationweight,
+                discipline_match_weight: sliderValues.disciplineweight,
+            },
         };
 
         const headers = { Authorization: `${localStorage.getItem("token")}` };
@@ -122,6 +133,20 @@ function CJobFieldsEdit(props) {
                     setDescValue(res.data.job.description);
                     setReqValue(res.data.job.requirements);
                     setBenefits(res.data.job.benefits);
+                    setSliderValues({
+                        skillweight: res.data.job.weights.cosine_similarity_weight,
+                        cgpaweight: res.data.job.weights.cgpa_weight,
+                        educationweight: res.data.job.weights.degree_match_weight,
+                        disciplineweight: res.data.job.weights.discipline_match_weight,
+                    });
+                    
+            // weights: {
+
+            //     cosine_similarity_weight: sliderValues.skillweight,
+            //     cgpa_weight: sliderValues.cgpaweight,
+            //     degree_match_weight: sliderValues.educationweight,
+            //     discipline_match_weight: sliderValues.disciplineweight,
+            // },
                 })
                 .catch((err) => console.log(err))
         }
@@ -133,15 +158,15 @@ function CJobFieldsEdit(props) {
         const newSliderValues = { ...sliderValues, [slider]: value };
         const total = Object.values(newSliderValues).reduce((a, b) => a + b, 0);
 
-        if (total <= 100) {
+        if (total <= 1) {
             setSliderValues(newSliderValues);
         } else {
-            const excess = total - 100;
+            const excess = total - 1;
             const remainingSliders = Object.keys(newSliderValues).filter(s => s !== slider);
             const maxValue = remainingSliders.reduce((max, s) => (newSliderValues[s] > max ? newSliderValues[s] : max), 0);
 
             const adjustedSliders = remainingSliders.reduce((acc, s) => {
-                const newValue = newSliderValues[s] - Math.round(excess * (newSliderValues[s] / maxValue));
+                const newValue = newSliderValues[s] - (excess * (newSliderValues[s] / maxValue));
                 return { ...acc, [s]: newValue < 0 ? 0 : newValue };
             }, {});
 
@@ -173,43 +198,47 @@ function CJobFieldsEdit(props) {
                                 <div className="subHeading">Basic Info</div>
                                 <div className="slidersContainer">
                                     <div className="sliderRow">
-                                        <label>Skills Weightage: {sliderValues.skillweight}%</label>
+                                        <label>Skills Weightage: {(sliderValues.skillweight * 100).toFixed(0)}%</label>
                                         <input
                                             type="range"
                                             min="0"
-                                            max="100"
+                                            max="1"
+                                            step="0.01"
                                             value={sliderValues.skillweight}
-                                            onChange={(e) => handleSliderChange("skillweight", parseInt(e.target.value))}
+                                            onChange={(e) => handleSliderChange("skillweight", parseFloat(e.target.value))}
                                         />
                                     </div>
                                     <div className="sliderRow">
-                                        <label>CGPA Weightage: {sliderValues.cgpaweight}%</label>
+                                        <label>CGPA Weightage: {(sliderValues.cgpaweight * 100).toFixed(0)}%</label>
                                         <input
                                             type="range"
                                             min="0"
-                                            max="100"
+                                            max="1"
+                                            step="0.01"
                                             value={sliderValues.cgpaweight}
-                                            onChange={(e) => handleSliderChange("cgpaweight", parseInt(e.target.value))}
+                                            onChange={(e) => handleSliderChange("cgpaweight", parseFloat(e.target.value))}
                                         />
                                     </div>
                                     <div className="sliderRow">
-                                        <label>Education Weightage: {sliderValues.educationweight}%</label>
+                                        <label>Education Weightage: {(sliderValues.educationweight * 100).toFixed(0)}%</label>
                                         <input
                                             type="range"
                                             min="0"
-                                            max="100"
+                                            max="1"
+                                            step="0.01"
                                             value={sliderValues.educationweight}
-                                            onChange={(e) => handleSliderChange("educationweight", parseInt(e.target.value))}
+                                            onChange={(e) => handleSliderChange("educationweight", parseFloat(e.target.value))}
                                         />
                                     </div>
                                     <div className="sliderRow">
-                                        <label>Discipline Weightage: {sliderValues.disciplineweight}%</label>
+                                        <label>Discipline Weightage: {(sliderValues.disciplineweight * 100).toFixed(0)}%</label>
                                         <input
                                             type="range"
                                             min="0"
-                                            max="100"
+                                            max="1"
+                                            step="0.01"
                                             value={sliderValues.disciplineweight}
-                                            onChange={(e) => handleSliderChange("disciplineweight", parseInt(e.target.value))}
+                                            onChange={(e) => handleSliderChange("disciplineweight", parseFloat(e.target.value))}
                                         />
                                     </div>
                                 </div>
