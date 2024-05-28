@@ -3,8 +3,10 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 import './login.css';
+import { useAuth } from '../../../AuthContext';  // Make sure the path is correct
 
 function Login() {
+    const { login } = useAuth();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -26,17 +28,23 @@ function Login() {
 
     const onChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
+    };
 
     const navigateByRole = (role) => {
-        if (role === 'Recruiter') {
-            navigate("/HRView");
-        } else if (role === 'Applicant') {
-            navigate("/CANDView");
-        } else if (role === 'Admin') {
-            navigate("/ADMINView");
+        switch (role) {
+            case 'Recruiter':
+                navigate("/HRView");
+                break;
+            case 'Applicant':
+                navigate("/CANDView");
+                break;
+            case 'Admin':
+                navigate("/ADMINView");
+                break;
+            default:
+                setError("Unknown role or unauthorized access.");
         }
-    }
+    };
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -47,13 +55,16 @@ function Login() {
             const { data } = await axios.post('/api/auth/login', { email, password });
             localStorage.setItem('user', JSON.stringify(data.user));
             localStorage.setItem('token', data.token);
-            setIsLoading(false);
+            login();  // Update authentication state
             navigateByRole(data.user.role);
         } catch (error) {
+            const message = error.response?.data?.message || 'Login failed. Please try again.';
+            setError(message);
+            console.error("Login error:", message);
+        } finally {
             setIsLoading(false);
-            setError(error.response?.data?.message || 'Login failed. Please try again.');
         }
-    }
+    };
 
     return (
         <div className="main">
@@ -83,7 +94,7 @@ function Login() {
                     />
                     <div className="form-group">
                         {isLoading ? <CircularProgress /> : <button type="submit" className='btn'>Login</button>}
-                        {error && <div className="notFound">{error}</div>}
+                        {error && <div className="error-message">{error}</div>}
                     </div>
                 </form>
             </div>
