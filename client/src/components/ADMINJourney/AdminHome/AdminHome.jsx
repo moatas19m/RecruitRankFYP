@@ -7,7 +7,7 @@ import AdminFeed from "../AdminHomeFeed/AdminFeed.jsx"
 function AdminHome(props) {
     return (
         <div className="mainContainer">
-            <div class="feed1"><AdminFeed /></div>
+            <div class="feed"><AdminFeed /></div>
         </div>
     )
 }

@@ -8,7 +8,7 @@ function CreateJobAdmin({ edit }) {
     return (
         <div className="CreateJob">
             <div>
-                <AdminSidebar/>
+                {/* <AdminSidebar/> */}
             </div>
             {!edit ? <CAdminFields /> : <CJobFieldsEdit />}
         </div>

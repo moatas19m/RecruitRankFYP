@@ -86,9 +86,9 @@ function ViewAdminJob(props) {
                             <div className="Spots">
                                 <div className="delete" onClick={delJob}><Delete />
                                 </div>
-                                <Link to={`/HRView/editJob/${jobId}`}>
+                                {/* <Link to={`/HRView/editJob/${jobId}`}> */}
                                     <div className="edit"><Edit /></div>
-                                </Link>
+                                {/* </Link> */}
                             </div>
                         </div>
                         <div className="bottomStuff">

@@ -41,6 +41,10 @@ import AdminRecruiters from "./screens/ADMINJourney/AdminUsers/AdminViewRecruite
 import ViewJobComponent from "./components/HRMJourney/ViewJob/ViewJobComponent";
 //import ViewAdminJob from "./components/ADMINJourney/ViewAdminJob/ViewAdminJobComp";
 
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from './theme';
+
 const LayoutForHr = ({ children }) => {
   return (
     <div className="mainAppContainer">
@@ -81,7 +85,7 @@ const LayoutForAdmin = ({ children }) => {
       <AdminSidebar />
       <div className="content">
         <Outlet />
-        <AdminHome />
+        {/* <AdminHome /> */}
       </div>
     </div>
   );
@@ -102,7 +106,7 @@ const AdminGet = ({ children }) => {
 const AdminJob = ({ children }) => {
   return (
     <div className="mainAppContainer">
-      <AdminSidebar />
+      {/* <AdminSidebar /> */}
       <div className="content">
         <Outlet />
         <ViewadminJob />
@@ -126,7 +130,7 @@ const AdminGetApps = ({ children }) => {
 const AdminGetRecruiter = ({ children }) => {
   return (
     <div className="mainAppContainer">
-      <AdminSidebar />
+      {/* <AdminSidebar /> */}
       <div className="content">
         <Outlet />
         <AdminRecruiters />
@@ -135,12 +139,25 @@ const AdminGetRecruiter = ({ children }) => {
   );
 };
 
+const LandingPageTheme = ({ children }) => {
+  return (
+    <div >
+      {/* <div className="content"> */}
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <LandingPage />
+      </ThemeProvider>
+    </div>
+    // </div>
+  );
+};
+
 function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<LandingPageTheme />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
@@ -171,14 +188,14 @@ function App() {
 
           {/* Admin Routes */}
           <Route path="/ADMINView" element={<LayoutForAdmin />}>
-            <Route index element={<AdminHome />} />
-            <Route path="createJob" element={<CreateJobAdmin edit={false} />} />
-            <Route path="ViewJob/:jobId" element={<AdminJob />} />
-            <Route path="ViewAllUsers" element={<AdminGet />} />
-            <Route path="ViewAllUsers/Applicants" element={<AdminGetApps />} />
+            <Route path="" element={<AdminHome />} />
+            <Route path="/ADMINView/createJob" element={<CreateJobAdmin edit={false} />} />
+            <Route path="/ADMINView/ViewJob/:jobId" element={<ViewadminJob />} />
+            <Route path="/ADMINView/ViewAllUsers" element={<AdminPage />} />
+            <Route path="/ADMINView/ViewAllUsers/Applicants" element={<AdminApplicants />} />
             <Route
-              path="ViewAllUsers/Recruiters"
-              element={<AdminGetRecruiter />}
+              path="/ADMINView/ViewAllUsers/Recruiters"
+              element={<AdminRecruiters />}
             />
           </Route>
 
