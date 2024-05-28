@@ -327,3 +327,23 @@ textarea {
     display: flex;
     flex-direction: column;
 }
+
+.cJobFields .slidersContainer {
+    margin-bottom: 1em;
+}
+
+.cJobFields .sliderRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+.cJobFields .sliderRow label {
+    margin-right: 1em;
+    flex: 1;
+}
+
+.cJobFields .sliderRow input[type="range"] {
+    flex: 3;
+}

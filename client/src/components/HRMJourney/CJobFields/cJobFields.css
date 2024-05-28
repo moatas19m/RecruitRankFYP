@@ -107,6 +107,7 @@
     background-color: #f1f1f1;
 }
 
+
 .tagsInputContainer {
     display: flex;
     align-items: center;
@@ -120,6 +121,7 @@
     border-radius: 1em;
     gap: 0.5em;
 }
+
 
 .tagItem {
     background-color: #d7d7d7;
@@ -346,3 +348,24 @@ textarea {
     }
   }
   
+  .cJobFields .slidersContainer {
+    margin-bottom: 1em;
+}
+
+.cJobFields .sliderRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5em;
+}
+
+.cJobFields .sliderRow label {
+    margin-right: 1em;
+    flex: 1;
+}
+
+.cJobFields .sliderRow input[type="range"] {
+    flex: 3;
+}
+
+

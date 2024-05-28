@@ -26,6 +26,13 @@ function CJobFieldsEdit(props) {
     const [pos, setPos] = useState(1);
     const [job, setJob] = useState({ _id: "n/a" })
 
+    const [sliderValues, setSliderValues] = useState({
+        skillweight: 25,
+        cgpaweight: 25,
+        educationweight: 25,
+        disciplineweight: 25,
+    });
+
     const editorStyles = {
         borderRadius: '0.5em',
         border: 'none',
@@ -122,6 +129,25 @@ function CJobFieldsEdit(props) {
             getJob();
         }
     })
+    const handleSliderChange = (slider, value) => {
+        const newSliderValues = { ...sliderValues, [slider]: value };
+        const total = Object.values(newSliderValues).reduce((a, b) => a + b, 0);
+
+        if (total <= 100) {
+            setSliderValues(newSliderValues);
+        } else {
+            const excess = total - 100;
+            const remainingSliders = Object.keys(newSliderValues).filter(s => s !== slider);
+            const maxValue = remainingSliders.reduce((max, s) => (newSliderValues[s] > max ? newSliderValues[s] : max), 0);
+
+            const adjustedSliders = remainingSliders.reduce((acc, s) => {
+                const newValue = newSliderValues[s] - Math.round(excess * (newSliderValues[s] / maxValue));
+                return { ...acc, [s]: newValue < 0 ? 0 : newValue };
+            }, {});
+
+            setSliderValues({ ...newSliderValues, ...adjustedSliders });
+        }
+    };
 
     return (
         <div className="cJobFields">
@@ -145,6 +171,48 @@ function CJobFieldsEdit(props) {
                         <div className="basicInfo">
                             <div className="basicInfoWrapper">
                                 <div className="subHeading">Basic Info</div>
+                                <div className="slidersContainer">
+                                    <div className="sliderRow">
+                                        <label>Skills Weightage: {sliderValues.skillweight}%</label>
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="100"
+                                            value={sliderValues.skillweight}
+                                            onChange={(e) => handleSliderChange("skillweight", parseInt(e.target.value))}
+                                        />
+                                    </div>
+                                    <div className="sliderRow">
+                                        <label>CGPA Weightage: {sliderValues.cgpaweight}%</label>
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="100"
+                                            value={sliderValues.cgpaweight}
+                                            onChange={(e) => handleSliderChange("cgpaweight", parseInt(e.target.value))}
+                                        />
+                                    </div>
+                                    <div className="sliderRow">
+                                        <label>Education Weightage: {sliderValues.educationweight}%</label>
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="100"
+                                            value={sliderValues.educationweight}
+                                            onChange={(e) => handleSliderChange("educationweight", parseInt(e.target.value))}
+                                        />
+                                    </div>
+                                    <div className="sliderRow">
+                                        <label>Discipline Weightage: {sliderValues.disciplineweight}%</label>
+                                        <input
+                                            type="range"
+                                            min="0"
+                                            max="100"
+                                            value={sliderValues.disciplineweight}
+                                            onChange={(e) => handleSliderChange("disciplineweight", parseInt(e.target.value))}
+                                        />
+                                    </div>
+                                </div>
                                 <input type="text" name="company" className="TextFieldSmall" placeholder="Company Name" value={company} onChange={(e) => setCompany(e.target.value)} required />
                                 <input type="text" name="jobTitle" className="TextFieldSmall" placeholder="Job Title (e.g: Software Engineer)" value={title} onChange={(e) => setTitle(e.target.value)} required />
                             <select name="workplace" className="ComboBox" value={workplace} onChange={(e) => setWorkplace(e.target.value)} required>
