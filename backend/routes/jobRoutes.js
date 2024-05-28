@@ -43,7 +43,7 @@ router.get("/filter", requireSignIn, isApplicantorAdmin, FilterQueryController);
 router.get("/search", requireSignIn, isApplicantorAdmin, SearchQueryController);
 
 //Search filter API
-router.post("/searchJobs", requireSignIn, isApplicantorAdmin, searchJobsController);
+router.post("/searchJobs", requireSignIn, searchJobsController);
 
 export default router;
 
