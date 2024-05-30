@@ -1,3 +1,4 @@
+// Navbar.js
 import React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -7,17 +8,20 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
+import { useTheme } from '@mui/material/styles';
 
 const pages = ['About', 'Contact'];
 const authLinks = ['Login', 'Register'];
 
 const Navbar = () => {
+  const theme = useTheme();
+
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ background: theme.gradients.primary }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
-            LOGO
+            RecruitRanks
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'flex' }, marginLeft: 'auto' }}>
             {pages.map((page) => (

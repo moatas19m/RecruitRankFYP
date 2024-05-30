@@ -213,75 +213,81 @@ function ViewJob(props) {
 
                     </div>
                     {/* <div className="bottomStuff"> */}
-                        <div className="bottomWrapper">
-                            <div className="leftPane">
-                                <div className="paneWrapper">
-                                    <div className="countsAndHRM">
-                                        <div className="HrmCreator">
-                                            Created by <b>{userName}</b>
-                                            <Link to={`mailto:${hrm.email}`}><EmailOutlined /></Link>
-                                        </div>
+                    <div className="bottomWrapper">
+                        <div className="leftPane">
+                            <div className="paneWrapper">
+                                <div className="countsAndHRM">
+                                    <div className="HrmCreator">
+                                        Created by <b>{userName}</b>
+                                        <Link to={`mailto:${hrm.email}`}><EmailOutlined /></Link>
                                     </div>
-                                    <div className="linkSection">
+                                </div>
+                                <div className="linkSection">
                                     <div className="linkPartContainer">
                                         <div className="linkPart">www.recruitranks.com/api/jobs/{job._id}</div>
                                     </div>
                                     <div className="iconPat"><AssignmentRounded /></div>
                                 </div>
-                                    <div className="jobDetails">
-                                        <div><b>Company:</b> {job.company}</div>
-                                        <div><b>Description:</b> {job.description}</div>
-                                        <div><b>Requirements:</b> {job.requirements}</div>
-                                        <div><b>Salary:</b> ${job.minSalary} - ${job.maxSalary}</div>
-                                        <div><b>Job Level:</b> {job.joblevel}</div>
-                                        <div><b>Experience:</b> {job.experience}</div>
-                                        <div><b>Education:</b> {job.education}</div>
-                                        <div><b>Benefits:</b> {job.benefits}</div>
-                                        {/* <div><b>Status:</b> {job.status}</div> */}
-                                        <div><b>Status:</b> {job.jobStatus}</div>
-                                    </div>
-                                    {/* <BasicTabs /> */}
-                                    
+                                <div className="jobDetails">
+                                    <div><b>Company:</b> {job.company}</div>
+                                    <div><b>Description:</b> {job.description}</div>
+                                    <div><b>Requirements:</b> {job.requirements}</div>
+                                    <div><b>Salary:</b> ${job.minSalary} - ${job.maxSalary}</div>
+                                    <div><b>Job Level:</b> {job.joblevel}</div>
+                                    <div><b>Experience:</b> {job.experience}</div>
+                                    <div><b>Education:</b> {job.education}</div>
+                                    <div><b>Benefits:</b> {job.benefits}</div>
+                                    {/* <div><b>Status:</b> {job.status}</div> */}
+                                    <div><b>Status:</b> {job.jobStatus}</div>
+                                </div>
+                                {/* <BasicTabs /> */}
 
-                                </div>
-                            </div>
-                            <div className="rightPane">
-                                
-                                <div className="applicantsSection">
-                                    <h2>Applicants</h2>
-                                    <ul>
-                                        {sortedApplicants.map((applicant) => (
-                                            <li key={applicant._id}>
-                                                <div className="applicantInfo">
-                                                    {applicant.user && (
-                                                        <>
-                                                            <p><b>Name:</b> {applicant.user.name}</p>
-                                                            <p><b>Email:</b> {applicant.user.email}</p>
-                                                            {/* <p><b>Phone:</b> {applicant.user.phone}</p> */}
-                                                        </>
-                                                    )}
-                                                    {/* <p><b>Applied On:</b> {new Date(applicant.createdAt).toLocaleDateString()}</p> */}
-                                                </div>
-                                                <div className="scoreBox">
-                                                    <div className="scoreHeading">Score</div>
-                                                    <div className="scoreValue">{applicant.score}</div>
-                                                </div>
-                                                <div className="progressStatus">
-                                                    <p><b>Progress:</b> {applicant.progress}</p>
-                                                    {/* <p><b>Status:</b> {applicant.status}</p> */}
-                                                </div>
-                                                <div className="actionButtons">
-                                                    <button className="rejectButton" onClick={() => handleReject(applicant._id)}>Reject</button>
-                                                    <button className="acceptButton" onClick={() => handleAccept(applicant._id)}>Accept</button>
-                                                </div>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                
+
                             </div>
                         </div>
+                        <div className="rightPane">
+                            {jobStatus === "Inactive" && (
+                                <div className="statisticsButtonContainer">
+                                    <Link to={`/HRView/ViewJob/stats/${jobId}`} className="link">
+                                        <button className="statisticsButton">View Statistics</button>
+                                    </Link>
+                                </div>
+                            )}
+                            <div className="applicantsSection">
+                                <h2>Applicants</h2>
+                                <ul>
+                                    {sortedApplicants.map((applicant) => (
+                                        <li key={applicant._id}>
+                                            <div className="applicantInfo">
+                                                {applicant.user && (
+                                                    <>
+                                                        <p><b>Name:</b> {applicant.user.name}</p>
+                                                        <p><b>Email:</b> {applicant.user.email}</p>
+                                                        {/* <p><b>Phone:</b> {applicant.user.phone}</p> */}
+                                                    </>
+                                                )}
+                                                {/* <p><b>Applied On:</b> {new Date(applicant.createdAt).toLocaleDateString()}</p> */}
+                                            </div>
+                                            <div className="scoreBox">
+                                                <div className="scoreHeading">Score</div>
+                                                <div className="scoreValue">{applicant.score}</div>
+                                            </div>
+                                            <div className="progressStatus">
+                                                <p><b>Progress:</b> {applicant.progress}</p>
+                                                {/* <p><b>Status:</b> {applicant.status}</p> */}
+                                            </div>
+                                            <div className="actionButtons">
+                                                <button className="rejectButton" onClick={() => handleReject(applicant._id)}>Reject</button>
+                                                <button className="acceptButton" onClick={() => handleAccept(applicant._id)}>Accept</button>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
+                </div>
                 // </div>
             ) : (
                 <div className="errorWrapper">

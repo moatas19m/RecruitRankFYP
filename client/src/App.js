@@ -44,6 +44,9 @@ import ViewJobComponent from "./components/HRMJourney/ViewJob/ViewJobComponent";
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import theme from './theme';
+import Signup from "./screens/HRMJourney/Signup/signup";
+import ViewStats from "./screens/HRMJourney/ViewStats/ViewStats";
+import StatsComp from "./components/HRMJourney/ViewStatsComp/StatsComp";
 
 const LayoutForHr = ({ children }) => {
   return (
@@ -67,6 +70,18 @@ const LayoutForHrViewJob = ({ children }) => {
     </div>
   );
 };
+
+// const HrStats = ({ children }) => {
+//   return (
+//     <div className="mainAppContainer">
+//       <Sidebar />
+//       <div className="content">
+//         <Outlet />
+//         <ViewStats />
+//       </div>
+//     </div>
+//   );
+// };
 
 const LayoutForCand = ({ children }) => {
   return (
@@ -158,6 +173,7 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<LandingPageTheme />} />
+          <Route path="/register" element={<Signup />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<Login />} />
@@ -213,6 +229,7 @@ function App() {
             <Route path="EditCompany" element={<CompanyMGT />} />
             <Route path="EditCompany/AddHR" element={<CreateHR />} />
             <Route path="ViewJob/:jobId" element={<ViewJob />} />
+            <Route path="ViewJob/stats/:jobId" element={<StatsComp />} />
             <Route path="ViewCandidate/:appId" element={<ViewCandidate />} />
             <Route path="ShowMyJobs" element={<JobList />} />
           </Route>

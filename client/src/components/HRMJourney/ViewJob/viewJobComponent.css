@@ -292,3 +292,22 @@ b {
 .actionButtons button:hover {
     opacity: 0.5;
 }
+.statisticsButtonContainer {
+    text-align: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.statisticsButton {
+    background-color: blue;
+    color: white;
+    padding: 12px 24px; /* Adjust padding for button size */
+    font-size: 16px; /* Adjust font size */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.statisticsButton:hover {
+    background-color: darkblue; /* Change color on hover */
+}

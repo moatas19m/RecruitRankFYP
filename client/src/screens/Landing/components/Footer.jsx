@@ -2,21 +2,17 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
+import { useTheme } from '@mui/material/styles';
 
 const Footer = () => {
+  const theme = useTheme();
+
   return (
-    <Box component="footer" sx={{ bgcolor: 'primary.main', py: 3, mt: 'auto' }}>
-      <Container maxWidth="lg" sx={{ display: 'flex', justifyContent: 'space-between' }}>
+    <Box component="footer" sx={{ background: theme.gradients.primary, py: 3, mt: 'auto', width: '100%', position: 'relative' }}>
+      <Container maxWidth="lg" sx={{ display: 'flex', justifyContent: 'center' }}>
         <Typography variant="body1" color="white">
-          &copy; {new Date().getFullYear()} My Company
+          &copy; {new Date().getFullYear()} RecruitRanks
         </Typography>
-        <Link href="/login" color="inherit" underline="none">
-          Login
-        </Link>
-        <Link href="/register" color="inherit" underline="none">
-          Register
-        </Link>
       </Container>
     </Box>
   );

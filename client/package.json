@@ -15,12 +15,14 @@
     "@testing-library/user-event": "^13.5.0",
     "@wixc3/react-board": "^2.2.0",
     "axios": "^1.4.0",
+    "chart.js": "^4.4.3",
     "date-fns": "^2.29.3",
     "dayjs": "^1.11.5",
     "http-proxy-middleware": "^2.0.6",
     "luxon": "^3.0.4",
     "moment": "^2.29.4",
     "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
     "react-date-time-formatter": "^1.0.3",
     "react-dom": "^18.2.0",
     "react-quill": "^2.0.0",
@@ -29,7 +31,8 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^9.1.2",
     "timeago.js": "^4.0.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yarn": "^1.22.22"
   },
   "proxy": "http://localhost:8080/",
   "scripts": {

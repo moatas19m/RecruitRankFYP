@@ -14,7 +14,6 @@ export const registerController= async(req,res)=>{
     const {password}=req.body;
     const {phone}=req.body;
     const {address}=req.body;
-    const {answer}=req.body;
     const {role}=req.body;
 
         //validations
@@ -33,9 +32,6 @@ export const registerController= async(req,res)=>{
         if(!address){
             return res.send({message:'Address is required'})
         }
-        if(!answer){
-            return res.send({message:'Answer is required'})
-        }
         if(!role){
             return res.send({message:'Role is required'})
         }
@@ -53,7 +49,7 @@ export const registerController= async(req,res)=>{
         const hashedPassword= await hashPassword(password)
         //save
         const user = await new userModel(
-            {name, email, phone, address, password:hashedPassword, answer, role}
+            {name, email, phone, address, password:hashedPassword, role}
             ).save()
         res.status(201).send({
             success:true,
