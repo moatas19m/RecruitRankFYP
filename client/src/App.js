@@ -49,6 +49,8 @@ import ViewStats from "./screens/HRMJourney/ViewStats/ViewStats";
 import StatsComp from "./components/HRMJourney/ViewStatsComp/StatsComp";
 import About from "./screens/Landing/About";
 import CandViewSingJob from "./components/CANDJourney/ViewJob/VieSingJobComponents";
+import Stats from "./components/ADMINJourney/Stats/Stats";
+import ViewStatistics from "./screens/ADMINJourney/ViewStatistics/ViewStatistics";
 
 const LayoutForHr = ({ children }) => {
   return (
@@ -235,6 +237,7 @@ function App() {
             <Route path="" element={<AdminHome />} />
             <Route path="/ADMINView/createJob" element={<CreateJobAdmin edit={false} />} />
             <Route path="/ADMINView/ViewJob/:jobId" element={<ViewadminJob />} />
+            <Route path="/ADMINView/ViewJob/stats/:jobId" element={<Stats />} />
             <Route path="/ADMINView/ViewAllUsers" element={<AdminPage />} />
             <Route path="/ADMINView/ViewAllUsers/Applicants" element={<AdminApplicants />} />
             <Route

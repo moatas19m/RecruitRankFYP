@@ -1,56 +1,64 @@
-/* StatsComp.css */
-
-.stats-container {
-    max-width: 800px;
-    margin: 0 auto;
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
+    background-color: #f0f2f5;
+    overflow-y: hidden;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    overflow-y: hidden;
+}
+
+.dashboard-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    overflow: scroll;
 }
 
 .stats-heading {
-    font-size: 24px;
-    font-weight: bold;
     margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    
 }
 
-.stats-chart-container {
-    height: 500px;
+.stats-headingPie {
+    margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 150px;
+    
+}
+
+.pie-chart-container, .stats-chart-container {
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
     width: 100%;
-    overflow: hidden;
 }
 
-/* Add animation to the chart container */
+.pie-chart-container {
+    height: 300px; /* Adjust height to make the pie chart smaller */
+}
+
 .stats-chart-container {
-    transition:height 0.8s ease-in-out;
+    height: 500px; /* Adjust height as needed */
 }
 
-
-/* Make the chart responsive */
-@media only screen and (max-width: 768px) {
-    .stats-container {
-        padding: 10px;
-    }
-
-    .stats-heading {
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    .stats-chart-container {
-        height: 400px;
-        width: calc(100% - 20px); /* Adjust width for smaller screens */
-    }
-}
-
-@media only screen and (max-width: 480px) {
-    .stats-heading {
-        font-size: 18px;
-    }
-
-    .stats-chart-container {
-        height: 300px;
+@media (max-width: 768px) {
+    .stats-chart-container, .pie-chart-container {
+        height: 300px; /* Adjust height for smaller screens */
     }
 }

@@ -1,8 +1,8 @@
 .viewJobComponent {
-    flex: 10;
-    padding: 3em;
+    flex: 1;
+    padding: 2em;
     color: #464646;
-    height: 100vh;
+    /* overflow-y: auto;*/
     overflow: hidden;
 }
 
@@ -163,4 +163,139 @@ b {
     align-items: center;
     gap: 0.5em;
     color: #464646;
+}
+
+.disableButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    background-color: #f0ad4e;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.disableButton:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.applicantsSection {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    flex: 1;
+}
+
+.applicantsSection h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.applicantsSection ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.applicantsSection li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.applicantsSection li p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.applicantsSection li p b {
+    color: #000;
+}
+
+.applicantInfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.data {
+    margin-right: 10px;
+}
+
+.scoreBox {
+    background-color: #6EBB41;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.scoreHeading {
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.actionButtons {
+    display: flex;
+    gap: 10px;
+}
+
+.actionButtons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.rejectButton {
+    background-color: #FF5733;
+    color: white;
+}
+
+.acceptButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.actionButtons button:hover {
+    opacity: 0.5;
+}
+.statisticsButtonContainer {
+    text-align: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.statisticsButton {
+    background-color: blue;
+    color: white;
+    padding: 12px 24px; /* Adjust padding for button size */
+    font-size: 16px; /* Adjust font size */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.statisticsButton:hover {
+    background-color: darkblue; /* Change color on hover */
 }

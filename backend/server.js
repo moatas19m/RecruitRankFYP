@@ -26,10 +26,11 @@ const app = express();
 
 //middelwares
 app.use(express.json());
+app.use(cors());
 //proxyMiddleware(app);
-// app.use(cors({
-//     origin: '*' // Allow requests from any origin
-//   }));
+app.use(cors({
+    origin: '*' // Allow requests from any origin
+  }));
 //routes
 app.use("/api/auth",authRoute);
 app.use("/api/user",userRoute);
