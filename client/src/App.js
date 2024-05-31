@@ -48,6 +48,7 @@ import Signup from "./screens/HRMJourney/Signup/signup";
 import ViewStats from "./screens/HRMJourney/ViewStats/ViewStats";
 import StatsComp from "./components/HRMJourney/ViewStatsComp/StatsComp";
 import About from "./screens/Landing/About";
+import CandViewSingJob from "./components/CANDJourney/ViewJob/VieSingJobComponents";
 
 const LayoutForHr = ({ children }) => {
   return (
@@ -268,7 +269,8 @@ function App() {
             <Route path="ApplyJob/:jobId" element={<CandApplyJob />} />
             <Route path="AppliedJobsScreen" element={<CandAppliedJobs />} />
             <Route path="EditCand" element={<CandEdit />} />
-            <Route path="ViewJob/:jobId" element={<CandViewJob />} />
+            <Route path="ViewJob/:jobId" element={<CandViewJob />} /> 
+            <Route path="AppliedJobsScreen/ViewJob/:jobId" element={<CandViewSingJob />} /> 
           </Route>
         </Routes>
         <ToastContainer />

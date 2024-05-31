@@ -1,5 +1,5 @@
 import express from "express";
-import {/*UploadFileController,*/postApplicationController, applicationWithdrawController, getApplicationsOnJobController, getAllApplicationsController, getActiveApplicationsController, getInprogressApplicationsController, getActiveInprogressApplicationsController, getActiveInprogressApplicationsOnJobController, getActiveAcceptedApplicationsOnJobController, getActiveRejectedApplicationsOnJobController, getActiveAcceptedApplicationsController, getActiveRejectedApplicationsController, acceptApplicationController, rejectApplicationController, FilterAppQueryController, getAppliedJobsController} from "../controller/applicationController.js"
+import {/*UploadFileController,*/postApplicationController, applicationWithdrawController, getApplicationsOnJobController, getAllApplicationsController, getActiveApplicationsController, getInprogressApplicationsController, getActiveInprogressApplicationsController, getActiveInprogressApplicationsOnJobController, getActiveAcceptedApplicationsOnJobController, getActiveRejectedApplicationsOnJobController, getActiveAcceptedApplicationsController, getActiveRejectedApplicationsController, acceptApplicationController, rejectApplicationController, FilterAppQueryController, getAppliedJobsController, getApplicationUserJobController} from "../controller/applicationController.js"
 import { requireSignIn, isAdmin, isRecruiter, isApplicantorAdmin, isRecruiterorAdmin } from "../middleware/Auth.js";
 
 
@@ -53,5 +53,7 @@ router.put("/rejectApplication/:id", requireSignIn, isRecruiterorAdmin, rejectAp
 
 //Filter Application
 router.get("/filterapp", requireSignIn, isAdmin, FilterAppQueryController);
+//Get active and accepted applications
+router.get("/getApplication/:UserID/:JobID", requireSignIn, isApplicantorAdmin, getApplicationUserJobController);
 
 export default router;

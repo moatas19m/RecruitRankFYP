@@ -9,14 +9,14 @@ import CandAppNotifCard from '../Widgets/CandAppNotifCard/CandAppNotifCard';
 function CandRightBar(props) {
     const [apps, setApps] = useState([]);
 
-    useEffect(() => {
-        const getApps = () => {
-            axios.get(`/jobApplications?candidateId=${localStorage.getItem("userId")}`)
-                .then((res) => setApps(res.data))
-                .catch(err => console.log(err));
-        };
-        getApps();
-    }, []);
+    // useEffect(() => {
+    //     const getApps = () => {
+    //         axios.get(`/jobApplications?candidateId=${localStorage.getItem("userId")}`)
+    //             .then((res) => setApps(res.data))
+    //             .catch(err => console.log(err));
+    //     };
+    //     getApps();
+    // }, []);
 
     return (
         <div className="rightbar">

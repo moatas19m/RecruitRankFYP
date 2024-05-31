@@ -17,7 +17,8 @@ function Card({ application }) {
                     <div className="positionSpots">
                         <div className="company">Company: {job.company}</div>
                         <div className="title">Title: {job.title}</div>
-                        <div className="location">Location: {job.location}</div>
+                        <div className="location">Location: {job.location}</div>\
+                        <div className="status">Job Status: {job.jobStatus}</div>
                     </div>
                     {/* <div className="applicationsCount">
                         <div className="count">{job.applications.length}</div>

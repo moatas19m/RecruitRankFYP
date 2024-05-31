@@ -328,6 +328,27 @@ export const getAppliedJobsController = async(req,res)=>
                 err});
         }
     };
+// appied user and job
+
+export const getApplicationUserJobController = async(req,res)=>
+    {
+        // const {userid:userID} = req.params.userid
+        // const {jobid:jobID} = req.params.jobid
+        //console.log(req.params.userid)
+        try{
+            const application= await Application.find({user:req.params.UserID, job:req.params.JobID})
+            res.status(200).json({
+            success:true,
+            ApplicationCount:application.length,
+            application});
+          
+        }catch(err)
+        {
+           return res.status(500).json({
+                success:false,
+                err});
+        }
+    };
 
 
 
