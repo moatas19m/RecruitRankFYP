@@ -32,7 +32,7 @@ function ViewadminJob(props) {
 
     return (
         
-        <div className="ViewJob">
+        <div >
             <div className="wrapper">
                 {/* <AdminSidebar /> */}
                 {loading ? (
@@ -40,7 +40,7 @@ function ViewadminJob(props) {
                         <div className="Heading">Loading...</div>
                     </div>
                 ) : job.title ? (
-                    <div className="viewJobComponent">
+                    <div >
                         <ViewAdminJob job={job} />
                     </div>
                 ) : (

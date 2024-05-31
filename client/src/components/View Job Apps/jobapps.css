@@ -1,0 +1,192 @@
+.wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.viewJobComponent {
+    flex: 1;
+    padding: 2em;
+    color: #464646;
+    /* overflow-y: auto;*/
+    overflow: hidden;
+}
+
+.Heading {
+    font-size: 2em;
+    font-weight: 900;
+    margin-bottom: 1em;
+}
+
+.attItem {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+}
+
+.headingAndAtts {
+    display: flex;
+    gap: 2em;
+    align-items: center;
+}
+
+.topBar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Spots {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    align-items: center;
+    margin: 0;
+}
+
+.spotsCircle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #99c2a2;
+    padding: 0.3em;
+    font-weight: 900;
+    color: white;
+    border-radius: 50%;
+    font-size: 1.5em;
+}
+
+.bottomWrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    overflow-y: scroll;
+}
+
+.leftPane {
+    flex: 2;
+    padding-right: 1em;
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.applicantsSection {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    flex: 1;
+    text-align: center; /* Center align the content */
+    
+}
+
+.applicantsSection h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+    font-weight: bold; /* Make the heading bold */
+}
+
+.applicantsSection ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.applicantsSection li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+.applicantInfo{
+    font-weight: 500;
+}
+.applicantInfo p {
+    margin: 5px 0;
+    color: #000000;
+    font-weight: 400;
+}
+
+.applicantInfo p b {
+    color: #000;
+    font-weight: bold; /* Make score bold */
+}
+
+.applicantInfo {
+    display: flex;
+    flex-direction: column; /* Change to column layout */
+    align-items: flex-start; /* Align items to the start */
+    margin-bottom: 10px;
+}
+
+.data {
+    margin-right: 10px;
+}
+
+.scoreBox {
+    background-color: #1e712e; /* Dark green background */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+
+.scoreHeading {
+    font-size: 0.8em;
+    font-weight: bolder;
+}
+.scoreValue{
+    font-weight: bold;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: center; /* Center align the buttons */
+    margin-top: 10px; /* Add some top margin */
+}
+
+.actionButtons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.rejectButton {
+    background-color: #FF5733;
+    color: white;
+}
+
+.acceptButton {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.actionButtons button:hover {
+    opacity: 0.5;
+}
+.statisticsButtonContainer {
+    text-align: center;
+    margin-top: 20px; /* Adjust as needed */
+}
+
+.statisticsButton {
+    background-color: #1c86dd;
+    color: white;
+    padding: 12px 24px; /* Adjust padding for button size */
+    font-size: 16px; /* Adjust font size */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight:500;
+}
+
+.statisticsButton:hover {
+    background-color: #0c65b4; /* Change color on hover */
+}

@@ -23,6 +23,7 @@ function ViewAdminJob(props) {
     const [disableLoading, setDisableLoading] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
     const [jobStatus, setJobStatus] = useState("");
+    const [showViewApplicantsButton, setShowViewApplicantsButton] = useState(false);
 
     useEffect(() => {
         const fetchJob = async () => {
@@ -45,6 +46,7 @@ function ViewAdminJob(props) {
         };
 
         fetchJob();
+        setShowViewApplicantsButton(jobStatus === "Inactive");
     }, [jobId, jobStatus]);
 
     const delJob = async () => {
@@ -111,52 +113,6 @@ function ViewAdminJob(props) {
         }
     };
 
-
-    // Function to handle rejection
-    const handleReject = async (applicantId) => {
-        const headers = { Authorization: `${localStorage.getItem("token")}` };
-        try {
-            // Make API request to change progress status to 'Rejected'
-            const response = await axios.put(`/api/application/rejectApplication/${applicantId}`, {}, { headers });
-            console.log('Applicant rejected:', response.data);
-
-
-            // Update the progress status locally
-            updateProgressStatus(applicantId, 'Rejected');
-            toast.success("Application Rejected")
-        } catch (error) {
-            console.error('Error rejecting applicant:', error);
-        }
-    };
-
-    // Function to handle acceptance
-    const handleAccept = async (applicantId) => {
-        const headers = { Authorization: `${localStorage.getItem("token")}` };
-        try {
-            // Make API request to change progress status to 'Accepted'
-            const response = await axios.put(`/api/application/acceptApplication/${applicantId}`, {}, { headers });
-            console.log('Applicant accepted:', response.data);
-
-            // Update the progress status locally
-            updateProgressStatus(applicantId, 'Accepted');
-            toast.success("Application Accepted")
-        } catch (error) {
-            console.error('Error accepting applicant:', error);
-        }
-    };
-
-    // Function to update progress status locally
-    const updateProgressStatus = (applicantId, newStatus) => {
-        setApplicants(prevApplicants =>
-            prevApplicants.map(applicant =>
-                applicant._id === applicantId ? { ...applicant, progress: newStatus } : applicant
-            )
-        );
-    };
-
-
-    const sortedApplicants = applicants.sort((a, b) => parseFloat(b.score) - parseFloat(a.score));
-
     return (
         // <div className="ViewJob">
         <div className="wrapper">
@@ -178,20 +134,27 @@ function ViewAdminJob(props) {
 
                             </>
                         )}
+                        
                         <div className="headingAndAtts">
                             <div className="Heading">{job.title}</div>
                             <div className="attsColumns">
                                 <div className="attItem"><PinDrop /> {job.location} ({job.type})</div>
                                 <div className="attItem"><Work /> {job.shift} shift</div>
-                            </div>
+                            </div>  
+                            {showViewApplicantsButton && (
+                            <Link to={`/ADMINView/ViewJob/applicants/${jobId}`} className="link">
+                                <button className="viewApplicantsButton">View Applicants</button>
+                            </Link>
+                        )}
                         </div>
                         <div className="Spots">
                             <div className="delete" onClick={delJob}><Delete />
                             </div>
-                            {/* <Link to={`/HRView/editJob/${jobId}`}> */}
-                            <div className="edit"><Edit /></div>
-                            {/* </Link> */}
+                            <Link to={`/HRView/editJob/${jobId}`}>
+                                <div className="edit"><Edit /></div>
+                            </Link>
                         </div>
+
                     </div>
                     {/* <div className="bottomStuff"> */}
                     <div className="bottomWrapper">
@@ -211,60 +174,17 @@ function ViewAdminJob(props) {
                                 </div>
                                 <div className="jobDetails">
                                     <div><b>Company:</b> {job.company}</div>
-                                    <div><b>Description:</b> {job.description}</div>
-                                    <div><b>Requirements:</b> {job.requirements}</div>
-                                    <div><b>Salary:</b> ${job.minSalary} - ${job.maxSalary}</div>
+                                    <div><b>Description:</b> {job.description.replace(/<[^>]*>/g, '')}</div>
+                                    <div><b>Requirements:</b> {job.requirements.replace(/<[^>]*>/g, '')}</div>
+                                    <div><b>Salary:</b> PKR{job.minSalary} - PKR{job.maxSalary}</div>
                                     <div><b>Job Level:</b> {job.joblevel}</div>
                                     <div><b>Experience:</b> {job.experience}</div>
                                     <div><b>Education:</b> {job.education}</div>
                                     <div><b>Benefits:</b> {job.benefits}</div>
-                                    <div><b>Status:</b> {job.status}</div>
+                                    {/* <div><b>Status:</b> {job.status}</div> */}
+                                    <div><b>Status:</b> {job.jobStatus}</div>
                                 </div>
-                                {/* <BasicTabs /> */}
                             </div>
-                        </div>
-                        <div className="rightPane">
-                            {jobStatus === "Inactive" && (
-                                <div className="statisticsButtonContainer">
-                                    <Link to={`/ADMINView/ViewJob/stats/${jobId}`} className="link">
-                                        <button className="statisticsButton">View Statistics</button>
-                                    </Link>
-                                </div>
-                            )}
-                            <div className="applicantsSection">
-                                <h2>Applicants</h2>
-                                <ul>
-                                    {sortedApplicants.map((applicant) => (
-                                        <li key={applicant._id}>
-                                            <div className="applicantInfo">
-                                                {applicant.user && (
-                                                    <>
-                                                        <p><b>Name:</b> {applicant.user.name}</p>
-                                                        <p><b>Email:</b> {applicant.user.email}</p>
-                                                        {/* <p><b>Phone:</b> {applicant.user.phone}</p> */}
-                                                    </>
-                                                )}
-                                                {/* <p><b>Applied On:</b> {new Date(applicant.createdAt).toLocaleDateString()}</p> */}
-                                            </div>
-                                            <div className="scoreBox">
-                                                <div className="scoreHeading">Score</div>
-                                                <div className="scoreValue">{applicant.score}</div>
-                                            </div>
-                                            <div className="progressStatus">
-                                                <p><b>Progress:</b> {applicant.progress}</p>
-                                                {/* <p><b>Status:</b> {applicant.status}</p> */}
-                                            </div>
-                                            <div className="actionButtons">
-                                                <button className="rejectButton" onClick={() => handleReject(applicant._id)}>Reject</button>
-                                                <button className="acceptButton" onClick={() => handleAccept(applicant._id)}>Accept</button>
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            {/* <div className="rightpaneWrapper">
-                                        <PreviewJobComp onAppsPage={true} job={job} />
-                                    </div> */}
                         </div>
                     </div>
                 </div>

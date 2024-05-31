@@ -51,6 +51,8 @@ import About from "./screens/Landing/About";
 import CandViewSingJob from "./components/CANDJourney/ViewJob/VieSingJobComponents";
 import Stats from "./components/ADMINJourney/Stats/Stats";
 import ViewStatistics from "./screens/ADMINJourney/ViewStatistics/ViewStatistics";
+import Applicant from "./components/HRMJourney/Applicants/Applicants";
+import Jobapps from "./components/View Job Apps/jobapps";
 
 const LayoutForHr = ({ children }) => {
   return (
@@ -237,6 +239,7 @@ function App() {
             <Route path="" element={<AdminHome />} />
             <Route path="/ADMINView/createJob" element={<CreateJobAdmin edit={false} />} />
             <Route path="/ADMINView/ViewJob/:jobId" element={<ViewadminJob />} />
+            <Route path="/ADMINView/ViewJob/applicants/:jobId" element={<Jobapps />} />
             <Route path="/ADMINView/ViewJob/stats/:jobId" element={<Stats />} />
             <Route path="/ADMINView/ViewAllUsers" element={<AdminPage />} />
             <Route path="/ADMINView/ViewAllUsers/Applicants" element={<AdminApplicants />} />
@@ -260,6 +263,7 @@ function App() {
             <Route path="EditCompany" element={<CompanyMGT />} />
             <Route path="EditCompany/AddHR" element={<CreateHR />} />
             <Route path="ViewJob/:jobId" element={<ViewJob />} />
+            <Route path="ViewJob/applicants/:jobId" element={<Applicant />} />
             <Route path="ViewJob/stats/:jobId" element={<StatsComp />} />
             <Route path="ViewCandidate/:appId" element={<ViewCandidate />} />
             <Route path="ShowMyJobs" element={<JobList />} />

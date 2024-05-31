@@ -13,6 +13,14 @@
     height: 100vh;
     overflow: hidden;
 }
+.jobDetails {
+    font-weight: bold;
+    font-size: 1.1em; /* Increase font size */
+}
+
+.jobDetails div {
+    margin-bottom: 8px; /* Add margin between each detail */
+}
 
 .viewJobComponent {
     flex: 1;
@@ -180,12 +188,17 @@ b {
 .disableButton {
     padding: 10px 20px;
     font-size: 16px;
+    font-weight:500;
     border: none;
-    background-color: #f0ad4e;
+    background-color: #ec493a !important;
     color: white;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
+}
+
+.disableButton:hover {
+    background-color: #a23026 !important;
 }
 
 .disableButton:disabled {
@@ -207,107 +220,29 @@ b {
     100% { transform: rotate(360deg); }
 }
 
-.applicantsSection {
-    background: #f9f9f9;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    flex: 1;
-}
 
-.applicantsSection h2 {
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    color: #333;
-}
-
-.applicantsSection ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.applicantsSection li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
-}
-
-.applicantsSection li p {
-    margin: 5px 0;
-    color: #555;
-}
-
-.applicantsSection li p b {
-    color: #000;
-}
-
-.applicantInfo {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
 
 .data {
     margin-right: 10px;
 }
 
-.scoreBox {
-    background-color: #6EBB41;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    margin-right: 10px;
-}
 
-.scoreHeading {
-    font-size: 0.8em;
-    font-weight: bold;
-}
 
-.actionButtons {
-    display: flex;
-    gap: 10px;
-}
 
-.actionButtons button {
+
+.viewApplicantsButton {
     padding: 10px 20px;
+    font-size: 16px;
     border: none;
+    background-color: #2196F3; /* Blue color */
+    color: white;
+    cursor: pointer;
     border-radius: 5px;
-    cursor: pointer;
+    margin-top: 20px; /* Adjust margin as needed */
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    font-weight:500;
 }
 
-.rejectButton {
-    background-color: #FF5733;
-    color: white;
-}
-
-.acceptButton {
-    background-color: #4CAF50;
-    color: white;
-}
-
-.actionButtons button:hover {
-    opacity: 0.5;
-}
-.statisticsButtonContainer {
-    text-align: center;
-    margin-top: 20px; /* Adjust as needed */
-}
-
-.statisticsButton {
-    background-color: blue;
-    color: white;
-    padding: 12px 24px; /* Adjust padding for button size */
-    font-size: 16px; /* Adjust font size */
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.statisticsButton:hover {
-    background-color: darkblue; /* Change color on hover */
+.viewApplicantsButton:hover {
+    background-color: #0e7cdd; /* Darker shade of blue on hover */
 }

@@ -3,7 +3,7 @@
     padding: 2em;
     color: #464646;
     /* overflow-y: auto;*/
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 .Heading {
