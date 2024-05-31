@@ -3,7 +3,7 @@
 import Chart from 'chart.js/auto'; // Import Chart.js
 
 // Function to render the chart
-const renderChart = (chartRef, data, options) => {
+export const renderChart = (chartRef, data, options) => {
     if (chartRef && chartRef.current) {
         // Render the new chart instance
         new Chart(chartRef.current, {
@@ -14,4 +14,15 @@ const renderChart = (chartRef, data, options) => {
     }
 };
 
-export default renderChart;
+// Function to render the bar chart
+export const renderBarChart = (chartRef, data, options) => {
+    if (chartRef && chartRef.current) {
+        // Render the new bar chart instance
+        new Chart(chartRef.current, {
+            type: 'bar',
+            data: data,
+            options: options
+        });
+    }
+};
+// export default renderChart;

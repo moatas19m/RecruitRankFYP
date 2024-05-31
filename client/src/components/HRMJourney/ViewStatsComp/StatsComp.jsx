@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Pie, Bar } from 'react-chartjs-2';
-import renderChart from './chart'; // Import the renderChart function
+import {renderChart, renderBarChart} from './chart'; // Import the renderChart function
 import './StatsComp.css'; // Import CSS file for styling
 
 function StatsComp(props) {
@@ -11,6 +11,7 @@ function StatsComp(props) {
     const [loading, setLoading] = useState(true);
     const [weightsData, setWeightsData] = useState(null);
     const [applicationScores, setApplicationScores] = useState([]);
+    const [usernames, setAppUser] = useState([]);
 
     useEffect(() => {
         const fetchJob = async () => {
@@ -71,11 +72,21 @@ function StatsComp(props) {
                 const applicantsResponse = await axios.get(`/api/application/getApplications/${jobId}`, { headers });
                 console.log("Fetched applicants data:", applicantsResponse.data);
                 console.log("Fetched Applicant", applicantsResponse.data.application);
-                
+
+
                 // Extracting scores from the fetched applications
                 const scores = applicantsResponse.data.application.map(applicant => applicant.score);
-                console.log("scores",scores)
+                const user = applicantsResponse.data.application.map(applicant => ({
+                    userName: applicant.user.name,
+                    score: applicant.score
+                }));
+                console.log("name", user);
+                console.log("scores", scores)
                 setApplicationScores(scores);
+                setAppUser(user);
+                console.log("Usman",usernames)
+
+
             } catch (error) {
                 console.error("Error fetching applicants data:", error); // Log any errors
             }
@@ -163,6 +174,90 @@ function StatsComp(props) {
         },
     };
 
+    console.log("Usma 2n",usernames)
+
+    const userData = usernames.map(applicant => ({
+        name: applicant.userName,
+        // score: applicant.score
+        score: parseFloat(applicant.score.replace('%', ''))
+    }));
+    console.log("data",userData)
+
+    const barChartData = {
+        labels: userData.map(user => user.name), // User names on the x-axis
+        datasets: [{
+            label: 'Application Scores',
+            data: userData.map(user => user.score), // Scores on the y-axis
+            backgroundColor: 'rgba(75, 192, 192, 0.2)', // Background color for bars
+            borderColor: 'rgba(75, 192, 192, 1)', // Border color for bars
+            borderWidth: 1
+        }]
+    };
+
+    
+    // const barChartData = {
+    //     labels: usernames.map(applicant => applicant.userName), // Correctly access userName for labels
+    //     datasets: [{
+    //         label: 'Application Scores',
+    //         data: usernames.map(applicant => applicant.score), // Correctly access score for data
+    //         backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    //         borderColor: 'rgba(75, 192, 192, 1)',
+    //         borderWidth: 1
+    //     }]
+    // };
+
+    
+
+    // Options for the bar chart
+    // const barChartOptions = {
+    //     indexAxis: 'y', // Display user names on the y-axis
+    //     responsive: true,
+    //     plugins: {
+    //         legend: {
+    //             display: false // Hide legend
+    //         },
+    //         title: {
+    //             display: true,
+    //             text: 'Application Scores by User'
+    //         }
+    //     }
+    // };
+    
+    const barChartOptions = {
+        indexAxis: 'y', // Display user names on the y-axis
+        responsive: true,
+        plugins: {
+            legend: {
+                display: false // Hide legend
+            },
+            title: {
+                display: true,
+                text: 'Application Scores by User'
+            }
+        },
+        // scales: {
+        //     x: {
+        //         type: 'category', // Specify the type of the x-axis as 'category'
+        //     }
+        // }
+        scales: {
+            x: {
+                type: 'linear', // Specify the type of the x-axis as 'linear'
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value) {
+                        return value + '%'; // Append '%' to tick values
+                    }
+                }
+            },
+            y: {
+                type: 'category' // Ensure the y-axis is treated as a category axis
+            }
+        }
+    };
+
+
+
     return (
         <div className="stats-container">
             <h2 className="stats-heading">Pie Chart for Job Weights</h2>
@@ -198,9 +293,15 @@ function StatsComp(props) {
                     <Bar data={histogramData} options={histogramOptions} />
                 </div>
             </div>
+            <h2 className="stats-heading">Bar Chart for Application Scores by User</h2>
+            <div className="stats-chart-container">
+                <div style={{ height: '500px', width: '100%' }}>
+                    <Bar data={barChartData} options={barChartOptions} />
+                </div>
+            </div>
         </div>
-        
     );
+    
 }
 
 export default StatsComp;
