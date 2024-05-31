@@ -235,8 +235,8 @@ function CJobFields(props) {
                         </div>
                         <div className="DescriptiveInfo">
                             <div className="subHeading">Descriptive Info</div>
-                            <ReactQuill name="description" className="TextField" placeholder="Job Description" style={editorStyles} value={descValue} onChange={setDescValue} required />
-                            <ReactQuill name="requirements" className="TextField" placeholder="Requirements" style={editorStyles} value={reqValue} onChange={setReqValue} required />
+                            <ReactQuill name="description" className="TextFieldBig" placeholder="Job Description" style={editorStyles} value={descValue} onChange={setDescValue} required />
+                            <ReactQuill name="requirements" className="TextFieldBig" placeholder="Requirements" style={editorStyles} value={reqValue} onChange={setReqValue} required />
                         </div>
                     </div>
                 </form>

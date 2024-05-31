@@ -77,6 +77,7 @@
     flex-direction: column;
     width: auto;
     gap: 1em;
+    overflow-y: scroll;
 }
 
 .ComboBox {
@@ -105,6 +106,7 @@
     font-size: 1.2em;
     border-radius: 1em;
     background-color: #f1f1f1;
+    overflow-y: scroll;
 }
 
 
