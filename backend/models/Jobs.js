@@ -24,10 +24,10 @@ const jobSchema= new mongoose.Schema({
     parsedData: { type: mongoose.Schema.Types.Mixed, required: false },
     jobStatus:{type:String, enum:["Active", "Inactive"], default:"Active"},
     weights: {
-        cosine_similarity_weight: { type: String, default: "0.5" },
-        cgpa_weight: { type: String, default: "0.1" },
-        degree_match_weight: { type: String, default: "0.2" },
-        discipline_match_weight: { type: String, default: "0.2" }
+        cosine_similarity_weight: { type: Number, default: "0.5" },
+        cgpa_weight: { type: Number, default: "0.1" },
+        degree_match_weight: { type: Number, default: "0.2" },
+        discipline_match_weight: { type: Number, default: "0.2" }
     }
 },
  {timestamps:true}

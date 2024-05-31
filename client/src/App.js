@@ -47,6 +47,7 @@ import theme from './theme';
 import Signup from "./screens/HRMJourney/Signup/signup";
 import ViewStats from "./screens/HRMJourney/ViewStats/ViewStats";
 import StatsComp from "./components/HRMJourney/ViewStatsComp/StatsComp";
+import About from "./screens/Landing/About";
 
 const LayoutForHr = ({ children }) => {
   return (
@@ -167,6 +168,32 @@ const LandingPageTheme = ({ children }) => {
   );
 };
 
+const LandingAboutPage = ({ children }) => {
+  return (
+    <div >
+      {/* <div className="content"> */}
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <About />
+      </ThemeProvider>
+    </div>
+    // </div>
+  );
+};
+
+const LandingContactPage = ({ children }) => {
+  return (
+    <div >
+      {/* <div className="content"> */}
+      <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <ContactUs />
+      </ThemeProvider>
+    </div>
+    // </div>
+  );
+};
+
 function App() {
   return (
     <BrowserRouter>
@@ -174,8 +201,8 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPageTheme />} />
           <Route path="/register" element={<Signup />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactUs />} />
+          <Route path="/about" element={<LandingAboutPage />} />
+          <Route path="/contact" element={<LandingContactPage />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/HRView"

@@ -95,6 +95,30 @@ export const updateJobController = async(req,res)=>
     }
 };
 
+//Enable Job
+export const EnableJobController = async(req,res)=>
+    {
+
+    try{
+        const updatedjob= await Job.findByIdAndUpdate(req.params.id,{
+            jobStatus: "Active"
+        },
+        {
+            new:true
+        });
+        return res.status(200).json({
+            success:true,
+            updatedjob
+        });
+ 
+    } 
+      catch(err){
+        return res.status(500).json({
+            success:false,
+            err});
+    }
+};
+
 //Update jobStatus attribute
 export const updateJobStatusController = async (req, res) => {
 

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { toast } from "react-toastify";
 
 function CJobFields(props) {
     const userData = localStorage.getItem("user");
@@ -23,7 +24,7 @@ function CJobFields(props) {
     const [education, setEducation] = useState("Graduate");
     const [shift, setShift] = useState("Morning");
     const [benefits, setBenefits] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState();
     const [validationErrors, setValidationErrors] = useState({});
 
     const [sliderValues, setSliderValues] = useState({
@@ -66,6 +67,7 @@ function CJobFields(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        
 
         const errors = {};
         if (!company) errors.company = true;
@@ -117,6 +119,7 @@ function CJobFields(props) {
         console.log(job);
 
         try {
+            setIsLoading(true);
             const headers = { Authorization: `${localStorage.getItem("token")}` };
             const { response } = await axios.post("/api/job/postjob", job, { headers });
 
@@ -125,12 +128,15 @@ function CJobFields(props) {
             }
             setIsLoading(true);
             navigate(`/HRView`);
+            toast.success("Job Posted Successfully")
         } catch (error) {
             console.error("Error posting job:", error);
             if (error.response) {
                 console.log("Server responded with status:", error.response.status);
                 console.log("Response data:", error.response.data);
             }
+        } finally {
+            setIsLoading(false);
         }
     };
 
