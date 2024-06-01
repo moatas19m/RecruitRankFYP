@@ -180,7 +180,7 @@ function Stats(props) {
         <div className="dashboard-container">
             <div className="dashboard-grid">
                 <div className="dashboard-card">
-                    <h2 className="stats-headingPie">Pie Chart for Job Weights</h2>
+                    <h2 className="stats-headingPie">Job Weights</h2>
                     <div className="pie-chart-container">
                         {weightsData && (
                             <Pie data={weightsData} options={{
@@ -204,13 +204,13 @@ function Stats(props) {
                     </div>
                 </div>
                 <div className="dashboard-card">
-                    <h2 className="stats-heading">Histogram for Application Scores</h2>
+                    <h2 className="stats-heading">Application Scores</h2>
                     <div className="stats-chart-container">
                         <Bar data={histogramData} options={histogramOptions} />
                     </div>
                 </div>
                 <div className="dashboard-card">
-                    <h2 className="stats-heading">Bar Chart for Application Scores by User</h2>
+                    <h2 className="stats-heading">Application Scores by User</h2>
                     <div className="stats-chart-container">
                         <Bar data={barChartData} options={barChartOptions} />
                     </div>
