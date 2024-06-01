@@ -52,7 +52,7 @@ function Login() {
         setError('');
 
         try {
-            const { data } = await axios.post('/api/auth/login', { email, password });
+            const { data } = await axios.post('https://recruit-ranks.vercel.app/api/auth/login', { email, password });
             localStorage.setItem('user', JSON.stringify(data.user));
             localStorage.setItem('token', data.token);
             login();  // Update authentication state
